@@ -1,3 +1,9 @@
 * {
     font-family: Bahnschrift, sans-serif;
+    box-sizing: border-box;
+}
+
+body {
+    width: 70lvw;
+    margin: auto;
 }

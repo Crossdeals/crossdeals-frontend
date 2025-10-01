@@ -1,0 +1,103 @@
+:root {
+    --colour-primary: #009A26;
+    --colour-secondary: #999999;
+
+    --colour-primary-hover: #3bcd5f;
+    --colour-secondary-hover: #dbdbdb;
+
+    --colour-primary-select: #00771e;
+    --colour-secondary-select: #6d6d6d;
+}
+
+* {
+    font-family: Bahnschrift, sans-serif;
+    box-sizing: border-box;
+}
+
+body {
+    width: 30lvw;
+    margin: auto;
+    text-align: center;
+}
+
+h1 {
+    font-size: 32pt;
+}
+
+a {
+    color: var(--colour-primary);
+    text-decoration: none;
+}
+
+a:hover {
+    color: var(--colour-primary-hover);
+}
+
+a:active {
+    color: var(--colour-primary-select);
+}
+
+label {
+    display: block;
+    text-align: left;
+    margin-top: 10px;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    border-width: 0px 0px 2px 0px;
+}
+
+input:focus {
+    border-color: var(--colour-primary);
+    outline: none;
+}
+
+.button {
+    width: 300px;
+    height: 40px;
+    border: none;
+    border-radius: 5px;
+    margin: 10px auto;
+    font-size: 16pt;
+    display: block;
+}
+
+.primary {
+    background-color: var(--colour-primary);
+    color: white;
+}
+
+.primary:hover {
+    background-color: var(--colour-primary-hover);
+}
+
+.primary:active {
+    background-color: var(--colour-primary-select);
+}
+
+.secondary {
+    background-color: var(--colour-secondary);
+}
+
+.secondary:hover {
+    background-color: var(--colour-secondary-hover);
+}
+
+.secondary:active {
+    background-color: var(--colour-secondary-select);
+}
+
+.action-buttons {
+    margin-top: 40px;
+}
+
+#logo {
+    width: 432px;
+    height: 270px;
+}
+
+.align-right {
+    text-align: right;
+}
