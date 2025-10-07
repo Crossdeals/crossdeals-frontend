@@ -76,6 +76,14 @@ header {
     margin-bottom: 5px;
 }
 
+#feature-more-button {
+    margin-top: 30px;
+}
+
+.card-title {
+    margin-bottom: 5px;
+}
+
 .card-price {
     color: var(--feature-price-colour);
     font-size: 24pt;
@@ -150,6 +158,7 @@ header {
     background: none;
     border: none;
     outline: none;
+    font-size: 12pt;
 }
 
 .account-button:hover {
