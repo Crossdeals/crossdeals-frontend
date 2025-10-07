@@ -115,6 +115,7 @@ header {
 .card-container {
     display: flex;
     gap: 20px;
+    overflow-x: scroll;
 }
 
 .deal-card {
