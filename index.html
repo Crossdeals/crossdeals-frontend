@@ -8,52 +8,60 @@
 </head>
 <body>
     <header>
-        <img src="images/logo.png" />
-        <div>
-            <input placeholder="Search for games..." />
-            <button>PS</button>
-            <button>Xbox</button>
-            <button>SW</button>
-            <button>PC</button>            
+        <img src="images/logo.png" id="logo" />
+        <div id="search">
+            <input placeholder="Search for games..." id="searchbar" />
+            <button id="ps">PS</button>
+            <button id="xbox">Xbox</button>
+            <button id="sw">SW</button>
+            <button id="pc">PC</button>            
         </div>
         <div>
+            <p class="inline-block">Signed in: <span id="username">User</span></p>
+            <button>Logout</button>
             <button>Sign Up</button>
             <button>Login</button>            
         </div>
     </header>
-    <div>
+    <main>
         <div>
-            <img src="images/logo.png" />
-        </div>
-        <div>
-            <h1>Game Title</h1>
-            <p>Publisher, Date</p>
-            <div>
-                <p>Xbox</p>
+            <div class="left" id="feature-image-container">
+                <img id="feature-image" src="images/mw19-placeholder.png" />
             </div>
-            <div>
-                <p>$19.99</p>
-                <p>75% off - Originally $79.99</p>
-                <p>Deal ends 07/17</p>
-                <p>Long description long description ...</p>
-            </div>
-            <div>
-                <button>More Details</button>
-            </div>
-        </div>
-    </div>
-    <div>
-        <h1>Today's Best Deals</h1>
-        <div>
-            <div>
-                <img src="images/icon.png" />
-                <p>Game Title</p>
-                <p>$19.99</p>
+            <div id="feature-details" class="right">
+                <h1 id="feature-title">Game Title</h1>
+                <p id="feature-publisher">Publisher, Date</p>
                 <div>
-                    <p>Xbox</p>
+                    <div class="platform-chip">
+                        <p>Xbox</p>
+                    </div>
+                </div>
+                <div>
+                    <p id="feature-price">$19.99</p>
+                    <p id="feature-percentage">75% off - Originally $79.99</p>
+                    <p id="feature-date">Deal ends 07/17</p>
+                    <p id="feature-description">Long description long description ...</p>
+                </div>
+                <div>
+                    <button id="feature-more-button">More Details</button>
                 </div>
             </div>
         </div>
-    </div>
+        <div class="clear deal-section">
+            <h1>Today's Best Deals</h1>
+            <div class="card-container">
+                <div class="deal-card">
+                    <img src="images/icon.png" />
+                    <p class="card-title">Game Title</p>
+                    <p class="card-price">$19.99</p>
+                    <div>
+                        <div class="platform-chip">
+                            <p>Xbox</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>        
+    </main>
 </body>
 </html>
