@@ -26,8 +26,8 @@ class APIHandler {
         }
     }
 
-    signup(username, password, securityQuestion, securityAnswer, responseCallback) {
-        const signupDetails = new SignupRequestDetails(username, password, securityQuestion, securityAnswer);
+    signup(username, password, responseCallback) {
+        const signupDetails = new SignupRequestDetails(username, password);
 
         const xhttp = new XMLHttpRequest();
         xhttp.withCredentials = true;

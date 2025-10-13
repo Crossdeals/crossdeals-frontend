@@ -2,6 +2,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../lang/en/messages.js"></script>
+    <script src="../js/form-classes.js"></script>
+    <script src="../js/api-handler.js"></script>
     <script src="../js/signup.js"></script>
     <link rel="stylesheet" href="../css/login.css" />
     <title>Login | CrossDeals</title>
@@ -17,7 +20,12 @@
         <label for="password">Password</label>
         <input id="password" type="password" /> 
     </div>
+    <div>
+        <label for="confirm-password">Confirm Password</label>
+        <input id="confirm-password" type="password" /> 
+    </div>
     <p class="align-right">Already have an account? <a href="login.html">Login</a></p>
+    <p id="error-message">Failed to login</p>
     <div class="action-buttons">
         <button id="login" class="button primary">Sign Up</button>
         <button id="back" class="button secondary">Back</button>
