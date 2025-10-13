@@ -1,4 +1,4 @@
-const gateway = "https://localhost:3000"
+const gateway = "http://localhost:8000"
 
 const loginEndpoint = `${gateway}/login/`;
 const signupEndpoint = `${gateway}/signup/`;
