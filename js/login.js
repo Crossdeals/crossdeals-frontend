@@ -1,4 +1,4 @@
-const landingPageUrl = "../index.html";
+const landingPageUrl = "./index.html";
 const usernameKey = "username";
 
 function submitFormData(formData) {
@@ -11,6 +11,7 @@ function submitFormData(formData) {
         let status = response["status"];
         if (status === 200) {
             sessionStorage.setItem(usernameKey, formData["username"]);
+            window.location = landingPageUrl;
         }
         else {
             document.getElementById("error-message").innerHTML = loginMessages.unknownError;

@@ -1,4 +1,4 @@
-const landingPageUrl = "../index.html";
+const landingPageUrl = "./index.html";
 const usernameKey = "username";
 
 function submitFormData(formData) {

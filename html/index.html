@@ -2,14 +2,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="js/api-handler.js"></script>
-    <script src="js/main.js"></script>
-    <link rel="stylesheet" href="css/main.css" />
+    <script src="../js/api-handler.js"></script>
+    <script src="../js/main.js"></script>
+    <link rel="stylesheet" href="../css/main.css" />
     <title>CrossDeals</title>
 </head>
 <body>
     <header>
-        <img src="images/logo.png" id="logo" />
+        <img src="../images/logo.png" id="logo" />
         <div id="search">
             <input placeholder="Search for games..." id="searchbar" />
             <button id="ps" class="platform-toggle">PS</button>
@@ -19,15 +19,15 @@
         </div>
         <div>
             <p class="inline-block">Signed in: <span id="username">User</span></p>
-            <button class="account-button">Logout</button>
-            <button class="account-button">Sign Up</button>
-            <button class="account-button">Login</button>            
+            <button id="logout" class="account-button">Logout</button>
+            <button id="signup" class="account-button">Sign Up</button>
+            <button id="login" class="account-button">Login</button>
         </div>
     </header>
     <main>
         <div>
             <div class="left" id="feature-image-container">
-                <img id="feature-image" src="images/mw19-placeholder.png" />
+                <img id="feature-image" src="../images/mw19-placeholder.png" />
             </div>
             <div id="feature-details" class="right">
                 <h1 id="feature-title">Game Title</h1>
@@ -52,7 +52,7 @@
             <h1>Today's Best Deals</h1>
             <div class="card-container">
                 <div class="deal-card">
-                    <img src="images/icon.png" />
+                    <img src="../images/icon.png" />
                     <p class="card-title">Game Title</p>
                     <p class="card-price">$19.99</p>
                     <div>
