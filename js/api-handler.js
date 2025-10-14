@@ -3,6 +3,7 @@ const gateway = "http://localhost:8000"
 const loginEndpoint = `${gateway}/login/`;
 const signupEndpoint = `${gateway}/signup/`;
 const logoutEndpoint = `${gateway}/logout/`;
+const usernameEndpoint = `${gateway}/username/`;
 
 class APIHandler {
     constructor() {
@@ -57,6 +58,24 @@ class APIHandler {
             }
         }
     }
+
+    username(username, responseCallback) {
+        const usernameRequest = new UsernameRequestDetails(username);
+        console.log(usernameRequest);
+
+        const xhttp = new XMLHttpRequest();
+        xhttp.withCredentials = true;
+        xhttp.open("POST", usernameEndpoint, true);
+        xhttp.setRequestHeader("Content-Type", "application/json");
+        xhttp.send(JSON.stringify(usernameRequest));
+        xhttp.onreadystatechange = () => {
+            if (xhttp.readyState === 4) {
+                let response = JSON.parse(xhttp.responseText);
+                response["status"] = xhttp.status;
+                responseCallback(response);
+            }
+        }
+    }
 }
 
 class LoginAuthDetails {
@@ -70,5 +89,11 @@ class SignupRequestDetails {
     constructor(username, password) {
         this.username = username;
         this.password = password;
+    }
+}
+
+class UsernameRequestDetails {
+    constructor(username) {
+        this.username = username;
     }
 }
