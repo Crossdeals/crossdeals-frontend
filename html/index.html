@@ -4,6 +4,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="../js/api-handler.js"></script>
     <script src="../js/main.js"></script>
+    <script src="../js/main-classes.js"></script>
     <link rel="stylesheet" href="../css/main.css" />
     <title>CrossDeals</title>
 </head>
@@ -48,21 +49,23 @@
                 </div>
             </div>
         </div>
-        <div class="clear deal-section">
-            <h1>Today's Best Deals</h1>
-            <div class="card-container">
-                <div class="deal-card">
-                    <img src="../images/icon.png" />
-                    <p class="card-title">Game Title</p>
-                    <p class="card-price">$19.99</p>
-                    <div>
-                        <div class="platform-chip">
-                            <p>Xbox</p>
+        <div class="clear section-container">
+            <div class="clear deal-section">
+                <h1 class="section-header">Today's Best Deals</h1>
+                <div class="card-container">
+                    <div class="deal-card">
+                        <img class="card-image" src="../images/icon.png" />
+                        <p class="card-title">Game Title</p>
+                        <p class="card-price">$19.99</p>
+                        <div class="card-platform-container">
+                            <div class="platform-chip">
+                                <p>Xbox</p>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>        
+        </div>      
     </main>
 </body>
 </html>
