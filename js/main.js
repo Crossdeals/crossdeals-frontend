@@ -1,4 +1,34 @@
 const usernameKey = "username";
+const dummyData = [
+    {
+        "header": "Dummy Data 1",
+        "data": [
+            {
+                "image": "../images/mw19-placeholder.png",
+                "title": "Placeholder game",
+                "price": 18.99,
+                "platforms": [
+                    "Xbox",
+                    "PS"
+                ]
+            }
+        ]
+    },
+    {
+        "header": "Dummy Data 2",
+        "data": [
+            {
+                "image": "../images/mw19-placeholder.png",
+                "title": "Placeholder game",
+                "price": 27.99,
+                "platforms": [
+                    "Xbox",
+                    "PS"
+                ]
+            }
+        ]
+    }
+];
 
 function getUsername() {
     const apiHandler = new APIHandler();
@@ -30,13 +60,22 @@ function logout() {
     })
 }
 
-function main() {
-    console.log("Hello world!");
-    getUsername();
-
+function setupLinks() {
     document.getElementById("logout").addEventListener("click", logout);
     document.getElementById("login").addEventListener("click", login);
     document.getElementById("signup").addEventListener("click", signup);
+}
+
+function populateData() {
+    // TODO: Add a client class and access data
+    let sectionListData = new GameCardSectionListData(dummyData);
+    let presenter = new HomeScreenPresenter(sectionListData);
+}
+
+function main() {
+    getUsername();
+    setupLinks();
+    populateData();
 }
 
 window.addEventListener("load", main);
