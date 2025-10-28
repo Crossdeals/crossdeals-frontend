@@ -24,7 +24,7 @@ class GameCardData {
     }
 }
 
-class HomeScreenPresenter {
+class GameSectionsPresenter {
     constructor(sections) {
         this.sectionContainer = document.querySelector(".section-container");
         this.sectionObjectList = [];
