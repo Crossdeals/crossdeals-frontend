@@ -56,13 +56,14 @@ class GameCardSection {
         this.section = this.sectionTemplate.cloneNode(true);
         this.sectionHeader = this.section.querySelector(".section-header");
         this.cardContainer = this.section.querySelector(".card-container");
-        this.cardTemplate = document.querySelector(".deal-card");
+        this.cardTemplate = this.section.querySelector(".deal-card");
 
         for (let i = 0; i < this.sectionData.data.length; i++) {
             this.addCard(this.sectionData.data[i]);
         }
 
         this.sectionHeader.innerHTML = this.sectionData.header;
+        this.cardTemplate.remove();
     }
 
     appendToContainer(container) {
@@ -90,7 +91,6 @@ class GameCardSection {
             cardPlatformContainer.appendChild(newChip);
         }
         
-        this.cardTemplate.remove();
         platformChip.remove();
 
         this.cardContainer.appendChild(card);

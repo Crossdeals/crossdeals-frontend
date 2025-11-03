@@ -1,34 +1,4 @@
 const usernameKey = "username";
-const dummyData = [
-    {
-        "header": "Dummy Data 1",
-        "data": [
-            {
-                "image": "../images/mw19-placeholder.png",
-                "title": "Placeholder game",
-                "price": 18.99,
-                "platforms": [
-                    "Xbox",
-                    "PS"
-                ]
-            }
-        ]
-    },
-    {
-        "header": "Dummy Data 2",
-        "data": [
-            {
-                "image": "../images/mw19-placeholder.png",
-                "title": "Placeholder game",
-                "price": 27.99,
-                "platforms": [
-                    "Xbox",
-                    "PS"
-                ]
-            }
-        ]
-    }
-];
 
 class HomeScreen {
     constructor() {
@@ -83,7 +53,8 @@ class HomeScreen {
 
 function populateData() {
     // TODO: Add a client class and access data
-    let sectionListData = new GameCardSectionListData(dummyData);
+    let homeScreenData = wishlistToHomeScreen(apiData);
+    let sectionListData = new GameCardSectionListData(homeScreenData);
     let presenter = new GameSectionsPresenter(sectionListData);
 }
 
