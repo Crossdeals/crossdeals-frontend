@@ -7,6 +7,8 @@
 
     --colour-primary-select: #00771e;
     --colour-secondary-select: #6d6d6d;
+    
+    --colour-disabled: #dbdbdb;
 }
 
 * {
@@ -55,6 +57,10 @@ input:focus {
     outline: none;
 }
 
+#error-message {
+    color: red;
+}
+
 .button {
     width: 300px;
     height: 40px;
@@ -76,6 +82,10 @@ input:focus {
 
 .primary:active {
     background-color: var(--colour-primary-select);
+}
+
+.primary:disabled {
+    background-color: var(--colour-disabled);
 }
 
 .secondary {
