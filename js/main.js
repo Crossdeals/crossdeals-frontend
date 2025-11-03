@@ -22,7 +22,7 @@ class HomeScreen {
 
     getUsername() {
         if (sessionStorage.getItem(usernameKey)) {
-            this.apiHandler.username(sessionStorage.getItem(usernameKey), response => {
+            this.client.username(sessionStorage.getItem(usernameKey), response => {
                 this.usernameText.innerHTML = response.username;
                 this.loginButton.hidden = true;
                 this.signupButton.hidden = true;
@@ -33,6 +33,20 @@ class HomeScreen {
             this.usernameObject.classList.add("hidden");
             this.logoutButton.hidden = true;
         }
+    }
+
+    getWishlist() {
+        let username = this.getUsername();
+        this.client.getWishlist(username, response => {
+            if (response.status === 200) {
+                let homeScreenData = wishlistToHomeScreen(response);
+                let sectionListData = new GameCardSectionListData(homeScreenData);
+                let presenter = new GameSectionsPresenter(sectionListData);
+            }
+            else {
+                console.log("Failed to retrieve wishlist");
+            }
+        });
     }
 
     signup() {
@@ -51,16 +65,9 @@ class HomeScreen {
     }
 }
 
-function populateData() {
-    // TODO: Add a client class and access data
-    let homeScreenData = wishlistToHomeScreen(apiData);
-    let sectionListData = new GameCardSectionListData(homeScreenData);
-    let presenter = new GameSectionsPresenter(sectionListData);
-}
-
 function main() {
     let homeScreen = new HomeScreen();
-    populateData();
+    homeScreen.getWishlist();
 }
 
 window.addEventListener("load", main);

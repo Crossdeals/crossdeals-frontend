@@ -4,6 +4,7 @@ const loginEndpoint = `${gateway}/login/`;
 const signupEndpoint = `${gateway}/signup/`;
 const logoutEndpoint = `${gateway}/logout/`;
 const usernameEndpoint = `${gateway}/username/`;
+const wishlistEndpoint = `${gateway}/wishlist/index/`;
 
 class APIHandler {
     constructor() {
@@ -76,6 +77,24 @@ class APIHandler {
             }
         }
     }
+
+    getWishlist(username, responseCallback) {
+        const wishlistRequest = new WishlistRequestDetails(username);
+        console.log(wishlistRequest);
+
+        const xhttp = new XMLHttpRequest();
+        xhttp.withCredentials = true;
+        xhttp.open("GET", wishlistEndpoint, true);
+        xhttp.setRequestHeader("Content-Type", "application/json");
+        xhttp.send(JSON.stringify(wishlistRequest));
+        xhttp.onreadystatechange = () => {
+            if (xhttp.readyState === 4) {
+                let response = JSON.parse(xhttp.responseText);
+                response["status"] = xhttp.status;
+                responseCallback(response);
+            }
+        }
+    }
 }
 
 class LoginAuthDetails {
@@ -93,6 +112,12 @@ class SignupRequestDetails {
 }
 
 class UsernameRequestDetails {
+    constructor(username) {
+        this.username = username;
+    }
+}
+
+class WishlistRequestDetails {
     constructor(username) {
         this.username = username;
     }
