@@ -95,6 +95,10 @@ header {
     display: inline-block;
 }
 
+.hidden {
+    display: none;
+}
+
 .left {
     float: left;
 }
