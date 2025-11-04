@@ -1,0 +1,102 @@
+#game-details-container {
+    width: 100%;
+    height: var(--featured-image-height);
+    background-size: 100% 100%;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+#game-image-container {
+    width: 100%;
+}
+
+#game-title {
+    font-size: 36pt;
+    margin-bottom: 0px;
+    color: white;
+    text-shadow: 1px 1px 0px black;
+}
+
+#game-publisher-year {
+    color: white;
+    text-shadow: 1px 1px 0px black;
+}
+
+#game-description-container {
+    padding: 10px;
+}
+
+#game-description {
+    width: 70%;
+}
+
+#game-pricing-container {
+    width: 30%;
+}
+
+#review-section {
+    padding: 10px;
+}
+
+#review-average-rating {
+    font-size: 24pt;
+    margin: 0px;
+}
+
+#review-box {
+    width: 70%;
+}
+
+#review-submit {
+    margin-left: 10px;
+}
+
+#review-controls {
+    height: 40px;
+}
+
+#review-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 15px 0px;
+}
+
+.review-card {
+    background-color: var(--colour-secondary-hover);
+    padding: 10px;
+    width: 28.5%;
+}
+
+.review-card p {
+    margin: 2px;
+}
+
+.game-details {
+    border: 1px solid var(--colour-secondary);
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.game-price {
+    color: var(--feature-price-colour);
+    font-size: 36pt;
+    margin-top: 0px;
+    margin-bottom: 5px;
+}
+
+.game-details p {
+    margin: 2px;
+}
+
+.review-username, .review-date {
+    font-size: 8pt;
+}
+
+.button-link {
+    text-align: center;
+    padding: 5px;
+    margin-top: 15px;
+}

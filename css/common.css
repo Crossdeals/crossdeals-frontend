@@ -1,5 +1,4 @@
 :root {
-    --featured-image-width: 60%;
     --featured-image-height: 500px;
 
     --background-colour: #D9D9D9;
@@ -14,6 +13,8 @@
 
     --colour-primary-select: #00771e;
     --colour-secondary-select: #6d6d6d;
+
+    --button-width: 300px;
 }
 
 * {
@@ -31,6 +32,17 @@ header {
 
 body {
     margin: 0;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    border-width: 0px 0px 2px 0px;
+}
+
+input:focus {
+    border-color: var(--colour-primary);
+    outline: none;
 }
 
 #logo {

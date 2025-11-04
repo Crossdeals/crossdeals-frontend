@@ -1,3 +1,7 @@
+:root {
+    --featured-image-width: 60%;
+}
+
 #feature-image {
     width: 100%;
     height: var(--featured-image-height);
