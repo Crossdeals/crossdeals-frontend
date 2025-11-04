@@ -12,6 +12,16 @@
     width: 100%;
 }
 
+#game-details-container {
+    width: 100%;
+    padding: 10px 200px;
+}
+
+#main-content-container {
+    width: 100%;
+    padding: 5px 200px;
+}
+
 #game-title {
     font-size: 36pt;
     margin-bottom: 0px;
@@ -29,11 +39,13 @@
 }
 
 #game-description {
-    width: 70%;
+    width: 40%;
 }
 
 #game-pricing-container {
-    width: 30%;
+    width: 60%;
+    display: flex;
+    gap: 10px;
 }
 
 #review-section {
@@ -46,7 +58,7 @@
 }
 
 #review-box {
-    width: 70%;
+    width: calc(100% - 310px);
 }
 
 #review-submit {
@@ -67,7 +79,7 @@
 .review-card {
     background-color: var(--colour-secondary-hover);
     padding: 10px;
-    width: 28.5%;
+    width: calc(100% / 3 - 7.5px);
 }
 
 .review-card p {
@@ -99,4 +111,9 @@
     text-align: center;
     padding: 5px;
     margin-top: 15px;
+    width: 100%;
+    border: none;
+    border-radius: 5px;
+    font-size: 16pt;
+    display: block;
 }
