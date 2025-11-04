@@ -1,0 +1,141 @@
+:root {
+    --featured-image-width: 60%;
+    --featured-image-height: 500px;
+
+    --background-colour: #D9D9D9;
+    --text-highlight: #3f3f3f;
+    --feature-price-colour: #ba0000;
+    
+    --colour-primary: #009A26;
+    --colour-secondary: #999999;
+
+    --colour-primary-hover: #3bcd5f;
+    --colour-secondary-hover: #dbdbdb;
+
+    --colour-primary-select: #00771e;
+    --colour-secondary-select: #6d6d6d;
+}
+
+* {
+    font-family: Bahnschrift, sans-serif;
+    box-sizing: border-box;
+}
+
+header {
+    width: 100lvw;
+    background-color: var(--background-colour);
+    margin: 0;
+    display: flex;
+    align-items: center;
+}
+
+body {
+    margin: 0;
+}
+
+#logo {
+    width: 120px;
+    height: 75px;
+}
+
+#search {
+    width: 80%;
+    display: inline-block;
+    text-align: center;
+}
+
+#searchbar {
+    padding: 15px;
+    width: 50%;
+    height: 50px;
+    border-radius: 15px;
+    border: none;
+}
+
+.inline-block {
+    display: inline-block;
+}
+
+.hidden {
+    display: none;
+}
+
+.left {
+    float: left;
+}
+
+.right {
+    float: right;
+}
+
+.clear {
+    clear: both;
+}
+
+.platform-chip {
+    width: 100px;
+    height: 25px;
+    padding: 5px;
+    text-align: center;
+    font-size: 10pt;
+    background-color: var(--background-colour);
+    border-radius: 5px;
+}
+
+.platform-chip p {
+    margin: auto 0;
+}
+
+.platform-toggle {
+    width: 50px;
+    height: 50px;
+    border-radius: 15px;
+    background-color: white;
+    border: none;
+}
+
+.account-button {
+    background: none;
+    border: none;
+    outline: none;
+    font-size: 12pt;
+}
+
+.account-button:hover {
+    color: var(--text-highlight);
+    cursor: pointer;
+}
+
+.button {
+    width: 300px;
+    height: 40px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16pt;
+    display: block;
+}
+
+.primary {
+    background-color: var(--colour-primary);
+    color: white;
+}
+
+.primary:hover {
+    background-color: var(--colour-primary-hover);
+}
+
+.primary:active {
+    background-color: var(--colour-primary-select);
+}
+
+.secondary {
+    background-color: var(--colour-secondary);
+}
+
+.secondary:hover {
+    background-color: var(--colour-secondary-hover);
+}
+
+.secondary:active {
+    background-color: var(--colour-secondary-select);
+}
