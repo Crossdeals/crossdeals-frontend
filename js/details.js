@@ -35,7 +35,7 @@ class GameDetailsPresenter {
         pricingCard.querySelector(".game-lowest-price").innerHTML = `Lowest ever: $${gamePricingData.lowestPrice}`;
         pricingCard.querySelector(".game-deal-ending").innerHTML = `Deal ends ${gamePricingData.dealEnding}`;
         pricingCard.querySelector(".game-deal-link").innerHTML = `Go to ${gamePricingData.storefrontName} Store`;
-
+        pricingCard.querySelector(".game-deal-link").href = gamePricingData.storefrontLink;
         this.pricingContainer.appendChild(pricingCard);
     }
 
@@ -62,7 +62,7 @@ function main() {
         9.99,
         "07/17/25",
         "PlayStation",
-        "example.com"
+        "../html/index.html"
     )
     let dummyXboxPricing = new GamePricingData(
         69,
@@ -72,7 +72,7 @@ function main() {
         4.99,
         "07/18/25",
         "Microsoft",
-        "example.com"
+        "../html/index.html"
     )
 
     let gameDetailsPresenter = new GameDetailsPresenter();

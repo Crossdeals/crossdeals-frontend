@@ -1,3 +1,7 @@
+a {
+    text-decoration: none;
+}
+
 #game-details-container {
     width: 100%;
     height: var(--featured-image-height);
