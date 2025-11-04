@@ -30,10 +30,11 @@ class GameDetailsPresenter {
         let pricingCard = this.pricingCardTemplate.cloneNode(true);
 
         pricingCard.querySelector(".game-platform").innerHTML = gamePricingData.platform;
-        pricingCard.querySelector(".game-price").innerHTML = gamePricingData.price;
-        pricingCard.querySelector(".game-original-price").innerHTML = gamePricingData.originalPrice;
-        pricingCard.querySelector(".game-lowest-price").innerHTML = gamePricingData.lowestPrice;
-        pricingCard.querySelector(".game-deal-ending").innerHTML = gamePricingData.dealEnding;
+        pricingCard.querySelector(".game-price").innerHTML = `$${gamePricingData.price}`;
+        pricingCard.querySelector(".game-original-price").innerHTML = `Original price: $${gamePricingData.originalPrice}`;
+        pricingCard.querySelector(".game-lowest-price").innerHTML = `Lowest ever: $${gamePricingData.lowestPrice}`;
+        pricingCard.querySelector(".game-deal-ending").innerHTML = `Deal ends ${gamePricingData.dealEnding}`;
+        pricingCard.querySelector(".game-deal-link").innerHTML = `Go to ${gamePricingData.storefrontName} Store`;
 
         this.pricingContainer.appendChild(pricingCard);
     }
@@ -59,7 +60,9 @@ function main() {
         14.99,
         69.99,
         9.99,
-        "07/17/25"
+        "07/17/25",
+        "PlayStation",
+        "example.com"
     )
     let dummyXboxPricing = new GamePricingData(
         69,
@@ -67,7 +70,9 @@ function main() {
         19.99,
         69.99,
         4.99,
-        "07/18/25"
+        "07/18/25",
+        "Microsoft",
+        "example.com"
     )
 
     let gameDetailsPresenter = new GameDetailsPresenter();
