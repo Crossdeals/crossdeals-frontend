@@ -35,6 +35,12 @@
     text-shadow: 1px 1px 0px black;
 }
 
+#platform-container {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
 #game-description-container {
     padding: 10px;
 }

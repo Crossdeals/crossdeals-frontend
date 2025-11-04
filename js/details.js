@@ -3,7 +3,7 @@ class GameDetailsPresenter {
         this.titleText = document.getElementById("game-title");
         this.publisherText = document.getElementById("game-publisher-year");
         this.platformChipTemplate = document.querySelector(".platform-chip");
-        this.platformChipContainer = document.querySelector(".card-platform-container");
+        this.platformChipContainer = document.getElementById("platform-container");
 
         this.descriptionText = document.getElementById("game-description");
         
