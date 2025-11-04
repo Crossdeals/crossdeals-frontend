@@ -1,0 +1,73 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../js/api-handler.js"></script>
+    <script src="../js/util.js"></script>
+    <script src="../js/test-data.js"></script>
+    <link rel="stylesheet" href="../css/main.css" />
+    <title>CrossDeals</title>
+</head>
+<body>
+    <header>
+        <img src="../images/logo.png" id="logo" />
+        <div id="search">
+            <input placeholder="Search for games..." id="searchbar" />
+            <button id="ps" class="platform-toggle">PS</button>
+            <button id="xbox" class="platform-toggle">Xbox</button>
+            <button id="sw" class="platform-toggle">SW</button>
+            <button id="pc" class="platform-toggle">PC</button>            
+        </div>
+        <div>
+            <p class="inline-block" id="username-container">Signed in: <span id="username">User</span></p>
+            <button id="logout" class="account-button">Logout</button>
+            <button id="signup" class="account-button">Sign Up</button>
+            <button id="login" class="account-button">Login</button>
+        </div>
+    </header>
+    <main>
+        <div>
+            <div id="game-image-container">
+                <img id="game-image" src="../images/mw19-placeholder.png" />
+                <p id="game-title">Game Title</p>
+                <p id="game-publisher-year">Publisher, Year</p>
+                <div class="card-platform-container">
+                    <div class="platform-chip">
+                        <p>Xbox</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div>
+            <div class="left" id="game-description">
+                <p>Long description...</p>
+            </div>
+            <div class="right game-pricing-container">
+                <p class="game-platform">Platform</p>
+                <p class="game-price">$19.99</p>
+                <p class="game-original-price">75% off - Original $79.99</p>
+                <p class="game-lowest-price">Lowest ever: $15.99</p>
+                <p class="game-deal-ending">Deal ends 07/17</p>
+                <a class="button-link">Go to Microsoft Store</a>
+            </div>
+        </div>
+        <div>
+            <div>
+                <p>Reviews</p>
+                <p>4.6★</p>
+            </div>
+            <div>
+                <input placeholder="Add your review..." />
+                <button class="button-primary">Add Review</button>
+            </div>
+            <div class="review-container">
+                <div class="review-card">
+                    <p class="review-username">Review username</p>
+                    <p class="review-username">Review review review...</p>
+                    <p class="review-username">2025-07-17</p>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
