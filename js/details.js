@@ -37,6 +37,11 @@ class GameDetailsPresenter {
 
         this.pricingContainer.appendChild(pricingCard);
     }
+
+    removeTempObjects() {
+        this.pricingCardTemplate.remove();
+        this.platformChipTemplate.remove();
+    }
 }
 
 function main() {
@@ -69,6 +74,7 @@ function main() {
     gameDetailsPresenter.setGameDetails(dummyDetails);
     gameDetailsPresenter.addPlatformCard(dummyPSPricing);
     gameDetailsPresenter.addPlatformCard(dummyXboxPricing);
+    gameDetailsPresenter.removeTempObjects();
 }
 
 window.addEventListener("load", main);
