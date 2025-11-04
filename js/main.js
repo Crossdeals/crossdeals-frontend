@@ -1,4 +1,5 @@
 const usernameKey = "username";
+const client = new APIHandler();
 
 class HomeScreen {
     constructor() {
@@ -9,20 +10,18 @@ class HomeScreen {
         this.usernameText = document.getElementById("username");
 
         this.setupLinks();
-
-        this.client = new APIHandler();
         this.getUsername();
     }
 
     setupLinks() {
-        this.logoutButton.addEventListener("click", logout);
-        this.loginButton.addEventListener("click", login);
-        this.signupButton.addEventListener("click", signup);
+        this.logoutButton.addEventListener("click", this.logout);
+        this.loginButton.addEventListener("click", this.login);
+        this.signupButton.addEventListener("click", this.signup);
     }
 
     getUsername() {
         if (sessionStorage.getItem(usernameKey)) {
-            this.client.username(sessionStorage.getItem(usernameKey), response => {
+            client.username(sessionStorage.getItem(usernameKey), response => {
                 this.usernameText.innerHTML = response.username;
                 this.loginButton.hidden = true;
                 this.signupButton.hidden = true;
@@ -37,7 +36,7 @@ class HomeScreen {
 
     getWishlist() {
         let username = this.getUsername();
-        this.client.getWishlist(username, response => {
+        client.getWishlist(username, response => {
             if (response.status === 200) {
                 let homeScreenData = wishlistToHomeScreen(response);
                 let sectionListData = new GameCardSectionListData(homeScreenData);
@@ -58,7 +57,7 @@ class HomeScreen {
     }
 
     logout() {
-        this.apiHandler.logout(response => {
+        client.logout(response => {
             sessionStorage.removeItem(usernameKey);
             window.location = window.location;
         })
