@@ -11,11 +11,7 @@ function submitFormData(formData) {
         let status = response["status"];
         if (status === 200) {
             sessionStorage.setItem(usernameKey, formData["username"]);
-            apiHandler.checkRole(formData["username"], (response) => {
-                if (response["status"] === 200) {
-                    window.location = landingPageUrl;
-                }
-            })
+            window.location = landingPageUrl;
         }
         else {
             document.getElementById("error-message").innerHTML = loginMessages.unknownError;
