@@ -4,12 +4,9 @@ class GameDetailsPresenter {
         this.publisherText = document.getElementById("game-publisher-year");
         this.platformChipTemplate = document.querySelector(".platform-chip");
         this.platformChipContainer = document.getElementById("platform-container");
-
         this.descriptionText = document.getElementById("game-description");
-        
         this.pricingContainer = document.getElementById("game-pricing-container");
         this.pricingCardTemplate = document.querySelector(".game-details");
-
         this.averageRatingText = document.getElementById("review-average-rating");
     }
 
