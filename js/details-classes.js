@@ -10,9 +10,7 @@ class GameDetailsData {
 }
 
 class GamePricingData {
-    constructor(id, platform, price, originalPrice, lowestPrice, dealEnding,
-        storefrontName, storefrontLink
-    ) {
+    constructor(id, platform, price, originalPrice, lowestPrice, dealEnding, storefrontName, storefrontLink) {
         this.id = id;
         this.platform = platform;
         this.price = price;
