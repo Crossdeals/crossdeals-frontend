@@ -1,7 +1,12 @@
+a {
+    text-decoration: none;
+}
+
 #game-details-container {
     width: 100%;
     height: var(--featured-image-height);
-    background-size: 100% 100%;
+    background-size: 100%;
+    background-position: 0px -100px;
     padding: 10px;
     display: flex;
     flex-direction: column;
@@ -34,12 +39,19 @@
     text-shadow: 1px 1px 0px black;
 }
 
+#platform-container {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
 #game-description-container {
     padding: 10px;
 }
 
 #game-description {
     width: 40%;
+    padding: 0px 5px;
 }
 
 #game-pricing-container {
@@ -90,6 +102,7 @@
     border: 1px solid var(--colour-secondary);
     border-radius: 10px;
     padding: 10px;
+    flex-grow: 1;
 }
 
 .game-price {
