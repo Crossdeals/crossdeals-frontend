@@ -21,6 +21,7 @@ class GameCardData {
         this.title = data.title;
         this.price = data.price;
         this.platforms = data.platforms;
+        this.isWishlisted = data.isWishlisted;
     }
 }
 
@@ -77,11 +78,15 @@ class GameCardSection {
         let cardPrice = card.querySelector(".card-price");
         let cardPlatformContainer = card.querySelector(".card-platform-container");
         let platformChip = card.querySelector(".platform-chip");
+        let wishlistAddButton = card.querySelector(".wishlist-add");
+        let wishlistRemoveButton = card.querySelector(".wishlist-remove");
 
         cardImage.src = gameCardData.image;
         cardTitle.innerHTML = gameCardData.title;
         cardPrice.innerHTML = gameCardData.price;
-
+        
+        wishlistAddButton.hidden = gameCardData.isWishlisted;
+        wishlistRemoveButton.hidden = !gameCardData.isWishlisted;
         
         for (let i = 0; i < gameCardData.platforms.length; i++) {
             let newChip = platformChip.cloneNode(true);

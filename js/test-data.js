@@ -9,7 +9,8 @@ const dummyData = [
                 "platforms": [
                     "Xbox",
                     "PS"
-                ]
+                ],
+                "isWishlisted": true
             }
         ]
     },
@@ -23,7 +24,8 @@ const dummyData = [
                 "platforms": [
                     "Xbox",
                     "PS"
-                ]
+                ],
+                "isWishlisted": true
             }
         ]
     }
