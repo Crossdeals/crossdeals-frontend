@@ -1,5 +1,6 @@
 const usernameKey = "username";
 const client = new APIHandler();
+let homeScreen = null;
 
 class HomeScreen {
     constructor() {
@@ -35,17 +36,34 @@ class HomeScreen {
     }
 
     getWishlist() {
-        let username = this.getUsername();
+        let username = homeScreen.getUsername();
         client.getWishlist(username, response => {
             if (response.status === 200) {
                 let homeScreenData = wishlistToHomeScreen(response);
                 let sectionListData = new GameCardSectionListData(homeScreenData);
-                let presenter = new GameSectionsPresenter(sectionListData);
+                let presenter = new GameSectionsPresenter(sectionListData, this.editWishlist);
             }
             else {
                 console.log("Failed to retrieve wishlist");
             }
         });
+    }
+
+    editWishlist(section, index, title, isAdding) {
+        let username = homeScreen.getUsername();
+        if (isAdding) {
+            client.addToWishlist(username, title, response => {
+                if (response.status === 200) {
+                    section.updateCardWishlistStatus(index, true);
+                }
+                else {
+                    console.log("Failed to update wishlist status");
+                }
+            })
+        }
+        else {
+            // TODO: Remove from wishlist
+        }
     }
 
     signup() {
@@ -65,7 +83,7 @@ class HomeScreen {
 }
 
 function main() {
-    let homeScreen = new HomeScreen();
+    homeScreen = new HomeScreen();
     homeScreen.getWishlist();
 }
 

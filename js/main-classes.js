@@ -17,6 +17,7 @@ class GameCardSectionData {
 
 class GameCardData {
     constructor(data) {
+        this.gameId = data.id;
         this.image = data.image;
         this.title = data.title;
         this.price = data.price;
@@ -26,20 +27,20 @@ class GameCardData {
 }
 
 class GameSectionsPresenter {
-    constructor(sections) {
+    constructor(sections, wishlistCallback) {
         this.sectionContainer = document.querySelector(".section-container");
         this.sectionObjectList = [];
         this.tempSection = document.querySelector(".deal-section");
 
         for (let i = 0; i < sections.sectionList.length; i++) {
-            this.displaySection(sections.sectionList[i]);
+            this.displaySection(sections.sectionList[i], wishlistCallback);
         }
 
         this.removeTempObjects();
     }
 
-    displaySection(section) {
-        let sectionObject = new GameCardSection(section);
+    displaySection(section, wishlistCallback) {
+        let sectionObject = new GameCardSection(section, wishlistCallback);
         sectionObject.appendToContainer(this.sectionContainer);
         this.sectionObjectList.concat(sectionObject);
     }
@@ -50,8 +51,9 @@ class GameSectionsPresenter {
 }
 
 class GameCardSection {
-    constructor(section) {
+    constructor(section, wishlistCallback) {
         this.sectionData = section;
+        this.wishlistCallback = wishlistCallback;
 
         this.sectionTemplate = document.querySelector(".deal-section");
         this.section = this.sectionTemplate.cloneNode(true);
@@ -59,8 +61,11 @@ class GameCardSection {
         this.cardContainer = this.section.querySelector(".card-container");
         this.cardTemplate = this.section.querySelector(".deal-card");
 
+        this.cards = [];
+
         for (let i = 0; i < this.sectionData.data.length; i++) {
-            this.addCard(this.sectionData.data[i]);
+            let card = this.addCard(i, this.sectionData.data[i]);
+            this.cards.concat(card);
         }
 
         this.sectionHeader.innerHTML = this.sectionData.header;
@@ -71,7 +76,8 @@ class GameCardSection {
         container.appendChild(this.section);
     }
 
-    addCard(gameCardData) {
+    addCard(gameIndex, gameCardData) {
+        let index = gameIndex;
         let card = this.cardTemplate.cloneNode(true);
         let cardImage = card.querySelector(".card-image");
         let cardTitle = card.querySelector(".card-title");
@@ -85,8 +91,12 @@ class GameCardSection {
         cardTitle.innerHTML = gameCardData.title;
         cardPrice.innerHTML = gameCardData.price;
         
+        let callback = this.wishlistCallback;
+        let section = this;
         wishlistAddButton.hidden = gameCardData.isWishlisted;
+        wishlistAddButton.addEventListener("click", () => callback(section, index, gameCardData.title, true));
         wishlistRemoveButton.hidden = !gameCardData.isWishlisted;
+        wishlistAddButton.addEventListener("click", () => callback(section, index, gameCardData.title, false));
         
         for (let i = 0; i < gameCardData.platforms.length; i++) {
             let newChip = platformChip.cloneNode(true);
@@ -99,5 +109,14 @@ class GameCardSection {
         platformChip.remove();
 
         this.cardContainer.appendChild(card);
+        return card;
+    }
+
+    updateCardWishlistStatus(index, isWishlisted) {
+        let card = this.cards[index];
+        let wishlistAddButton = card.querySelector(".wishlist-add");
+        let wishlistRemoveButton = card.querySelector(".wishlist-remove");
+        wishlistAddButton.hidden = isWishlisted;
+        wishlistRemoveButton.hidden = isWishlisted;
     }
 }
