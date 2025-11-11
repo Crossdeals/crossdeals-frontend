@@ -21,6 +21,7 @@ function wishlistToHomeScreen(wishlistData) {
 // Converts one game entry from the server's GET /index response to one game entry in frontend data format.
 function gameToHomeScreen(apiGameData) {
     let displayData = {};
+    displayData["gameId"] = apiGameData._id;
     displayData["image"] = "../images/mw19-placeholder.png";
     displayData["title"] = apiGameData.title;
 

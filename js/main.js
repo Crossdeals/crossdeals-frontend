@@ -49,20 +49,29 @@ class HomeScreen {
         });
     }
 
-    editWishlist(section, index, title, isAdding) {
+    editWishlist(section, index, gameId, title, isAdding) {
         let username = homeScreen.getUsername();
         if (isAdding) {
             client.addToWishlist(username, title, response => {
                 if (response.status === 200) {
-                    section.updateCardWishlistStatus(index, true);
+                    section.updateCardWishlistStatus(section, index, true);
+                    console.log("Wishlist add success");
                 }
                 else {
-                    console.log("Failed to update wishlist status");
+                    console.log("Failed to add to wishlist");
                 }
             })
         }
         else {
-            // TODO: Remove from wishlist
+            client.removeFromWishlist(gameId, response => {
+                if (response.status === 200) {
+                    section.updateCardWishlistStatus(section, index, false);
+                    console.log("Wishlist remove success")
+                }
+                else {
+                    console.log("Failed to remove from wishlist");
+                }
+            })
         }
     }
 

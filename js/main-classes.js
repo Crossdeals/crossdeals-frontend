@@ -65,7 +65,7 @@ class GameCardSection {
 
         for (let i = 0; i < this.sectionData.data.length; i++) {
             let card = this.addCard(i, this.sectionData.data[i]);
-            this.cards.concat(card);
+            this.cards.push(card);
         }
 
         this.sectionHeader.innerHTML = this.sectionData.header;
@@ -93,10 +93,10 @@ class GameCardSection {
         
         let callback = this.wishlistCallback;
         let section = this;
-        wishlistAddButton.hidden = gameCardData.isWishlisted;
-        wishlistAddButton.addEventListener("click", () => callback(section, index, gameCardData.title, true));
-        wishlistRemoveButton.hidden = !gameCardData.isWishlisted;
-        wishlistAddButton.addEventListener("click", () => callback(section, index, gameCardData.title, false));
+        wishlistAddButton.hidden = !gameCardData.isWishlisted;
+        wishlistAddButton.addEventListener("click", () => callback(section, index, gameCardData.gameId, gameCardData.title, true));
+        wishlistRemoveButton.hidden = gameCardData.isWishlisted;
+        wishlistRemoveButton.addEventListener("click", () => callback(section, index, gameCardData.gameId, gameCardData.title, false));
         
         for (let i = 0; i < gameCardData.platforms.length; i++) {
             let newChip = platformChip.cloneNode(true);
@@ -112,11 +112,14 @@ class GameCardSection {
         return card;
     }
 
-    updateCardWishlistStatus(index, isWishlisted) {
-        let card = this.cards[index];
+    updateCardWishlistStatus(section, index, isWishlisted) {
+        console.log(section);
+        console.log(index);
+        console.log(this);
+        let card = section.cards[index];
         let wishlistAddButton = card.querySelector(".wishlist-add");
         let wishlistRemoveButton = card.querySelector(".wishlist-remove");
         wishlistAddButton.hidden = isWishlisted;
-        wishlistRemoveButton.hidden = isWishlisted;
+        wishlistRemoveButton.hidden = !isWishlisted;
     }
 }
