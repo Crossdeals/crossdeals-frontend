@@ -7,6 +7,31 @@ const usernameEndpoint = `${gateway}/username/`;
 const wishlistEndpoint = `${gateway}/wishlist/index/`;
 const wishlistAddEndpoint = `${gateway}/wishlist/add/`;
 const wishlistRemoveEndpoint = `${gateway}/wishlist/remove/`;
+const gameDetailsEndpoint = `${gateway}/games/`;
+
+const dummyGameDataForTesting = {
+    "_id": "691bca19b8cab703f514e754",
+    "title": "Minecraft",
+    "deals": [
+        {
+            "storefront": {
+                "_id": "691bca19b8cab703f514e74b",
+                "url": "www.sonystore.com",
+                "name": "Sony Store",
+                "platforms": [
+                    "ps5"
+                ],
+                "__v": 0
+            },
+            "originalPrice": 99.99,
+            "currentPrice": 59.99,
+            "bestPrice": 39.99,
+            "dealEndDate": "2025-11-11T00:00:00.000Z",
+            "_id": "691bca19b8cab703f514e755"
+        }
+    ],
+    "__v": 0
+}
 
 class APIHandler {
     constructor() {
@@ -119,6 +144,30 @@ class APIHandler {
         xhttp.withCredentials = true;
         let endpoint = wishlistRemoveEndpoint.concat(gameId);
         xhttp.open("DELETE", endpoint, true);
+        xhttp.setRequestHeader("Content-Type", "application/json");
+        xhttp.send();
+        xhttp.onreadystatechange = () => {
+            if (xhttp.readyState === 4) {
+                let responseText = xhttp.responseText;
+                let response = {
+                    "message": responseText
+                }
+                response["status"] = xhttp.status;
+                responseCallback(response);
+            }
+        }
+    }
+
+    getGameDetails(gameId, responseCallback) {
+        const dummyResponse = dummyGameDataForTesting;
+        dummyResponse["status"] = 200;
+        responseCallback(dummyResponse);
+        return;
+
+        const xhttp = new XMLHttpRequest();
+        xhttp.withCredentials = true;
+        let endpoint = gameDetailsEndpoint.concat(gameId);
+        xhttp.open("GET", endpoint, true);
         xhttp.setRequestHeader("Content-Type", "application/json");
         xhttp.send();
         xhttp.onreadystatechange = () => {
