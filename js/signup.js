@@ -21,8 +21,6 @@ function submitFormData(formData) {
 
 function main() {
     const form = new Form(document.getElementById("login"), document.getElementById("error-message"));
-    console.log(form);
-
     const usernameField = new FormField("username", document.getElementById("username"));
     usernameField.setValidator((input) => {
         if (input.trim().length === 0) {

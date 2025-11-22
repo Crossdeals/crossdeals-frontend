@@ -64,8 +64,6 @@ class APIHandler {
 
     username(username, responseCallback) {
         const usernameRequest = new UsernameRequestDetails(username);
-        console.log(usernameRequest);
-
         const xhttp = new XMLHttpRequest();
         xhttp.withCredentials = true;
         xhttp.open("POST", usernameEndpoint, true);
@@ -82,8 +80,6 @@ class APIHandler {
 
     getWishlist(username, responseCallback) {
         const wishlistRequest = new WishlistRequestDetails(username);
-        console.log(wishlistRequest);
-
         const xhttp = new XMLHttpRequest();
         xhttp.withCredentials = true;
         xhttp.open("GET", wishlistEndpoint, true);
@@ -122,7 +118,6 @@ class APIHandler {
         const xhttp = new XMLHttpRequest();
         xhttp.withCredentials = true;
         let endpoint = wishlistRemoveEndpoint.concat(gameId);
-        console.log(endpoint);
         xhttp.open("DELETE", endpoint, true);
         xhttp.setRequestHeader("Content-Type", "application/json");
         xhttp.send();

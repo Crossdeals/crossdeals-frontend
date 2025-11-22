@@ -113,9 +113,6 @@ class GameCardSection {
     }
 
     updateCardWishlistStatus(section, index, isWishlisted) {
-        console.log(section);
-        console.log(index);
-        console.log(this);
         let card = section.cards[index];
         let wishlistAddButton = card.querySelector(".wishlist-add");
         let wishlistRemoveButton = card.querySelector(".wishlist-remove");
