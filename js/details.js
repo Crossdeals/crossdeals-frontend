@@ -1,3 +1,30 @@
+class GameDetailsScreen {
+    constructor() {
+        this.headerPresenter = new HeaderPresenter();
+        this.headerPresenter.checkLogin();
+
+        this.client = new APIHandler();
+    }
+
+    populateDetails() {
+        // TODO: get response from the server
+        this.client.getGameDetailsDummy("691bca19b8cab703f514e754", response => {
+            if (response.status === 200) {
+                const presenter = new GameDetailsPresenter();
+                const gameDetailsData = gameDetailsToDetailsScreen(response);
+                const pricingList = gamePricingToDetailsScreen(response);
+
+                presenter.setGameDetails(gameDetailsData);
+                pricingList.forEach(data => {
+                    presenter.addPlatformCard(data);
+                })
+
+                presenter.removeTempObjects();
+            }
+        })
+    }
+}
+
 class GameDetailsPresenter {
     constructor() {
         this.titleText = document.getElementById("game-title");
@@ -43,40 +70,8 @@ class GameDetailsPresenter {
 }
 
 function main() {
-    let dummyDetails = new GameDetailsData(
-        69,
-        "Contemporary Warfare",
-        "Artivision",
-        "2019",
-        ["PS", "Xbox"],
-        "\"Section Six, going dark.\" The latest entry in the Call to Arms franchise, Contemporary Warfare, depicts warfare in the 21st century."
-    )
-    let dummyPSPricing = new GamePricingData(
-        69,
-        "PS",
-        14.99,
-        69.99,
-        9.99,
-        "07/17/25",
-        "PlayStation",
-        "../html/index.html"
-    )
-    let dummyXboxPricing = new GamePricingData(
-        69,
-        "Xbox",
-        19.99,
-        69.99,
-        4.99,
-        "07/18/25",
-        "Microsoft",
-        "../html/index.html"
-    )
-
-    let gameDetailsPresenter = new GameDetailsPresenter();
-    gameDetailsPresenter.setGameDetails(dummyDetails);
-    gameDetailsPresenter.addPlatformCard(dummyPSPricing);
-    gameDetailsPresenter.addPlatformCard(dummyXboxPricing);
-    gameDetailsPresenter.removeTempObjects();
+    const detailsScreen = new GameDetailsScreen();
+    detailsScreen.populateDetails();
 }
 
 window.addEventListener("load", main);

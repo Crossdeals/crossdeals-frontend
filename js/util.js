@@ -1,5 +1,11 @@
 let headers = ['Your Wishlist']
 
+function unixTimestampToDisplay(timestamp) {
+    const month = timestamp.slice(5, 7);
+    const date = timestamp.slice(8, 10);
+    return `${month}/${date}`;
+}
+
 // Converts server's GET /index response to frontend data format.
 function wishlistToHomeScreen(wishlistData) {
     let displayData = [];
@@ -43,4 +49,50 @@ function gameToHomeScreen(apiGameData) {
     displayData["platforms"] = bestPricePlatforms;
 
     return displayData;
+}
+
+function gameDetailsToDetailsScreen(apiGameData) {
+    // Get a list of all platforms for this game.
+    const platforms = [];
+    for (let i = 0; i < apiGameData.deals.length; i++) {
+        const dealData = apiGameData.deals[i];
+        for (let j = 0; j < dealData.storefront.platforms.length; j++) {
+            const platform = dealData.storefront.platforms[j];
+            platforms.push(platform);
+        }
+    }
+
+    const gameDetailsData = new GameDetailsData(
+        apiGameData._id,
+        apiGameData.title,
+        "Unknown Publisher",
+        "Unknown Year",
+        platforms,
+        "Unknown Description"
+    );
+
+    return gameDetailsData;
+}
+
+function gamePricingToDetailsScreen(apiGameData) {
+    const gamePricingDataList = [];
+
+    for (let i = 0; i < apiGameData.deals.length; i++) {
+        const dealData = apiGameData.deals[i];
+        const platform = dealData.storefront.platforms[0];
+        const pricingData = new GamePricingData(
+            apiGameData._id,
+            platform,
+            dealData.currentPrice,
+            dealData.originalPrice,
+            dealData.bestPrice,
+            unixTimestampToDisplay(dealData.dealEndDate),
+            dealData.storefront.name,
+            dealData.storefront.url
+        );
+
+        gamePricingDataList.push(pricingData);
+    }
+
+    return gamePricingDataList;
 }

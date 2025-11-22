@@ -7,6 +7,7 @@ const usernameEndpoint = `${gateway}/username/`;
 const wishlistEndpoint = `${gateway}/wishlist/index/`;
 const wishlistAddEndpoint = `${gateway}/wishlist/add/`;
 const wishlistRemoveEndpoint = `${gateway}/wishlist/remove/`;
+const gameDetailsEndpoint = `${gateway}/games/`;
 
 class APIHandler {
     constructor() {
@@ -119,6 +120,32 @@ class APIHandler {
         xhttp.withCredentials = true;
         let endpoint = wishlistRemoveEndpoint.concat(gameId);
         xhttp.open("DELETE", endpoint, true);
+        xhttp.setRequestHeader("Content-Type", "application/json");
+        xhttp.send();
+        xhttp.onreadystatechange = () => {
+            if (xhttp.readyState === 4) {
+                let responseText = xhttp.responseText;
+                let response = {
+                    "message": responseText
+                }
+                response["status"] = xhttp.status;
+                responseCallback(response);
+            }
+        }
+    }
+
+    getGameDetailsDummy(gameId, responseCallback) {
+        const dummyResponse = dummyGameData;
+        dummyResponse["status"] = 200;
+        responseCallback(dummyResponse);
+        return;
+    }
+
+    getGameDetails(gameId, responseCallback) {
+        const xhttp = new XMLHttpRequest();
+        xhttp.withCredentials = true;
+        let endpoint = gameDetailsEndpoint.concat(gameId);
+        xhttp.open("GET", endpoint, true);
         xhttp.setRequestHeader("Content-Type", "application/json");
         xhttp.send();
         xhttp.onreadystatechange = () => {
