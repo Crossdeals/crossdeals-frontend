@@ -44,3 +44,49 @@ function gameToHomeScreen(apiGameData) {
 
     return displayData;
 }
+
+function gameDetailsToDetailsScreen(apiGameData) {
+    // Get a list of all platforms for this game.
+    const platforms = [];
+    for (let i = 0; i < apiGameData.deals.length; i++) {
+        const dealData = apiGameData.deals[i];
+        for (let j = 0; j < dealData.storefront.platforms.length; j++) {
+            const platform = dealData.storefront.platforms[j];
+            platforms.push(platform);
+        }
+    }
+
+    const gameDetailsData = new GameDetailsData(
+        apiGameData._id,
+        apiGameData.title,
+        "Unknown Publisher",
+        "Unknown Year",
+        platforms,
+        "Unknown Description"
+    );
+
+    return gameDetailsData;
+}
+
+function gamePricingToDetailsScreen(apiGameData) {
+    const gamePricingDataList = [];
+
+    for (let i = 0; i < apiGameData.deals.length; i++) {
+        const dealData = apiGameData.deals[i];
+        const platform = dealData.storefront.platforms[0];
+        const pricingData = new GamePricingData(
+            apiGameData._id,
+            platform,
+            apiGameData.currentPrice,
+            apiGameData.originalPrice,
+            apiGameData.bestPrice,
+            apiGameData.dealEndDate,
+            apiGameData.storefront.name,
+            apiGameData.storefront.url
+        );
+
+        gamePricingDataList.push(pricingData);
+    }
+
+    return gamePricingDataList;
+}
