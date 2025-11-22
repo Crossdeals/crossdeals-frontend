@@ -118,6 +118,21 @@ input:focus {
     cursor: pointer;
 }
 
+.wishlist-add, .wishlist-remove {
+    background-color: var(--colour-secondary);
+    width: 25px;
+    height: 25px;
+    text-align: center;
+    padding: 5px;
+    border-radius: 12px;
+    font-size: 11pt;
+    cursor: pointer;
+}
+
+.wishlist-add:hover, .wishlist-remove:hover {
+    background-color: var(--colour-secondary-hover);
+}
+
 .button {
     width: 300px;
     height: 40px;
