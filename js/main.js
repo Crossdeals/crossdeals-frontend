@@ -1,38 +1,10 @@
-const usernameKey = "username";
 const client = new APIHandler();
 let homeScreen = null;
 
 class HomeScreen {
     constructor() {
-        this.loginButton = document.getElementById("login");
-        this.logoutButton = document.getElementById("logout");
-        this.signupButton = document.getElementById("signup");
-        this.usernameObject = document.getElementById("username-container");
-        this.usernameText = document.getElementById("username");
-
-        this.setupLinks();
-        this.getUsername();
-    }
-
-    setupLinks() {
-        this.logoutButton.addEventListener("click", this.logout);
-        this.loginButton.addEventListener("click", this.login);
-        this.signupButton.addEventListener("click", this.signup);
-    }
-
-    getUsername() {
-        if (sessionStorage.getItem(usernameKey)) {
-            client.username(sessionStorage.getItem(usernameKey), response => {
-                this.usernameText.innerHTML = response.username;
-                this.loginButton.hidden = true;
-                this.signupButton.hidden = true;
-            })
-        }
-        else {
-            console.log("Nobody signed in");
-            this.usernameObject.classList.add("hidden");
-            this.logoutButton.hidden = true;
-        }
+        this.headerPresenter = new HeaderPresenter();
+        this.headerPresenter.checkLogin();
     }
 
     getWishlist() {
@@ -73,21 +45,6 @@ class HomeScreen {
                 }
             })
         }
-    }
-
-    signup() {
-        window.location = "signup.html";
-    }
-
-    login() {
-        window.location = "login.html";
-    }
-
-    logout() {
-        client.logout(response => {
-            sessionStorage.removeItem(usernameKey);
-            window.location = window.location;
-        })
     }
 }
 
