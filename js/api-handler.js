@@ -134,12 +134,14 @@ class APIHandler {
         }
     }
 
-    getGameDetails(gameId, responseCallback) {
+    getGameDetailsDummy(gameId, responseCallback) {
         const dummyResponse = dummyGameData;
         dummyResponse["status"] = 200;
         responseCallback(dummyResponse);
         return;
+    }
 
+    getGameDetails(gameId, responseCallback) {
         const xhttp = new XMLHttpRequest();
         xhttp.withCredentials = true;
         let endpoint = gameDetailsEndpoint.concat(gameId);

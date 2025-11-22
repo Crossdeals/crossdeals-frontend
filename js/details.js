@@ -7,7 +7,8 @@ class GameDetailsScreen {
     }
 
     populateDetails() {
-        this.client.getGameDetails("691bca19b8cab703f514e754", response => {
+        // TODO: get response from the server
+        this.client.getGameDetailsDummy("691bca19b8cab703f514e754", response => {
             if (response.status === 200) {
                 const presenter = new GameDetailsPresenter();
                 const gameDetailsData = gameDetailsToDetailsScreen(response);
