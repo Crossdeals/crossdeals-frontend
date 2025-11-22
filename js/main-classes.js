@@ -77,30 +77,30 @@ class GameCardSection {
     }
 
     addCard(gameIndex, gameCardData) {
-        let index = gameIndex;
-        let card = this.cardTemplate.cloneNode(true);
-        let cardImage = card.querySelector(".card-image");
-        let cardTitle = card.querySelector(".card-title");
-        let cardPrice = card.querySelector(".card-price");
-        let cardPlatformContainer = card.querySelector(".card-platform-container");
-        let platformChip = card.querySelector(".platform-chip");
-        let wishlistAddButton = card.querySelector(".wishlist-add");
-        let wishlistRemoveButton = card.querySelector(".wishlist-remove");
+        const index = gameIndex;
+        const card = this.cardTemplate.cloneNode(true);
+        const cardImage = card.querySelector(".card-image");
+        const cardTitle = card.querySelector(".card-title");
+        const cardPrice = card.querySelector(".card-price");
+        const cardPlatformContainer = card.querySelector(".card-platform-container");
+        const platformChip = card.querySelector(".platform-chip");
+        const wishlistAddButton = card.querySelector(".wishlist-add");
+        const wishlistRemoveButton = card.querySelector(".wishlist-remove");
 
         cardImage.src = gameCardData.image;
         cardTitle.innerHTML = gameCardData.title;
         cardPrice.innerHTML = gameCardData.price;
         
-        let callback = this.wishlistCallback;
-        let section = this;
+        const callback = this.wishlistCallback;
+        const section = this;
         wishlistAddButton.hidden = !gameCardData.isWishlisted;
         wishlistAddButton.addEventListener("click", () => callback(section, index, gameCardData.gameId, gameCardData.title, true));
         wishlistRemoveButton.hidden = gameCardData.isWishlisted;
         wishlistRemoveButton.addEventListener("click", () => callback(section, index, gameCardData.gameId, gameCardData.title, false));
         
         for (let i = 0; i < gameCardData.platforms.length; i++) {
-            let newChip = platformChip.cloneNode(true);
-            let newChipText = newChip.querySelector("p");
+            const newChip = platformChip.cloneNode(true);
+            const newChipText = newChip.querySelector("p");
 
             newChipText.innerHTML = gameCardData.platforms[i];
             cardPlatformContainer.appendChild(newChip);
@@ -113,9 +113,9 @@ class GameCardSection {
     }
 
     updateCardWishlistStatus(section, index, isWishlisted) {
-        let card = section.cards[index];
-        let wishlistAddButton = card.querySelector(".wishlist-add");
-        let wishlistRemoveButton = card.querySelector(".wishlist-remove");
+        const card = section.cards[index];
+        const wishlistAddButton = card.querySelector(".wishlist-add");
+        const wishlistRemoveButton = card.querySelector(".wishlist-remove");
         wishlistAddButton.hidden = isWishlisted;
         wishlistRemoveButton.hidden = !isWishlisted;
     }
