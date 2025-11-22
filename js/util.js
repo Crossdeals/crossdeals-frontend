@@ -77,12 +77,12 @@ function gamePricingToDetailsScreen(apiGameData) {
         const pricingData = new GamePricingData(
             apiGameData._id,
             platform,
-            apiGameData.currentPrice,
-            apiGameData.originalPrice,
-            apiGameData.bestPrice,
-            apiGameData.dealEndDate,
-            apiGameData.storefront.name,
-            apiGameData.storefront.url
+            dealData.currentPrice,
+            dealData.originalPrice,
+            dealData.bestPrice,
+            dealData.dealEndDate,
+            dealData.storefront.name,
+            dealData.storefront.url
         );
 
         gamePricingDataList.push(pricingData);

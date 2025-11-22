@@ -28,6 +28,22 @@ const dummyGameDataForTesting = {
             "bestPrice": 39.99,
             "dealEndDate": "2025-11-11T00:00:00.000Z",
             "_id": "691bca19b8cab703f514e755"
+        },
+        {
+            "storefront": {
+                "_id": "691bca19b8cab703f514e74b",
+                "url": "www.sonystore.com",
+                "name": "Microsoft Store",
+                "platforms": [
+                    "xbox"
+                ],
+                "__v": 0
+            },
+            "originalPrice": 99.99,
+            "currentPrice": 29.99,
+            "bestPrice": 59.99,
+            "dealEndDate": "2025-11-11T00:00:00.000Z",
+            "_id": "691bca19b8cab703f514e755"
         }
     ],
     "__v": 0
