@@ -1,5 +1,11 @@
 let headers = ['Your Wishlist']
 
+function unixTimestampToDisplay(timestamp) {
+    const month = timestamp.slice(5, 7);
+    const date = timestamp.slice(8, 10);
+    return `${month}/${date}`;
+}
+
 // Converts server's GET /index response to frontend data format.
 function wishlistToHomeScreen(wishlistData) {
     let displayData = [];
@@ -80,7 +86,7 @@ function gamePricingToDetailsScreen(apiGameData) {
             dealData.currentPrice,
             dealData.originalPrice,
             dealData.bestPrice,
-            dealData.dealEndDate,
+            unixTimestampToDisplay(dealData.dealEndDate),
             dealData.storefront.name,
             dealData.storefront.url
         );
