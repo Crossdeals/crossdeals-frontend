@@ -7,13 +7,21 @@ class LoginManager {
         this.username = "";
     }
 
+    getUsername() {
+        return this.username;
+    }
+
     checkLogin(callback) {
         if (sessionStorage.getItem(usernameKey)) {
             client.username(sessionStorage.getItem(usernameKey), response => {
+                this.isLoggedIn = true;
+                this.username = response.username;
                 callback(true, response.username);
             })
         }
         else {
+            this.isLoggedIn = false;
+            this.username = "";
             callback(false, "");
         }
     }
@@ -33,6 +41,10 @@ class HeaderPresenter {
 
     checkLogin() {
         this.loginManager.checkLogin(this.onLoginCheckComplete.bind(this));
+    }
+
+    getUsername() {
+        return this.loginManager.getUsername();
     }
 
     onLoginCheckComplete(isLoggedIn, username) {
