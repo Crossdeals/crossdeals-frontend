@@ -16,7 +16,7 @@ const dummyGameDataForTesting = {
         {
             "storefront": {
                 "_id": "691bca19b8cab703f514e74b",
-                "url": "www.sonystore.com",
+                "url": "https://www.sony.ca/en",
                 "name": "Sony Store",
                 "platforms": [
                     "ps5"
@@ -32,7 +32,7 @@ const dummyGameDataForTesting = {
         {
             "storefront": {
                 "_id": "691bca19b8cab703f514e74b",
-                "url": "www.sonystore.com",
+                "url": "https://www.microsoft.com/en-ca/store/",
                 "name": "Microsoft Store",
                 "platforms": [
                     "xbox"
