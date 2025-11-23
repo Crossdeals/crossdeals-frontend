@@ -1,5 +1,3 @@
-let headers = ['Your Wishlist']
-
 function unixTimestampToDisplayString(timestamp) {
     const month = timestamp.slice(5, 7);
     const date = timestamp.slice(8, 10);
@@ -13,19 +11,16 @@ function floatToPercentageString(floatPercentage) {
 }
 
 // Converts server's GET /index response to frontend data format.
-function wishlistToHomeScreen(wishlistData) {
-    let displayData = [];
-
-    headers.forEach(header => {
-        let headerGameList = [];
-        wishlistData.forEach(gameData => {
-            headerGameList.push(gameToHomeScreen(gameData));
-        });
-        displayData.push({
-            "header": header,
-            "data": headerGameList
-        });
+function gameListToHomeScreen(header, apiGameList) {
+    let displayData = {};
+    let headerGameList = [];
+    apiGameList.forEach(gameData => {
+        headerGameList.push(gameToHomeScreen(gameData));
     });
+    displayData = {
+        "header": header,
+        "data": headerGameList
+    };
 
     return displayData;
 }
