@@ -24,7 +24,7 @@ class HomeScreen {
     getWishlist() {
         let username = this.headerPresenter.getUsername();
         this.client.getWishlist(username, response => {
-            if (response.status === 200 || 304) {
+            if (response.status === 200 || response.status === 304) {
                 this.homeScreenData.push(gameListToHomeScreen("Your Wishlist", response));
                 this.getHomeScreenGames();
             }
@@ -37,7 +37,7 @@ class HomeScreen {
 
     getHomeScreenGames() {
         this.client.getHomeScreenGamesDummy(response => {
-            if (response.status === 200 || 304) {
+            if (response.status === 200 || response.status === 304) {
                 this.homeScreenData.push(gameListToHomeScreen("Featured Deals", response));
                 let sectionListData = new GameCardSectionListData(this.homeScreenData);
                 let presenter = new GameSectionsPresenter(sectionListData, this.editWishlist.bind(this));
