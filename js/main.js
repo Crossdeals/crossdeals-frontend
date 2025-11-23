@@ -5,6 +5,8 @@ class HomeScreen {
         this.headerPresenter.checkLogin();
         this.featuredPresenter = new FeaturedGamePresenter();
         this.populateFeaturedGame();
+
+        this.homeScreenData = [];
     }
 
     populateFeaturedGame() {
@@ -22,15 +24,25 @@ class HomeScreen {
     getWishlist() {
         let username = this.headerPresenter.getUsername();
         this.client.getWishlist(username, response => {
-            if (response.status === 200) {
-                let homeScreenData = wishlistToHomeScreen(response);
-                let sectionListData = new GameCardSectionListData(homeScreenData);
-                let presenter = new GameSectionsPresenter(sectionListData, this.editWishlist.bind(this));
+            if (response.status === 200 || 304) {
+                this.homeScreenData.push(gameListToHomeScreen("Your Wishlist", response));
+                this.getHomeScreenGames();
             }
             else {
                 console.log("Failed to retrieve wishlist");
+                this.getHomeScreenGames();
             }
         });
+    }
+
+    getHomeScreenGames() {
+        this.client.getHomeScreenGamesDummy(response => {
+            if (response.status === 200 || 304) {
+                this.homeScreenData.push(gameListToHomeScreen("Featured Deals", response));
+                let sectionListData = new GameCardSectionListData(this.homeScreenData);
+                let presenter = new GameSectionsPresenter(sectionListData, this.editWishlist.bind(this));
+            }
+        })
     }
 
     editWishlist(section, index, gameId, title, isAdding) {
