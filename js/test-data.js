@@ -1,42 +1,8 @@
-const dummyData = [
-    {
-        "header": "Dummy Data 1",
-        "data": [
-            {
-                "id": 3,
-                "image": "../images/mw19-placeholder.png",
-                "title": "Placeholder game",
-                "price": 18.99,
-                "platforms": [
-                    "Xbox",
-                    "PS"
-                ],
-                "isWishlisted": true
-            }
-        ]
-    },
-    {
-        "header": "Dummy Data 2",
-        "data": [
-            {
-                "id": 4,
-                "image": "../images/mw19-placeholder.png",
-                "title": "Placeholder game",
-                "price": 27.99,
-                "platforms": [
-                    "Xbox",
-                    "PS"
-                ],
-                "isWishlisted": true
-            }
-        ]
-    }
-];
-
 const homeScreenData = [
     {
         "_id": "691bca19b8cab703f514e754",
         "title": "Minecraft",
+        "isWishlisted": true,
         "deals": [
             {
                 "storefront": {

@@ -31,6 +31,7 @@ function gameToHomeScreen(apiGameData) {
     displayData["gameId"] = apiGameData._id;
     displayData["image"] = "../images/mw19-placeholder.png";
     displayData["title"] = apiGameData.title;
+    displayData["isWishlisted"] = apiGameData.isWishlisted;
 
     // Get best price and platform
     let bestPrice = 9000;
