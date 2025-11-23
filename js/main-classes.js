@@ -143,7 +143,7 @@ class FeaturedGamePresenter {
         this.featuredTitle.innerHTML = featuredGameDetails.title;
         this.featuredPublisherDate.innerHTML = `${featuredGameDetails.publisher}, ${featuredGameDetails.year}`;
         this.featuredPrice.innerHTML = lowestPriceDetails.lowestPrice;
-        this.featuredPercentage.innerHTML = `${lowestPriceDetails.salePercentage} off - Originally $${lowestPriceDetails.originalPrice}`;
+        this.featuredPercentage.innerHTML = `${floatToPercentageString(lowestPriceDetails.salePercentage)} off - Originally $${lowestPriceDetails.originalPrice}`;
         this.featuredEndDate.innerHTML = `Deal ends ${lowestPriceDetails.endDate}`;
         this.featuredDescription.innerHTML = featuredGameDetails.description;
         this.featuredMoreButton.addEventListener("click", this.goToFeaturedGameDetails.bind(this))

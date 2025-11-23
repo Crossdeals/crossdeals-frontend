@@ -1,9 +1,15 @@
 let headers = ['Your Wishlist']
 
-function unixTimestampToDisplay(timestamp) {
+function unixTimestampToDisplayString(timestamp) {
     const month = timestamp.slice(5, 7);
     const date = timestamp.slice(8, 10);
     return `${month}/${date}`;
+}
+
+function floatToPercentageString(floatPercentage) {
+    const multiplied = floatPercentage * 100;
+    const rounded = Math.round(multiplied);
+    return `${rounded}%`;
 }
 
 // Converts server's GET /index response to frontend data format.
@@ -86,7 +92,7 @@ function gamePricingToDetailsScreen(apiGameData) {
             dealData.currentPrice,
             dealData.originalPrice,
             dealData.bestPrice,
-            unixTimestampToDisplay(dealData.dealEndDate),
+            unixTimestampToDisplayString(dealData.dealEndDate),
             dealData.storefront.name,
             dealData.storefront.url
         );
@@ -110,7 +116,7 @@ function getLowestPriceDetails(apiGameData) {
             lowestPrice = dealData.currentPrice;
             originalPrice = dealData.originalPrice;
             salePercentage = 1.0 - (lowestPrice / originalPrice);
-            endDate = unixTimestampToDisplay(dealData.dealEndDate);
+            endDate = unixTimestampToDisplayString(dealData.dealEndDate);
         }
     }
 
