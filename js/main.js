@@ -3,6 +3,20 @@ class HomeScreen {
         this.client = new APIHandler();
         this.headerPresenter = new HeaderPresenter();
         this.headerPresenter.checkLogin();
+        this.featuredPresenter = new FeaturedGamePresenter();
+        this.populateFeaturedGame();
+    }
+
+    populateFeaturedGame() {
+        // TODO: Get actual data from BE.
+        this.client.getGameDetailsDummy("", response => {
+            if (response.status === 200) {
+                this.featuredPresenter.populateFeaturedGame(response);
+            }
+            else {
+                console.log("Failed to retrieve featured game details");
+            }
+        })
     }
 
     getWishlist() {
