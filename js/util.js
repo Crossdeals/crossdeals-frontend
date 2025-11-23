@@ -96,3 +96,28 @@ function gamePricingToDetailsScreen(apiGameData) {
 
     return gamePricingDataList;
 }
+
+function getLowestPriceDetails(apiGameData) {
+    let lowestPrice = 99999;
+    let originalPrice = 99999;
+    let salePercentage = 1.0;
+    let endDate = "00/00";
+
+    for (let i = 0; i < apiGameData.deals.length; i++) {
+        const dealData = apiGameData.deals[i];
+
+        if (dealData.currentPrice < lowestPrice) {
+            lowestPrice = dealData.currentPrice;
+            originalPrice = dealData.originalPrice;
+            salePercentage = 1.0 - (lowestPrice / originalPrice);
+            endDate = unixTimestampToDisplay(dealData.dealEndDate);
+        }
+    }
+
+    return {
+        "lowestPrice": lowestPrice,
+        "originalPrice": originalPrice,
+        "salePercentage": salePercentage,
+        "endDate": endDate
+    };
+}
