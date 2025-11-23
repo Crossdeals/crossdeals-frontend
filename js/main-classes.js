@@ -93,10 +93,16 @@ class GameCardSection {
         
         const callback = this.wishlistCallback;
         const section = this;
-        wishlistAddButton.hidden = !gameCardData.isWishlisted;
-        wishlistAddButton.addEventListener("click", () => callback(section, index, gameCardData.gameId, gameCardData.title, true));
-        wishlistRemoveButton.hidden = gameCardData.isWishlisted;
-        wishlistRemoveButton.addEventListener("click", () => callback(section, index, gameCardData.gameId, gameCardData.title, false));
+        if (gameCardData.isWishlisted === undefined) {
+            wishlistAddButton.hidden = true;
+            wishlistRemoveButton.hidden = true;
+        }
+        else {
+            wishlistAddButton.hidden = !gameCardData.isWishlisted;
+            wishlistAddButton.addEventListener("click", () => callback(section, index, gameCardData.gameId, gameCardData.title, true));
+            wishlistRemoveButton.hidden = gameCardData.isWishlisted;
+            wishlistRemoveButton.addEventListener("click", () => callback(section, index, gameCardData.gameId, gameCardData.title, false));
+        }
         
         for (let i = 0; i < gameCardData.platforms.length; i++) {
             const newChip = platformChip.cloneNode(true);

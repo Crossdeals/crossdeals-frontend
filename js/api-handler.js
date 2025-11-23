@@ -7,6 +7,7 @@ const usernameEndpoint = `${gateway}/username/`;
 const wishlistEndpoint = `${gateway}/wishlist/index/`;
 const wishlistAddEndpoint = `${gateway}/wishlist/add/`;
 const wishlistRemoveEndpoint = `${gateway}/wishlist/remove/`;
+const gamesHomeScreenEndpoint = `${gateway}/games/`;
 const gameDetailsEndpoint = `${gateway}/games/`;
 const gameFeaturedEndpoint = `${gateway}/games/featured/`;
 
@@ -140,6 +141,28 @@ class APIHandler {
         dummyResponse["status"] = 200;
         responseCallback(dummyResponse);
         return;
+    }
+
+    getHomeScreenGamesDummy(responseCallback) {
+        const dummyResponse = homeScreenData;
+        dummyResponse["status"] = 200;
+        responseCallback(dummyResponse);
+        return;
+    }
+
+    getHomeScreenGames(responseCallback) {
+        const xhttp = new XMLHttpRequest();
+        xhttp.withCredentials = true;
+        xhttp.open("GET", gamesHomeScreenEndpoint, true);
+        xhttp.setRequestHeader("Content-Type", "application/json");
+        xhttp.send();
+        xhttp.onreadystatechange = () => {
+            if (xhttp.readyState === 4) {
+                let response = JSON.parse(xhttp.response);
+                response["status"] = xhttp.status;
+                responseCallback(response);
+            }
+        }
     }
 
     getGameDetails(gameId, responseCallback) {

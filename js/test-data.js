@@ -1,46 +1,12 @@
-const dummyData = [
+const homeScreenData = [
     {
-        "header": "Dummy Data 1",
-        "data": [
-            {
-                "id": 3,
-                "image": "../images/mw19-placeholder.png",
-                "title": "Placeholder game",
-                "price": 18.99,
-                "platforms": [
-                    "Xbox",
-                    "PS"
-                ],
-                "isWishlisted": true
-            }
-        ]
-    },
-    {
-        "header": "Dummy Data 2",
-        "data": [
-            {
-                "id": 4,
-                "image": "../images/mw19-placeholder.png",
-                "title": "Placeholder game",
-                "price": 27.99,
-                "platforms": [
-                    "Xbox",
-                    "PS"
-                ],
-                "isWishlisted": true
-            }
-        ]
-    }
-];
-
-const apiData = [
-    {
-        "_id": "69042459aa4f0797a8164f11",
+        "_id": "691bca19b8cab703f514e754",
         "title": "Minecraft",
+        "isWishlisted": true,
         "deals": [
             {
                 "storefront": {
-                    "_id": "6902af8c93daf3e7e758a7df",
+                    "_id": "691bca19b8cab703f514e74b",
                     "url": "www.sonystore.com",
                     "name": "Sony Store",
                     "platforms": [
@@ -52,18 +18,18 @@ const apiData = [
                 "currentPrice": 59.99,
                 "bestPrice": 39.99,
                 "dealEndDate": "2025-11-11T00:00:00.000Z",
-                "_id": "69042459aa4f0797a8164f12"
+                "_id": "691bca19b8cab703f514e755"
             }
         ],
         "__v": 0
     },
     {
-        "_id": "69042459aa4f0797a8164f15",
+        "_id": "691bca19b8cab703f514e758",
         "title": "Starcraft",
         "deals": [
             {
                 "storefront": {
-                    "_id": "6902af8c93daf3e7e758a7df",
+                    "_id": "691bca19b8cab703f514e74b",
                     "url": "www.sonystore.com",
                     "name": "Sony Store",
                     "platforms": [
@@ -73,7 +39,7 @@ const apiData = [
                 },
                 "originalPrice": 29.99,
                 "currentPrice": 29.99,
-                "_id": "69042459aa4f0797a8164f16"
+                "_id": "691bca19b8cab703f514e759"
             }
         ],
         "__v": 0
