@@ -89,7 +89,7 @@ class GameCardSection {
 
         cardImage.src = gameCardData.image;
         cardTitle.innerHTML = gameCardData.title;
-        cardPrice.innerHTML = gameCardData.price;
+        cardPrice.innerHTML = `$${gameCardData.price}`;
         
         const callback = this.wishlistCallback;
         const section = this;
@@ -142,7 +142,7 @@ class FeaturedGamePresenter {
 
         this.featuredTitle.innerHTML = featuredGameDetails.title;
         this.featuredPublisherDate.innerHTML = `${featuredGameDetails.publisher}, ${featuredGameDetails.year}`;
-        this.featuredPrice.innerHTML = lowestPriceDetails.lowestPrice;
+        this.featuredPrice.innerHTML = `$${lowestPriceDetails.lowestPrice}`;
         this.featuredPercentage.innerHTML = `${floatToPercentageString(lowestPriceDetails.salePercentage)} off - Originally $${lowestPriceDetails.originalPrice}`;
         this.featuredEndDate.innerHTML = `Deal ends ${lowestPriceDetails.endDate}`;
         this.featuredDescription.innerHTML = featuredGameDetails.description;
