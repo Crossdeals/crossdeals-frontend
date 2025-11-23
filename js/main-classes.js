@@ -89,7 +89,7 @@ class GameCardSection {
 
         cardImage.src = gameCardData.image;
         cardTitle.innerHTML = gameCardData.title;
-        cardPrice.innerHTML = gameCardData.price;
+        cardPrice.innerHTML = `$${gameCardData.price}`;
         
         const callback = this.wishlistCallback;
         const section = this;
@@ -118,5 +118,38 @@ class GameCardSection {
         const wishlistRemoveButton = card.querySelector(".wishlist-remove");
         wishlistAddButton.hidden = isWishlisted;
         wishlistRemoveButton.hidden = !isWishlisted;
+    }
+}
+
+class FeaturedGamePresenter {
+    constructor() {
+        this.featuredTitle = document.getElementById("feature-title");
+        this.featuredPublisherDate = document.getElementById("feature-publisher");
+        this.featuredPrice = document.getElementById("feature-price");
+        this.featuredPercentage = document.getElementById("feature-percentage");
+        this.featuredEndDate = document.getElementById("feature-date");
+        this.featuredDescription = document.getElementById("feature-description");
+        this.featuredMoreButton = document.getElementById("feature-more-button");
+
+        this.featuredGameId = null;
+    }
+
+    populateFeaturedGame(apiGameData) {
+        const featuredGameDetails = gameDetailsToDetailsScreen(apiGameData);
+        const lowestPriceDetails = getLowestPriceDetails(apiGameData);
+
+        this.featuredGameId = featuredGameDetails.id;
+
+        this.featuredTitle.innerHTML = featuredGameDetails.title;
+        this.featuredPublisherDate.innerHTML = `${featuredGameDetails.publisher}, ${featuredGameDetails.year}`;
+        this.featuredPrice.innerHTML = `$${lowestPriceDetails.lowestPrice}`;
+        this.featuredPercentage.innerHTML = `${floatToPercentageString(lowestPriceDetails.salePercentage)} off - Originally $${lowestPriceDetails.originalPrice}`;
+        this.featuredEndDate.innerHTML = `Deal ends ${lowestPriceDetails.endDate}`;
+        this.featuredDescription.innerHTML = featuredGameDetails.description;
+        this.featuredMoreButton.addEventListener("click", this.goToFeaturedGameDetails.bind(this))
+    }
+
+    goToFeaturedGameDetails() {
+        window.location = "details.html";
     }
 }
