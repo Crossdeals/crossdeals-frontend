@@ -104,6 +104,12 @@ input:focus {
     border-radius: 15px;
     background-color: white;
     border: none;
+    cursor: pointer;
+}
+
+.platform-toggle-off {
+    background-color: var(--background-colour);
+    border: 2px solid white;
 }
 
 .account-button {

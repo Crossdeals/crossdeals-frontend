@@ -50,6 +50,7 @@ class PreferredPlatformManager {
 class HeaderPresenter {
     constructor() {
         this.loginManager = new LoginManager();
+        this.platformManager = new PreferredPlatformManager();
 
         // Auth
         this.loginButton = document.getElementById("login");
@@ -57,23 +58,19 @@ class HeaderPresenter {
         this.signupButton = document.getElementById("signup");
         this.usernameObject = document.getElementById("username-container");
         this.usernameText = document.getElementById("username");
-        this.setupLinks();
+        this.setupAuthLinks();
 
         // Search
         this.searchBar = document.getElementById("searchbar");
-        this.searchBar.addEventListener("keydown", keyboardEvent => {
-            if (keyboardEvent.key === "Enter") {
-                // TODO: Validating the input.
-                const searchValue = this.searchBar.value;
-                window.location = detailsUrl.concat(`?title=${searchValue}`)
-            }
-        })
+        this.searchBar.addEventListener("keydown", this.search.bind(this));
 
         // Platforms
         this.playstationToggle = document.getElementById("ps");
         this.xboxToggle = document.getElementById("xbox");
-        this.swToggle = document.getElementById("sw");
+        this.switchToggle = document.getElementById("sw");
         this.pcToggle = document.getElementById("pc");
+        this.setupPlatformButtons();
+        this.updatePlatformButtonState();
     }
 
     checkLogin() {
@@ -97,7 +94,7 @@ class HeaderPresenter {
         }
     }
 
-    setupLinks() {
+    setupAuthLinks() {
         this.logoutButton.addEventListener("click", this.logout);
         this.loginButton.addEventListener("click", this.login);
         this.signupButton.addEventListener("click", this.signup);
@@ -117,5 +114,66 @@ class HeaderPresenter {
             sessionStorage.removeItem(usernameKey);
             window.location = window.location;
         })
+    }
+
+    search(keyboardEvent) {
+        if (keyboardEvent.key === "Enter") {
+            // TODO: Validating the input.
+            const searchValue = this.searchBar.value;
+            window.location = detailsUrl.concat(`?title=${searchValue}`)
+        }
+    }
+
+    setupPlatformButtons() {
+        this.playstationToggle.addEventListener("click", () => {
+            this.platformManager.isPlaystationPreferred = !this.platformManager.isPlaystationPreferred;
+            this.platformManager.updatePreferences();
+            this.updatePlatformButtonState();
+        });
+        this.xboxToggle.addEventListener("click", () => {
+            this.platformManager.isXboxPreferred = !this.platformManager.isXboxPreferred;
+            this.platformManager.updatePreferences();
+            this.updatePlatformButtonState();
+        });
+        this.switchToggle.addEventListener("click", () => {
+            this.platformManager.isSwitchPreferred = !this.platformManager.isSwitchPreferred;
+            this.platformManager.updatePreferences();
+            this.updatePlatformButtonState();
+        });
+        this.pcToggle.addEventListener("click", () => {
+            this.platformManager.isPCPreferred = !this.platformManager.isPCPreferred;
+            this.platformManager.updatePreferences();
+            this.updatePlatformButtonState();
+        });
+    }
+
+    updatePlatformButtonState() {
+        if (this.platformManager.isPlaystationPreferred) {
+            this.playstationToggle.classList.remove("platform-toggle-off")
+        }
+        else {
+            this.playstationToggle.classList.add("platform-toggle-off");
+        }
+
+        if (this.platformManager.isXboxPreferred) {
+            this.xboxToggle.classList.remove("platform-toggle-off")
+        }
+        else {
+            this.xboxToggle.classList.add("platform-toggle-off");
+        }
+        
+        if (this.platformManager.isSwitchPreferred) {
+            this.switchToggle.classList.remove("platform-toggle-off")
+        }
+        else {
+            this.switchToggle.classList.add("platform-toggle-off");
+        }
+        
+        if (this.platformManager.isPCPreferred) {
+            this.pcToggle.classList.remove("platform-toggle-off")
+        }
+        else {
+            this.pcToggle.classList.add("platform-toggle-off");
+        }
     }
 }
