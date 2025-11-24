@@ -51,7 +51,17 @@ function gameToHomeScreen(apiGameData) {
     })
 
     displayData["price"] = bestPrice;
-    displayData["platforms"] = bestPricePlatforms;
+
+    // Get a list of all platforms for this game.
+    const platforms = [];
+    for (let i = 0; i < apiGameData.deals.length; i++) {
+        const dealData = apiGameData.deals[i];
+        for (let j = 0; j < dealData.storefront.platforms.length; j++) {
+            const platform = dealData.storefront.platforms[j];
+            platforms.push(platform);
+        }
+    }
+    displayData["platforms"] = platforms;
 
     return displayData;
 }
