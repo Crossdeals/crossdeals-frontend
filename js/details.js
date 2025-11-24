@@ -25,6 +25,10 @@ class GameDetailsScreen {
 
                 presenter.removeTempObjects();
             }
+            else {
+                const presenter = new GameDetailsPresenter();
+                presenter.hideMainDetailsContainer();
+            }
         })
     }
 }
@@ -39,6 +43,15 @@ class GameDetailsPresenter {
         this.pricingContainer = document.getElementById("game-pricing-container");
         this.pricingCardTemplate = document.querySelector(".game-details");
         this.averageRatingText = document.getElementById("review-average-rating");
+
+        this.mainDetailsContainer = document.getElementById("main-content-container");
+    }
+
+    hideMainDetailsContainer() {
+        this.mainDetailsContainer.hidden = true;
+        this.titleText.innerHTML = "Game Not Found";
+        this.publisherText.innerHTML = "Please search for another game!";
+        this.platformChipTemplate.hidden = true;
     }
 
     setGameDetails(gameDetailsData) {
