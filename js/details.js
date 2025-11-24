@@ -33,7 +33,7 @@ class GameDetailsScreen {
             }
             else {
                 this.gameDetailsPresenter = new GameDetailsPresenter(null, null);
-                this.gameDetailsPresenter.hideMainDetailsContainer(title);
+                this.gameDetailsPresenter.hideMainDetailsContainer(this.title);
             }
         })
     }
