@@ -89,7 +89,7 @@ input:focus {
     height: 25px;
     padding: 5px;
     text-align: center;
-    font-size: 10pt;
+    font-size: 9pt;
     background-color: var(--background-colour);
     border-radius: 5px;
 }
