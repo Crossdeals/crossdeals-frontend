@@ -20,7 +20,9 @@ class GameDetailsScreen {
 
                 presenter.setGameDetails(gameDetailsData);
                 pricingList.forEach(data => {
-                    presenter.addPlatformCard(data);
+                    if (platformManager.isPreferredPlatform(data.storefrontId)) {
+                        presenter.addPlatformCard(data);
+                    }
                 })
 
                 presenter.removeTempObjects();

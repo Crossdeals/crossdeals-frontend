@@ -1,6 +1,7 @@
 const usernameKey = "username";
 const client = new APIHandler();
 const detailsUrl = "./details.html";
+let platformManager;
 
 class LoginManager {
     constructor() {
@@ -50,6 +51,22 @@ class PreferredPlatformManager {
         this.xboxId = "6923f542173e60b736aa1766";
         this.switchId = "6923f542173e60b736aa176c";
         this.pcId = "6923f542173e60b736aa175e"; // Steam only
+    }
+
+    isPreferredPlatform(storefrontId) {
+        if (this.isPlaystationPreferred && storefrontId === this.playstationId) {
+            return true;
+        }
+        else if (this.isXboxPreferred && storefrontId === this.xboxId) {
+            return true;
+        }
+        else if (this.isSwitchPreferred && storefrontId === this.switchId) {
+            return true;
+        }
+        else if (this.isPCPreferred && storefrontId === this.pcId) {
+            return true;
+        }
+        return false;
     }
 
     getPlatformsFromServer(onSuccess) {
@@ -118,6 +135,7 @@ class HeaderPresenter {
     constructor() {
         this.loginManager = new LoginManager();
         this.platformManager = new PreferredPlatformManager();
+        platformManager = this.platformManager;
 
         // Home
         this.homeButton = document.getElementById("logo");

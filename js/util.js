@@ -81,9 +81,11 @@ function gamePricingToDetailsScreen(apiGameData) {
 
     for (let i = 0; i < apiGameData.deals.length; i++) {
         const dealData = apiGameData.deals[i];
+        console.log(dealData);
         const platform = dealData.storefront.platforms[0];
         const pricingData = new GamePricingData(
             apiGameData._id,
+            dealData.storefront._id,
             platform,
             dealData.currentPrice,
             dealData.originalPrice,
