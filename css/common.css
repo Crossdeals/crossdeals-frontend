@@ -69,12 +69,22 @@ input:focus {
     position: fixed;
     width: 50%;
     left: 25%;
-    bottom: 10px;
     margin: 10px;
     padding: 5px;
     background-color: var(--colour-secondary-hover);
     border-radius: 5px;
     text-align: center;
+    transition-property: bottom;
+    transition-duration: 0.1s;
+    transition-timing-function: linear;
+}
+
+.notification-banner-shown {
+    bottom: 10px;
+}
+
+.notification-banner-hidden {
+    bottom: -75px;
 }
 
 .inline-block {

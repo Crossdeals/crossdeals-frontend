@@ -1,7 +1,38 @@
 const usernameKey = "username";
 const client = new APIHandler();
 const detailsUrl = "./details.html";
-let platformManager;
+let platformManager = null;
+let notificationManager = null;
+
+class NotificationManager {
+    constructor() {
+        this.banner = document.getElementById("notification-banner");
+        this.bannerText = this.banner.querySelector("p");
+        this.bannerDuration = 3000;
+        this.isBannerShown = false;
+        this.hideBanner();
+    }
+
+    showBannerTemporarily(message) {
+        this.bannerText.innerHTML = message;
+        if (!this.isBannerShown) {
+            setTimeout(this.hideBanner.bind(this), this.bannerDuration);
+        }
+        this.showBanner();
+    }
+
+    showBanner() {
+        this.isBannerShown = true;
+        this.banner.classList.add("notification-banner-shown");
+        this.banner.classList.remove("notification-banner-hidden");
+    }
+
+    hideBanner() {
+        this.isBannerShown = false;
+        this.banner.classList.add("notification-banner-hidden");
+        this.banner.classList.remove("notification-banner-shown");
+    }
+}
 
 class LoginManager {
     constructor() {
@@ -270,3 +301,9 @@ class HeaderPresenter {
         }
     }
 }
+
+function main() {
+    notificationManager = new NotificationManager();
+}
+
+window.addEventListener("load", main);

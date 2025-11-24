@@ -50,6 +50,7 @@ class HomeScreen {
             this.client.addToWishlist(username, title, response => {
                 if (response.status === 200) {
                     section.updateCardWishlistStatus(section, index, true);
+                    notificationManager.showBannerTemporarily("Added game to wishlist!");
                     console.log("Wishlist add success");
                 }
                 else {
@@ -61,6 +62,7 @@ class HomeScreen {
             this.client.removeFromWishlist(gameId, response => {
                 if (response.status === 200) {
                     section.updateCardWishlistStatus(section, index, false);
+                    notificationManager.showBannerTemporarily("Removed game from wishlist!");
                     console.log("Wishlist remove success")
                 }
                 else {
