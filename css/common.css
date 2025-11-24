@@ -115,6 +115,7 @@ input:focus {
     font-size: 9pt;
     background-color: var(--background-colour);
     border-radius: 5px;
+    display: inline-block;
 }
 
 .platform-chip p {
