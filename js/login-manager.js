@@ -81,7 +81,28 @@ class PreferredPlatformManager {
 
     updatePreferences() {
         // Update the server's preferred platforms
-        
+        const stores = [];
+
+        if (this.isPlaystationPreferred) {
+            stores.push(this.playstationId);
+        }
+        if (this.isXboxPreferred) {
+            stores.push(this.isXboxPreferred);
+        }
+        if (this.isSwitchPreferred) {
+            stores.push(this.isSwitchPreferred);
+        }
+        if (this.isPCPreferred) {
+            stores.push(this.isPCPreferred);
+        }
+
+        this.client.setPreferredPlatformsDummy(stores, response => {
+            if (response.status === 200) {
+                console.log("Updated platforms successfully");
+                // Refresh the page to repopulate the game lists.
+                window.location = window.location;
+            }
+        });
     }
 }
 

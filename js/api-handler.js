@@ -237,6 +237,33 @@ class APIHandler {
             }
         }
     }
+
+    setPreferredPlatformsDummy(platformIds, responseCallback) {
+        const dummyResponse = {"message": "Updated"};
+        dummyResponse["status"] = 200;
+        responseCallback(dummyResponse);
+        return;
+    }
+
+    setPreferredPlatforms(platformIds, responseCallback) {
+        const platformsRequest = new PreferredPlatformsRequestDetails(platformIds);
+
+        const xhttp = new XMLHttpRequest();
+        xhttp.withCredentials = true;
+        xhttp.open("PATCH", preferredPlatformsEndpoint, true);
+        xhttp.setRequestHeader("Content-Type", "application/json");
+        xhttp.send(JSON.stringify(platformsRequest));
+        xhttp.onreadystatechange = () => {
+            if (xhttp.readyState === 4) {
+                let responseText = xhttp.responseText;
+                let response = {
+                    "message": responseText
+                }
+                response["status"] = xhttp.status;
+                responseCallback(response);
+            }
+        }
+    }
 }
 
 class LoginAuthDetails {
@@ -269,5 +296,11 @@ class WishlistAddRequestDetails {
     constructor(username, title) {
         this.username = username;
         this.title = title;
+    }
+}
+
+class PreferredPlatformsRequestDetails {
+    constructor(storeIds) {
+        this.stores = storeIds;
     }
 }
