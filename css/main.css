@@ -62,4 +62,5 @@
 .deal-card {
     width: 230px;
     padding: 10px;
+    cursor: pointer;
 }
