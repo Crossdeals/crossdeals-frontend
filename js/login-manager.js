@@ -1,5 +1,6 @@
 const usernameKey = "username";
 const client = new APIHandler();
+const detailsUrl = "./details.html";
 
 class LoginManager {
     constructor() {
@@ -27,16 +28,108 @@ class LoginManager {
     }
 }
 
+class PreferredPlatformManager {
+    constructor() {
+        this.client = new APIHandler();
+
+        this.isPlaystationPreferred = true;
+        this.isXboxPreferred = true;
+        this.isSwitchPreferred = true;
+        this.isPCPreferred = true;
+
+        // TODO: Add the _ids here after hooking up with BE
+        this.playstationId = "playstation";
+        this.xboxId = "xbox";
+        this.switchId = "switch";
+        this.pcId = "pc";
+    }
+
+    getPlatformsFromServer(onSuccess) {
+        // Get preferred platforms from server
+        this.client.getPreferredPlatformsDummy(response => {
+            if (response.status === 200 || response.status === 304) {
+                this.onGetPreferredPlatforms(response.stores);
+                onSuccess();
+            }
+        })
+    }
+
+    onGetPreferredPlatforms(stores) {
+        this.isPlaystationPreferred = false;
+        this.isXboxPreferred = false;
+        this.isSwitchPreferred = false;
+        this.isPCPreferred = false;
+
+        stores.forEach(store => {
+            if (store === this.playstationId) {
+                this.isPlaystationPreferred = true;
+            }
+            else if (store === this.xboxId) {
+                this.isXboxPreferred = true;
+            }
+            else if (store === this.switchId) {
+                this.isSwitchPreferred = true;
+            }
+            else if (store === this.pcId) {
+                this.isPCPreferred = true;
+            }
+            else {
+                console.log(`Unknown store ID: ${store}`);
+            }
+        });
+    }
+
+    updatePreferences() {
+        // Update the server's preferred platforms
+        const stores = [];
+
+        if (this.isPlaystationPreferred) {
+            stores.push(this.playstationId);
+        }
+        if (this.isXboxPreferred) {
+            stores.push(this.isXboxPreferred);
+        }
+        if (this.isSwitchPreferred) {
+            stores.push(this.isSwitchPreferred);
+        }
+        if (this.isPCPreferred) {
+            stores.push(this.isPCPreferred);
+        }
+
+        this.client.setPreferredPlatformsDummy(stores, response => {
+            if (response.status === 200) {
+                console.log("Updated platforms successfully");
+                // Refresh the page to repopulate the game lists.
+                window.location = window.location;
+            }
+        });
+    }
+}
+
 class HeaderPresenter {
     constructor() {
         this.loginManager = new LoginManager();
+        this.platformManager = new PreferredPlatformManager();
 
+        // Auth
         this.loginButton = document.getElementById("login");
         this.logoutButton = document.getElementById("logout");
         this.signupButton = document.getElementById("signup");
         this.usernameObject = document.getElementById("username-container");
         this.usernameText = document.getElementById("username");
-        this.setupLinks();
+        this.setupAuthLinks();
+
+        // Search
+        this.searchBar = document.getElementById("searchbar");
+        this.searchBar.addEventListener("keydown", this.search.bind(this));
+
+        // Platforms
+        this.playstationToggle = document.getElementById("ps");
+        this.xboxToggle = document.getElementById("xbox");
+        this.switchToggle = document.getElementById("sw");
+        this.pcToggle = document.getElementById("pc");
+        this.setupPlatformButtons();
+        this.platformManager.getPlatformsFromServer(this.updatePlatformButtonState.bind(this));
     }
 
     checkLogin() {
@@ -60,7 +153,7 @@ class HeaderPresenter {
         }
     }
 
-    setupLinks() {
+    setupAuthLinks() {
         this.logoutButton.addEventListener("click", this.logout);
         this.loginButton.addEventListener("click", this.login);
         this.signupButton.addEventListener("click", this.signup);
@@ -80,5 +173,66 @@ class HeaderPresenter {
             sessionStorage.removeItem(usernameKey);
             window.location = window.location;
         })
+    }
+
+    search(keyboardEvent) {
+        if (keyboardEvent.key === "Enter") {
+            // TODO: Validating the input.
+            const searchValue = this.searchBar.value;
+            window.location = detailsUrl.concat(`?title=${searchValue}`)
+        }
+    }
+
+    setupPlatformButtons() {
+        this.playstationToggle.addEventListener("click", () => {
+            this.platformManager.isPlaystationPreferred = !this.platformManager.isPlaystationPreferred;
+            this.platformManager.updatePreferences();
+            this.updatePlatformButtonState();
+        });
+        this.xboxToggle.addEventListener("click", () => {
+            this.platformManager.isXboxPreferred = !this.platformManager.isXboxPreferred;
+            this.platformManager.updatePreferences();
+            this.updatePlatformButtonState();
+        });
+        this.switchToggle.addEventListener("click", () => {
+            this.platformManager.isSwitchPreferred = !this.platformManager.isSwitchPreferred;
+            this.platformManager.updatePreferences();
+            this.updatePlatformButtonState();
+        });
+        this.pcToggle.addEventListener("click", () => {
+            this.platformManager.isPCPreferred = !this.platformManager.isPCPreferred;
+            this.platformManager.updatePreferences();
+            this.updatePlatformButtonState();
+        });
+    }
+
+    updatePlatformButtonState() {
+        if (this.platformManager.isPlaystationPreferred) {
+            this.playstationToggle.classList.remove("platform-toggle-off")
+        }
+        else {
+            this.playstationToggle.classList.add("platform-toggle-off");
+        }
+
+        if (this.platformManager.isXboxPreferred) {
+            this.xboxToggle.classList.remove("platform-toggle-off")
+        }
+        else {
+            this.xboxToggle.classList.add("platform-toggle-off");
+        }
+        
+        if (this.platformManager.isSwitchPreferred) {
+            this.switchToggle.classList.remove("platform-toggle-off")
+        }
+        else {
+            this.switchToggle.classList.add("platform-toggle-off");
+        }
+        
+        if (this.platformManager.isPCPreferred) {
+            this.pcToggle.classList.remove("platform-toggle-off")
+        }
+        else {
+            this.pcToggle.classList.add("platform-toggle-off");
+        }
     }
 }

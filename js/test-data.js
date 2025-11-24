@@ -85,3 +85,10 @@ const dummyGameData = {
     ],
     "__v": 0
 }
+
+const dummyPreferredPlatformData = {
+    "stores": [
+        "playstation",
+        "switch"
+    ]
+}

@@ -4,12 +4,16 @@ const loginEndpoint = `${gateway}/login/`;
 const signupEndpoint = `${gateway}/signup/`;
 const logoutEndpoint = `${gateway}/logout/`;
 const usernameEndpoint = `${gateway}/username/`;
+
 const wishlistEndpoint = `${gateway}/wishlist/index/`;
 const wishlistAddEndpoint = `${gateway}/wishlist/add/`;
 const wishlistRemoveEndpoint = `${gateway}/wishlist/remove/`;
+const preferredPlatformsEndpoint = `${gateway}/wishlist/storefront/`;
+
 const gamesHomeScreenEndpoint = `${gateway}/games/`;
 const gameDetailsEndpoint = `${gateway}/games/`;
 const gameFeaturedEndpoint = `${gateway}/games/featured/`;
+const gameSearchEndpoint = `${gateway}/games/search?title=`;
 
 class APIHandler {
     constructor() {
@@ -195,6 +199,71 @@ class APIHandler {
             }
         }
     }
+
+    searchGame(gameTitle, responseCallback) {
+        const xhttp = new XMLHttpRequest();
+        xhttp.withCredentials = true;
+        const endpoint = gameSearchEndpoint.concat(gameTitle);
+        xhttp.open("GET", endpoint, true);
+        xhttp.setRequestHeader("Content-Type", "application/json");
+        xhttp.send();
+        xhttp.onreadystatechange = () => {
+            if (xhttp.readyState === 4) {
+                let response = JSON.parse(xhttp.response);
+                response["status"] = xhttp.status;
+                responseCallback(response);
+            }
+        }
+    }
+
+    getPreferredPlatformsDummy(responseCallback) {
+        const dummyResponse = dummyPreferredPlatformData;
+        dummyResponse["status"] = 200;
+        responseCallback(dummyResponse);
+        return;
+    }
+
+    getPreferredPlatforms(responseCallback) {
+        const xhttp = new XMLHttpRequest();
+        xhttp.withCredentials = true;
+        xhttp.open("GET", preferredPlatformsEndpoint, true);
+        xhttp.setRequestHeader("Content-Type", "application/json");
+        xhttp.send();
+        xhttp.onreadystatechange = () => {
+            if (xhttp.readyState === 4) {
+                let response = JSON.parse(xhttp.response);
+                response["status"] = xhttp.status;
+                responseCallback(response);
+            }
+        }
+    }
+
+    setPreferredPlatformsDummy(platformIds, responseCallback) {
+        const dummyResponse = {"message": "Updated"};
+        dummyResponse["status"] = 200;
+        responseCallback(dummyResponse);
+        return;
+    }
+
+    setPreferredPlatforms(platformIds, responseCallback) {
+        const platformsRequest = new PreferredPlatformsRequestDetails(platformIds);
+
+        const xhttp = new XMLHttpRequest();
+        xhttp.withCredentials = true;
+        xhttp.open("PATCH", preferredPlatformsEndpoint, true);
+        xhttp.setRequestHeader("Content-Type", "application/json");
+        xhttp.send(JSON.stringify(platformsRequest));
+        xhttp.onreadystatechange = () => {
+            if (xhttp.readyState === 4) {
+                let responseText = xhttp.responseText;
+                let response = {
+                    "message": responseText
+                }
+                response["status"] = xhttp.status;
+                responseCallback(response);
+            }
+        }
+    }
 }
 
 class LoginAuthDetails {
@@ -227,5 +296,11 @@ class WishlistAddRequestDetails {
     constructor(username, title) {
         this.username = username;
         this.title = title;
+    }
+}
+
+class PreferredPlatformsRequestDetails {
+    constructor(storeIds) {
+        this.stores = storeIds;
     }
 }

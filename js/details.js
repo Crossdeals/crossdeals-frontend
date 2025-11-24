@@ -7,6 +7,9 @@ class GameDetailsScreen {
     }
 
     populateDetails() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const title = urlParams.get("title");
+
         // TODO: get response from the server
         this.client.getGameDetailsDummy("691bca19b8cab703f514e754", response => {
             if (response.status === 200) {
