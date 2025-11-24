@@ -11,10 +11,13 @@ function floatToPercentageString(floatPercentage) {
 }
 
 // Converts server's GET /index response to frontend data format.
-function gameListToHomeScreen(header, apiGameList) {
+function gameListToHomeScreen(header, apiGameList, isAlreadyWishlisted) {
     let displayData = {};
     let headerGameList = [];
     apiGameList.forEach(gameData => {
+        if (isAlreadyWishlisted) {
+            gameData["isWishlisted"] = true;
+        }
         headerGameList.push(gameToHomeScreen(gameData));
     });
     displayData = {

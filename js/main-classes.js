@@ -99,9 +99,9 @@ class GameCardSection {
             wishlistRemoveButton.hidden = true;
         }
         else {
-            wishlistAddButton.hidden = !gameCardData.isWishlisted;
+            wishlistAddButton.hidden = gameCardData.isWishlisted;
             wishlistAddButton.addEventListener("click", () => callback(section, index, gameCardData.gameId, gameCardData.title, true));
-            wishlistRemoveButton.hidden = gameCardData.isWishlisted;
+            wishlistRemoveButton.hidden = !gameCardData.isWishlisted;
             wishlistRemoveButton.addEventListener("click", () => callback(section, index, gameCardData.gameId, gameCardData.title, false));
         }
         
