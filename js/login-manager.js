@@ -3,6 +3,7 @@ const client = new APIHandler();
 const detailsUrl = "./details.html";
 let platformManager = null;
 let notificationManager = null;
+let loginManager = null;
 
 class NotificationManager {
     constructor() {
@@ -182,6 +183,7 @@ class PreferredPlatformManager {
 class HeaderPresenter {
     constructor() {
         this.loginManager = new LoginManager();
+        loginManager = this.loginManager;
         this.platformManager = new PreferredPlatformManager();
         platformManager = this.platformManager;
 

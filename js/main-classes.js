@@ -69,7 +69,6 @@ class GameCardSection {
             this.cards.push(card);
         }
 
-        console.log(this.sectionData.data.length);
         if (this.sectionData.data.length == 0) {
             this.cardContainerPlaceholder.hidden = false;
         }

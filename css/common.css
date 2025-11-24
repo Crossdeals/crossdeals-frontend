@@ -100,10 +100,6 @@ input:focus {
     display: inline-block;
 }
 
-.hidden {
-    display: none;
-}
-
 .left {
     float: left;
 }
@@ -206,4 +202,8 @@ input:focus {
 
 .secondary:active {
     background-color: var(--colour-secondary-select);
+}
+
+.hidden {
+    display: none;
 }

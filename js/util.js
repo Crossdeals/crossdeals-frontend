@@ -82,7 +82,8 @@ function gameDetailsToDetailsScreen(apiGameData) {
         "Unknown Publisher",
         "Unknown Year",
         platforms,
-        "Unknown Description"
+        "Unknown Description",
+        apiGameData.isWishlisted
     );
 
     return gameDetailsData;
