@@ -160,6 +160,23 @@ class PreferredPlatformManager {
             }
         });
     }
+
+    numberOfPreferredPlatforms() {
+        let number = 0;
+        if (this.isPlaystationPreferred) {
+            number++;
+        }
+        if (this.isXboxPreferred) {
+            number++;
+        }
+        if (this.isSwitchPreferred) {
+            number++;
+        }
+        if (this.isPCPreferred) {
+            number++;
+        }
+        return number;
+    }
 }
 
 class HeaderPresenter {
@@ -250,21 +267,37 @@ class HeaderPresenter {
 
     setupPlatformButtons() {
         this.playstationToggle.addEventListener("click", () => {
+            if (this.platformManager.isPlaystationPreferred && this.platformManager.numberOfPreferredPlatforms() <= 1) {
+                notificationManager.showBannerTemporarily("You must have at least one preferred platform!");
+                return;
+            }
             this.platformManager.isPlaystationPreferred = !this.platformManager.isPlaystationPreferred;
             this.platformManager.updatePreferences();
             this.updatePlatformButtonState();
         });
         this.xboxToggle.addEventListener("click", () => {
+            if (this.platformManager.isXboxPreferred && this.platformManager.numberOfPreferredPlatforms() <= 1) {
+                notificationManager.showBannerTemporarily("You must have at least one preferred platform!");
+                return;
+            }
             this.platformManager.isXboxPreferred = !this.platformManager.isXboxPreferred;
             this.platformManager.updatePreferences();
             this.updatePlatformButtonState();
         });
         this.switchToggle.addEventListener("click", () => {
+            if (this.platformManager.isSwitchPreferred && this.platformManager.numberOfPreferredPlatforms() <= 1) {
+                notificationManager.showBannerTemporarily("You must have at least one preferred platform!");
+                return;
+            }
             this.platformManager.isSwitchPreferred = !this.platformManager.isSwitchPreferred;
             this.platformManager.updatePreferences();
             this.updatePlatformButtonState();
         });
         this.pcToggle.addEventListener("click", () => {
+            if (this.platformManager.isPCPreferred && this.platformManager.numberOfPreferredPlatforms() <= 1) {
+                notificationManager.showBannerTemporarily("You must have at least one preferred platform!");
+                return;
+            }
             this.platformManager.isPCPreferred = !this.platformManager.isPCPreferred;
             this.platformManager.updatePreferences();
             this.updatePlatformButtonState();
