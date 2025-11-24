@@ -15,9 +15,17 @@ class LoginManager {
     checkLogin(callback) {
         if (sessionStorage.getItem(usernameKey)) {
             client.username(sessionStorage.getItem(usernameKey), response => {
-                this.isLoggedIn = true;
-                this.username = response.username;
-                callback(true, response.username);
+                if (response.status === 200) {
+                    this.isLoggedIn = true;
+                    this.username = response.username;
+                    callback(true, response.username);
+                }
+                else {
+                    this.isLoggedIn = false;
+                    this.username = "";
+                    sessionStorage.removeItem(usernameKey);
+                    callback(false, "");
+                }
             })
         }
         else {
