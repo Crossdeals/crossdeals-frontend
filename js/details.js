@@ -72,9 +72,9 @@ class GameDetailsPresenter {
         let pricingCard = this.pricingCardTemplate.cloneNode(true);
 
         pricingCard.querySelector(".game-platform").innerHTML = gamePricingData.platform;
-        pricingCard.querySelector(".game-price").innerHTML = `$${gamePricingData.price}`;
-        pricingCard.querySelector(".game-original-price").innerHTML = `Original price: $${gamePricingData.originalPrice}`;
-        pricingCard.querySelector(".game-lowest-price").innerHTML = `Lowest ever: $${gamePricingData.lowestPrice}`;
+        pricingCard.querySelector(".game-price").innerHTML = dollarAmountFormatted(gamePricingData.price);
+        pricingCard.querySelector(".game-original-price").innerHTML = `Original price: ${dollarAmountFormatted(gamePricingData.originalPrice)}`;
+        pricingCard.querySelector(".game-lowest-price").innerHTML = `Lowest ever: ${dollarAmountFormatted(gamePricingData.lowestPrice)}`;
         pricingCard.querySelector(".game-deal-ending").innerHTML = `Deal ends ${gamePricingData.dealEnding}`;
         pricingCard.querySelector(".game-deal-link").innerHTML = `Go to ${gamePricingData.storefrontName}`;
         pricingCard.querySelector(".game-deal-link").href = gamePricingData.storefrontLink;

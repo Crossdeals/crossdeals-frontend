@@ -10,6 +10,10 @@ function floatToPercentageString(floatPercentage) {
     return `${rounded}%`;
 }
 
+function dollarAmountFormatted(dollarsFloat) {
+    return `$${dollarsFloat.toFixed(2)}`;
+}
+
 // Converts server's GET /index response to frontend data format.
 function gameListToHomeScreen(header, apiGameList, isAlreadyWishlisted) {
     let displayData = {};
