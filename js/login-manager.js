@@ -46,7 +46,7 @@ class PreferredPlatformManager {
 
     getPlatformsFromServer(onSuccess) {
         // Get preferred platforms from server
-        this.client.getPreferredPlatformsDummy(response => {
+        this.client.getPreferredPlatforms(response => {
             if (response.status === 200 || response.status === 304) {
                 this.onGetPreferredPlatforms(response.stores);
                 onSuccess();
@@ -96,7 +96,7 @@ class PreferredPlatformManager {
             stores.push(this.isPCPreferred);
         }
 
-        this.client.setPreferredPlatformsDummy(stores, response => {
+        this.client.setPreferredPlatforms(stores, response => {
             if (response.status === 200) {
                 console.log("Updated platforms successfully");
                 // Refresh the page to repopulate the game lists.

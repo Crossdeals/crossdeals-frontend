@@ -10,8 +10,7 @@ class HomeScreen {
     }
 
     populateFeaturedGame() {
-        // TODO: Get actual data from BE.
-        this.client.getGameDetailsDummy("", response => {
+        this.client.getFeaturedGameDetails(response => {
             if (response.status === 200) {
                 this.featuredPresenter.populateFeaturedGame(response);
             }
@@ -36,7 +35,7 @@ class HomeScreen {
     }
 
     getHomeScreenGames() {
-        this.client.getHomeScreenGamesDummy(response => {
+        this.client.getHomeScreenGames(response => {
             if (response.status === 200 || response.status === 304) {
                 this.homeScreenData.push(gameListToHomeScreen("Featured Deals", response));
                 let sectionListData = new GameCardSectionListData(this.homeScreenData);

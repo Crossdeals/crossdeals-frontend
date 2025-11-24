@@ -11,7 +11,7 @@ class GameDetailsScreen {
         const title = urlParams.get("title");
 
         // TODO: get response from the server
-        this.client.getGameDetailsDummy("691bca19b8cab703f514e754", response => {
+        this.client.getGameDetails("691bca19b8cab703f514e754", response => {
             if (response.status === 200) {
                 const presenter = new GameDetailsPresenter();
                 const gameDetailsData = gameDetailsToDetailsScreen(response);
