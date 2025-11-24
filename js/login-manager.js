@@ -206,7 +206,6 @@ class HeaderPresenter {
         this.xboxToggle = document.getElementById("xbox");
         this.switchToggle = document.getElementById("sw");
         this.pcToggle = document.getElementById("pc");
-        this.setupPlatformButtons();
         this.platformManager.getPlatformsFromServer(this.updatePlatformButtonState.bind(this));
     }
 
@@ -223,11 +222,16 @@ class HeaderPresenter {
             this.usernameText.innerHTML = username;
             this.loginButton.hidden = true;
             this.signupButton.hidden = true;
+            this.setupPlatformButtons();
         }
         else {
             console.log("Nobody signed in");
             this.usernameObject.classList.add("hidden");
             this.logoutButton.hidden = true;
+            this.playstationToggle.hidden = true;
+            this.xboxToggle.hidden = true;
+            this.switchToggle.hidden = true;
+            this.pcToggle.hidden = true;
         }
     }
 
