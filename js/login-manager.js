@@ -1,5 +1,6 @@
 const usernameKey = "username";
 const client = new APIHandler();
+const detailsUrl = "./details.html";
 
 class LoginManager {
     constructor() {
@@ -62,8 +63,9 @@ class HeaderPresenter {
         this.searchBar = document.getElementById("searchbar");
         this.searchBar.addEventListener("keydown", keyboardEvent => {
             if (keyboardEvent.key === "Enter") {
-                // go to search page here
-                // use url params or something
+                // TODO: Validating the input.
+                const searchValue = this.searchBar.value;
+                window.location = detailsUrl.concat(`?title=${searchValue}`)
             }
         })
 
