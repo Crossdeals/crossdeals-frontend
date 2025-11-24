@@ -45,6 +45,11 @@ function main() {
     form.addField(passwordField);
 
     form.setOnSubmit(submitFormData);
+
+    const backButton = document.getElementById("back");
+    backButton.addEventListener("click", () => {
+        window.location = "./index.html";
+    })
 }
 
 window.addEventListener("load", main);
