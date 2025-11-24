@@ -78,10 +78,10 @@ class PreferredPlatformManager {
         this.isPCPreferred = true;
 
         // TODO: Add the _ids here after hooking up with BE
-        this.playstationId = "6923f542173e60b736aa1769";
-        this.xboxId = "6923f542173e60b736aa1766";
-        this.switchId = "6923f542173e60b736aa176c";
-        this.pcId = "6923f542173e60b736aa175e"; // Steam only
+        this.playstationId = "storefront_sonyplaystationstore";
+        this.xboxId = "storefront_xboxstore";
+        this.switchId = "storefront_nintendostore";
+        this.pcId = "storefront_steam"; // Steam only
     }
 
     isPreferredPlatform(storefrontId) {
