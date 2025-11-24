@@ -1,6 +1,38 @@
 const usernameKey = "username";
 const client = new APIHandler();
 const detailsUrl = "./details.html";
+let platformManager = null;
+let notificationManager = null;
+
+class NotificationManager {
+    constructor() {
+        this.banner = document.getElementById("notification-banner");
+        this.bannerText = this.banner.querySelector("p");
+        this.bannerDuration = 3000;
+        this.isBannerShown = false;
+        this.hideBanner();
+    }
+
+    showBannerTemporarily(message) {
+        this.bannerText.innerHTML = message;
+        if (!this.isBannerShown) {
+            setTimeout(this.hideBanner.bind(this), this.bannerDuration);
+        }
+        this.showBanner();
+    }
+
+    showBanner() {
+        this.isBannerShown = true;
+        this.banner.classList.add("notification-banner-shown");
+        this.banner.classList.remove("notification-banner-hidden");
+    }
+
+    hideBanner() {
+        this.isBannerShown = false;
+        this.banner.classList.add("notification-banner-hidden");
+        this.banner.classList.remove("notification-banner-shown");
+    }
+}
 
 class LoginManager {
     constructor() {
@@ -15,9 +47,17 @@ class LoginManager {
     checkLogin(callback) {
         if (sessionStorage.getItem(usernameKey)) {
             client.username(sessionStorage.getItem(usernameKey), response => {
-                this.isLoggedIn = true;
-                this.username = response.username;
-                callback(true, response.username);
+                if (response.status === 200) {
+                    this.isLoggedIn = true;
+                    this.username = response.username;
+                    callback(true, response.username);
+                }
+                else {
+                    this.isLoggedIn = false;
+                    this.username = "";
+                    sessionStorage.removeItem(usernameKey);
+                    callback(false, "");
+                }
             })
         }
         else {
@@ -38,17 +78,33 @@ class PreferredPlatformManager {
         this.isPCPreferred = true;
 
         // TODO: Add the _ids here after hooking up with BE
-        this.playstationId = "playstation";
-        this.xboxId = "xbox";
-        this.switchId = "switch";
-        this.pcId = "pc";
+        this.playstationId = "6923f542173e60b736aa1769";
+        this.xboxId = "6923f542173e60b736aa1766";
+        this.switchId = "6923f542173e60b736aa176c";
+        this.pcId = "6923f542173e60b736aa175e"; // Steam only
+    }
+
+    isPreferredPlatform(storefrontId) {
+        if (this.isPlaystationPreferred && storefrontId === this.playstationId) {
+            return true;
+        }
+        else if (this.isXboxPreferred && storefrontId === this.xboxId) {
+            return true;
+        }
+        else if (this.isSwitchPreferred && storefrontId === this.switchId) {
+            return true;
+        }
+        else if (this.isPCPreferred && storefrontId === this.pcId) {
+            return true;
+        }
+        return false;
     }
 
     getPlatformsFromServer(onSuccess) {
         // Get preferred platforms from server
-        this.client.getPreferredPlatformsDummy(response => {
+        this.client.getPreferredPlatforms(response => {
             if (response.status === 200 || response.status === 304) {
-                this.onGetPreferredPlatforms(response.stores);
+                this.onGetPreferredPlatforms(response);
                 onSuccess();
             }
         })
@@ -87,16 +143,16 @@ class PreferredPlatformManager {
             stores.push(this.playstationId);
         }
         if (this.isXboxPreferred) {
-            stores.push(this.isXboxPreferred);
+            stores.push(this.xboxId);
         }
         if (this.isSwitchPreferred) {
-            stores.push(this.isSwitchPreferred);
+            stores.push(this.switchId);
         }
         if (this.isPCPreferred) {
-            stores.push(this.isPCPreferred);
+            stores.push(this.pcId);
         }
 
-        this.client.setPreferredPlatformsDummy(stores, response => {
+        this.client.setPreferredPlatforms(stores, response => {
             if (response.status === 200) {
                 console.log("Updated platforms successfully");
                 // Refresh the page to repopulate the game lists.
@@ -110,6 +166,11 @@ class HeaderPresenter {
     constructor() {
         this.loginManager = new LoginManager();
         this.platformManager = new PreferredPlatformManager();
+        platformManager = this.platformManager;
+
+        // Home
+        this.homeButton = document.getElementById("logo");
+        this.homeButton.addEventListener("click", this.goHome);
 
         // Auth
         this.loginButton = document.getElementById("login");
@@ -157,6 +218,10 @@ class HeaderPresenter {
         this.logoutButton.addEventListener("click", this.logout);
         this.loginButton.addEventListener("click", this.login);
         this.signupButton.addEventListener("click", this.signup);
+    }
+
+    goHome() {
+        window.location = "index.html";
     }
 
     signup() {
@@ -236,3 +301,9 @@ class HeaderPresenter {
         }
     }
 }
+
+function main() {
+    notificationManager = new NotificationManager();
+}
+
+window.addEventListener("load", main);

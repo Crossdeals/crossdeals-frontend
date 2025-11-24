@@ -48,6 +48,7 @@ input:focus {
 #logo {
     width: 120px;
     height: 75px;
+    cursor: pointer;
 }
 
 #search {
@@ -62,6 +63,28 @@ input:focus {
     height: 50px;
     border-radius: 15px;
     border: none;
+}
+
+#notification-banner {
+    position: fixed;
+    width: 50%;
+    left: 25%;
+    margin: 10px;
+    padding: 5px;
+    background-color: var(--colour-secondary-hover);
+    border-radius: 5px;
+    text-align: center;
+    transition-property: bottom;
+    transition-duration: 0.1s;
+    transition-timing-function: linear;
+}
+
+.notification-banner-shown {
+    bottom: 10px;
+}
+
+.notification-banner-hidden {
+    bottom: -75px;
 }
 
 .inline-block {
@@ -89,7 +112,7 @@ input:focus {
     height: 25px;
     padding: 5px;
     text-align: center;
-    font-size: 10pt;
+    font-size: 9pt;
     background-color: var(--background-colour);
     border-radius: 5px;
 }

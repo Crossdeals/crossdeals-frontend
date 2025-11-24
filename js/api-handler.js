@@ -140,20 +140,6 @@ class APIHandler {
         }
     }
 
-    getGameDetailsDummy(gameId, responseCallback) {
-        const dummyResponse = dummyGameData;
-        dummyResponse["status"] = 200;
-        responseCallback(dummyResponse);
-        return;
-    }
-
-    getHomeScreenGamesDummy(responseCallback) {
-        const dummyResponse = homeScreenData;
-        dummyResponse["status"] = 200;
-        responseCallback(dummyResponse);
-        return;
-    }
-
     getHomeScreenGames(responseCallback) {
         const xhttp = new XMLHttpRequest();
         xhttp.withCredentials = true;
@@ -216,13 +202,6 @@ class APIHandler {
         }
     }
 
-    getPreferredPlatformsDummy(responseCallback) {
-        const dummyResponse = dummyPreferredPlatformData;
-        dummyResponse["status"] = 200;
-        responseCallback(dummyResponse);
-        return;
-    }
-
     getPreferredPlatforms(responseCallback) {
         const xhttp = new XMLHttpRequest();
         xhttp.withCredentials = true;
@@ -236,13 +215,6 @@ class APIHandler {
                 responseCallback(response);
             }
         }
-    }
-
-    setPreferredPlatformsDummy(platformIds, responseCallback) {
-        const dummyResponse = {"message": "Updated"};
-        dummyResponse["status"] = 200;
-        responseCallback(dummyResponse);
-        return;
     }
 
     setPreferredPlatforms(platformIds, responseCallback) {

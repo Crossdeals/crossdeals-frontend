@@ -28,6 +28,11 @@
 
 .card-title {
     margin-bottom: 5px;
+    cursor: pointer;
+}
+
+.card-title:hover {
+    color: var(--colour-primary);
 }
 
 .card-price {

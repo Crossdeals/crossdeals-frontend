@@ -90,6 +90,7 @@ class GameCardSection {
         cardImage.src = gameCardData.image;
         cardTitle.innerHTML = gameCardData.title;
         cardPrice.innerHTML = `$${gameCardData.price}`;
+        cardTitle.addEventListener("click", () => window.location = `./details.html?title=${gameCardData.title}`)
         
         const callback = this.wishlistCallback;
         const section = this;
@@ -98,9 +99,9 @@ class GameCardSection {
             wishlistRemoveButton.hidden = true;
         }
         else {
-            wishlistAddButton.hidden = !gameCardData.isWishlisted;
+            wishlistAddButton.hidden = gameCardData.isWishlisted;
             wishlistAddButton.addEventListener("click", () => callback(section, index, gameCardData.gameId, gameCardData.title, true));
-            wishlistRemoveButton.hidden = gameCardData.isWishlisted;
+            wishlistRemoveButton.hidden = !gameCardData.isWishlisted;
             wishlistRemoveButton.addEventListener("click", () => callback(section, index, gameCardData.gameId, gameCardData.title, false));
         }
         
@@ -152,10 +153,10 @@ class FeaturedGamePresenter {
         this.featuredPercentage.innerHTML = `${floatToPercentageString(lowestPriceDetails.salePercentage)} off - Originally $${lowestPriceDetails.originalPrice}`;
         this.featuredEndDate.innerHTML = `Deal ends ${lowestPriceDetails.endDate}`;
         this.featuredDescription.innerHTML = featuredGameDetails.description;
-        this.featuredMoreButton.addEventListener("click", this.goToFeaturedGameDetails.bind(this))
+        this.featuredMoreButton.addEventListener("click", () => this.goToFeaturedGameDetails(featuredGameDetails.title))
     }
 
-    goToFeaturedGameDetails() {
-        window.location = "details.html";
+    goToFeaturedGameDetails(gameTitle) {
+        window.location = `details.html?title=${gameTitle}`;
     }
 }

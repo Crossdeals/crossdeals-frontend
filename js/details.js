@@ -11,18 +11,24 @@ class GameDetailsScreen {
         const title = urlParams.get("title");
 
         // TODO: get response from the server
-        this.client.getGameDetailsDummy("691bca19b8cab703f514e754", response => {
+        this.client.searchGame(title, response => {
             if (response.status === 200) {
                 const presenter = new GameDetailsPresenter();
-                const gameDetailsData = gameDetailsToDetailsScreen(response);
-                const pricingList = gamePricingToDetailsScreen(response);
+                const gameDetailsData = gameDetailsToDetailsScreen(response[0]);
+                const pricingList = gamePricingToDetailsScreen(response[0]);
 
                 presenter.setGameDetails(gameDetailsData);
                 pricingList.forEach(data => {
-                    presenter.addPlatformCard(data);
+                    if (platformManager.isPreferredPlatform(data.storefrontId)) {
+                        presenter.addPlatformCard(data);
+                    }
                 })
 
                 presenter.removeTempObjects();
+            }
+            else {
+                const presenter = new GameDetailsPresenter();
+                presenter.hideMainDetailsContainer(title);
             }
         })
     }
@@ -38,6 +44,15 @@ class GameDetailsPresenter {
         this.pricingContainer = document.getElementById("game-pricing-container");
         this.pricingCardTemplate = document.querySelector(".game-details");
         this.averageRatingText = document.getElementById("review-average-rating");
+
+        this.mainDetailsContainer = document.getElementById("main-content-container");
+    }
+
+    hideMainDetailsContainer(title) {
+        this.mainDetailsContainer.hidden = true;
+        this.titleText.innerHTML = "Game Not Found";
+        this.publisherText.innerHTML = `${title} is not a game in our database. Please search for another game!`;
+        this.platformChipTemplate.hidden = true;
     }
 
     setGameDetails(gameDetailsData) {
@@ -61,7 +76,7 @@ class GameDetailsPresenter {
         pricingCard.querySelector(".game-original-price").innerHTML = `Original price: $${gamePricingData.originalPrice}`;
         pricingCard.querySelector(".game-lowest-price").innerHTML = `Lowest ever: $${gamePricingData.lowestPrice}`;
         pricingCard.querySelector(".game-deal-ending").innerHTML = `Deal ends ${gamePricingData.dealEnding}`;
-        pricingCard.querySelector(".game-deal-link").innerHTML = `Go to ${gamePricingData.storefrontName} Store`;
+        pricingCard.querySelector(".game-deal-link").innerHTML = `Go to ${gamePricingData.storefrontName}`;
         pricingCard.querySelector(".game-deal-link").href = gamePricingData.storefrontLink;
         this.pricingContainer.appendChild(pricingCard);
     }
