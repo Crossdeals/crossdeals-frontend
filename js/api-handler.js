@@ -10,6 +10,7 @@ const wishlistRemoveEndpoint = `${gateway}/wishlist/remove/`;
 const gamesHomeScreenEndpoint = `${gateway}/games/`;
 const gameDetailsEndpoint = `${gateway}/games/`;
 const gameFeaturedEndpoint = `${gateway}/games/featured/`;
+const gameSearchEndpoint = `${gateway}/games/search?title=`;
 
 class APIHandler {
     constructor() {
@@ -185,6 +186,22 @@ class APIHandler {
         const xhttp = new XMLHttpRequest();
         xhttp.withCredentials = true;
         xhttp.open("GET", gameFeaturedEndpoint, true);
+        xhttp.setRequestHeader("Content-Type", "application/json");
+        xhttp.send();
+        xhttp.onreadystatechange = () => {
+            if (xhttp.readyState === 4) {
+                let response = JSON.parse(xhttp.response);
+                response["status"] = xhttp.status;
+                responseCallback(response);
+            }
+        }
+    }
+
+    searchGame(gameTitle, responseCallback) {
+        const xhttp = new XMLHttpRequest();
+        xhttp.withCredentials = true;
+        const endpoint = gameSearchEndpoint.concat(gameTitle);
+        xhttp.open("GET", endpoint, true);
         xhttp.setRequestHeader("Content-Type", "application/json");
         xhttp.send();
         xhttp.onreadystatechange = () => {

@@ -27,16 +27,51 @@ class LoginManager {
     }
 }
 
+class PreferredPlatformManager {
+    constructor() {
+        this.client = new APIHandler();
+
+        this.isPlaystationPreferred = true;
+        this.isXboxPreferred = true;
+        this.isSwitchPreferred = true;
+        this.isPCPreferred = true;
+    }
+
+    getPreferences() {
+        // Get preferred platforms from server
+    }
+
+    updatePreferences() {
+        // Update the server's preferred platforms
+    }
+}
+
 class HeaderPresenter {
     constructor() {
         this.loginManager = new LoginManager();
 
+        // Auth
         this.loginButton = document.getElementById("login");
         this.logoutButton = document.getElementById("logout");
         this.signupButton = document.getElementById("signup");
         this.usernameObject = document.getElementById("username-container");
         this.usernameText = document.getElementById("username");
         this.setupLinks();
+
+        // Search
+        this.searchBar = document.getElementById("searchbar");
+        this.searchBar.addEventListener("keydown", keyboardEvent => {
+            if (keyboardEvent.key === "Enter") {
+                // go to search page here
+                // use url params or something
+            }
+        })
+
+        // Platforms
+        this.playstationToggle = document.getElementById("ps");
+        this.xboxToggle = document.getElementById("xbox");
+        this.swToggle = document.getElementById("sw");
+        this.pcToggle = document.getElementById("pc");
     }
 
     checkLogin() {
