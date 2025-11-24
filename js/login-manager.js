@@ -38,17 +38,17 @@ class PreferredPlatformManager {
         this.isPCPreferred = true;
 
         // TODO: Add the _ids here after hooking up with BE
-        this.playstationId = "playstation";
-        this.xboxId = "xbox";
-        this.switchId = "switch";
-        this.pcId = "pc";
+        this.playstationId = "6923f542173e60b736aa1769";
+        this.xboxId = "6923f542173e60b736aa1766";
+        this.switchId = "6923f542173e60b736aa176c";
+        this.pcId = "6923f542173e60b736aa175e"; // Steam only
     }
 
     getPlatformsFromServer(onSuccess) {
         // Get preferred platforms from server
         this.client.getPreferredPlatforms(response => {
             if (response.status === 200 || response.status === 304) {
-                this.onGetPreferredPlatforms(response.stores);
+                this.onGetPreferredPlatforms(response);
                 onSuccess();
             }
         })
@@ -87,13 +87,13 @@ class PreferredPlatformManager {
             stores.push(this.playstationId);
         }
         if (this.isXboxPreferred) {
-            stores.push(this.isXboxPreferred);
+            stores.push(this.xboxId);
         }
         if (this.isSwitchPreferred) {
-            stores.push(this.isSwitchPreferred);
+            stores.push(this.switchId);
         }
         if (this.isPCPreferred) {
-            stores.push(this.isPCPreferred);
+            stores.push(this.pcId);
         }
 
         this.client.setPreferredPlatforms(stores, response => {
