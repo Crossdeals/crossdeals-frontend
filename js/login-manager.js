@@ -111,6 +111,10 @@ class HeaderPresenter {
         this.loginManager = new LoginManager();
         this.platformManager = new PreferredPlatformManager();
 
+        // Home
+        this.homeButton = document.getElementById("logo");
+        this.homeButton.addEventListener("click", this.goHome);
+
         // Auth
         this.loginButton = document.getElementById("login");
         this.logoutButton = document.getElementById("logout");
@@ -157,6 +161,10 @@ class HeaderPresenter {
         this.logoutButton.addEventListener("click", this.logout);
         this.loginButton.addEventListener("click", this.login);
         this.signupButton.addEventListener("click", this.signup);
+    }
+
+    goHome() {
+        window.location = "index.html";
     }
 
     signup() {
