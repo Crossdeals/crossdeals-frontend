@@ -36,14 +36,52 @@ class PreferredPlatformManager {
         this.isXboxPreferred = true;
         this.isSwitchPreferred = true;
         this.isPCPreferred = true;
+
+        // TODO: Add the _ids here after hooking up with BE
+        this.playstationId = "playstation";
+        this.xboxId = "xbox";
+        this.switchId = "switch";
+        this.pcId = "pc";
     }
 
-    getPreferences() {
+    getPlatformsFromServer(onSuccess) {
         // Get preferred platforms from server
+        this.client.getPreferredPlatformsDummy(response => {
+            if (response.status === 200 || response.status === 304) {
+                this.onGetPreferredPlatforms(response.stores);
+                onSuccess();
+            }
+        })
+    }
+
+    onGetPreferredPlatforms(stores) {
+        this.isPlaystationPreferred = false;
+        this.isXboxPreferred = false;
+        this.isSwitchPreferred = false;
+        this.isPCPreferred = false;
+
+        stores.forEach(store => {
+            if (store === this.playstationId) {
+                this.isPlaystationPreferred = true;
+            }
+            else if (store === this.xboxId) {
+                this.isXboxPreferred = true;
+            }
+            else if (store === this.switchId) {
+                this.isSwitchPreferred = true;
+            }
+            else if (store === this.pcId) {
+                this.isPCPreferred = true;
+            }
+            else {
+                console.log(`Unknown store ID: ${store}`);
+            }
+        });
     }
 
     updatePreferences() {
         // Update the server's preferred platforms
+        
     }
 }
 
@@ -70,7 +108,7 @@ class HeaderPresenter {
         this.switchToggle = document.getElementById("sw");
         this.pcToggle = document.getElementById("pc");
         this.setupPlatformButtons();
-        this.updatePlatformButtonState();
+        this.platformManager.getPlatformsFromServer(this.updatePlatformButtonState.bind(this));
     }
 
     checkLogin() {
