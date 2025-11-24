@@ -90,7 +90,7 @@ class GameCardSection {
         cardImage.src = gameCardData.image;
         cardTitle.innerHTML = gameCardData.title;
         cardPrice.innerHTML = `$${gameCardData.price}`;
-        card.addEventListener("click", () => window.location = `./details.html?title=${gameCardData.title}`)
+        cardTitle.addEventListener("click", () => window.location = `./details.html?title=${gameCardData.title}`)
         
         const callback = this.wishlistCallback;
         const section = this;
