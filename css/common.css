@@ -65,6 +65,18 @@ input:focus {
     border: none;
 }
 
+#notification-banner {
+    position: fixed;
+    width: 50%;
+    left: 25%;
+    bottom: 10px;
+    margin: 10px;
+    padding: 5px;
+    background-color: var(--colour-secondary-hover);
+    border-radius: 5px;
+    text-align: center;
+}
+
 .inline-block {
     display: inline-block;
 }
