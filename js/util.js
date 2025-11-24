@@ -38,15 +38,10 @@ function gameToHomeScreen(apiGameData) {
 
     // Get best price and platform
     let bestPrice = 9000;
-    let bestPricePlatforms = ["None"];
 
     apiGameData.deals.forEach(storePrice => {
         if (storePrice.currentPrice < bestPrice) {
             bestPrice = storePrice.currentPrice;
-            bestPricePlatforms = storePrice.storefront.platforms;
-        }
-        else if (storePrice.currentPrice == bestPrice) {
-            bestPricePlatforms.concat(storePrice.storefront.platforms);
         }
     })
 
