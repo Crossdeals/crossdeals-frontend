@@ -13,7 +13,6 @@ class GameDetailsScreen {
         // TODO: get response from the server
         this.client.searchGame(title, response => {
             if (response.status === 200) {
-                // TODO: handle no data
                 const presenter = new GameDetailsPresenter();
                 const gameDetailsData = gameDetailsToDetailsScreen(response[0]);
                 const pricingList = gamePricingToDetailsScreen(response[0]);
@@ -29,7 +28,7 @@ class GameDetailsScreen {
             }
             else {
                 const presenter = new GameDetailsPresenter();
-                presenter.hideMainDetailsContainer();
+                presenter.hideMainDetailsContainer(title);
             }
         })
     }
@@ -49,10 +48,10 @@ class GameDetailsPresenter {
         this.mainDetailsContainer = document.getElementById("main-content-container");
     }
 
-    hideMainDetailsContainer() {
+    hideMainDetailsContainer(title) {
         this.mainDetailsContainer.hidden = true;
         this.titleText.innerHTML = "Game Not Found";
-        this.publisherText.innerHTML = "Please search for another game!";
+        this.publisherText.innerHTML = `${title} is not a game in our database. Please search for another game!`;
         this.platformChipTemplate.hidden = true;
     }
 
