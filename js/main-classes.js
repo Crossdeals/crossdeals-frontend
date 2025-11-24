@@ -152,10 +152,10 @@ class FeaturedGamePresenter {
         this.featuredPercentage.innerHTML = `${floatToPercentageString(lowestPriceDetails.salePercentage)} off - Originally $${lowestPriceDetails.originalPrice}`;
         this.featuredEndDate.innerHTML = `Deal ends ${lowestPriceDetails.endDate}`;
         this.featuredDescription.innerHTML = featuredGameDetails.description;
-        this.featuredMoreButton.addEventListener("click", this.goToFeaturedGameDetails.bind(this))
+        this.featuredMoreButton.addEventListener("click", () => this.goToFeaturedGameDetails(featuredGameDetails.title).bind(this))
     }
 
-    goToFeaturedGameDetails() {
-        window.location = "details.html";
+    goToFeaturedGameDetails(gameTitle) {
+        window.location = `details.html?title=${gameTitle}`;
     }
 }
