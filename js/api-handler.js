@@ -94,6 +94,7 @@ class APIHandler {
         xhttp.send(JSON.stringify(wishlistRequest));
         xhttp.onreadystatechange = () => {
             if (xhttp.readyState === 4) {
+                console.log(xhttp.responseText);
                 let response = JSON.parse(xhttp.responseText);
                 response["status"] = xhttp.status;
                 responseCallback(response);

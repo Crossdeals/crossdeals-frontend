@@ -60,12 +60,21 @@ class GameCardSection {
         this.sectionHeader = this.section.querySelector(".section-header");
         this.cardContainer = this.section.querySelector(".card-container");
         this.cardTemplate = this.section.querySelector(".deal-card");
+        this.cardContainerPlaceholder = this.section.querySelector(".no-cards");
 
         this.cards = [];
 
         for (let i = 0; i < this.sectionData.data.length; i++) {
             let card = this.addCard(i, this.sectionData.data[i]);
             this.cards.push(card);
+        }
+
+        console.log(this.sectionData.data.length);
+        if (this.sectionData.data.length == 0) {
+            this.cardContainerPlaceholder.hidden = false;
+        }
+        else {
+            this.cardContainerPlaceholder.hidden = true;
         }
 
         this.sectionHeader.innerHTML = this.sectionData.header;
