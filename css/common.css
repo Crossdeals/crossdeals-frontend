@@ -139,14 +139,22 @@ input:focus {
     cursor: pointer;
 }
 
+.platform-toggle-off {
+    background-color: var(--colour-secondary);
+    border: 2px solid white;
+}
+
+.platform-toggle:hover {
+    background-color: var(--colour-secondary-hover);
+}
+
+.platform-toggle-off:hover {
+    background-color: var(--colour-secondary-select);
+}
+
 .platform-img {
     width: 25px;
     height: 25px;
-}
-
-.platform-toggle-off {
-    background-color: var(--background-colour);
-    border: 2px solid white;
 }
 
 .account-button {
