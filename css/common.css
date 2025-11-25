@@ -1,6 +1,8 @@
 :root {
     --featured-image-height: 500px;
 
+    --theme-gradient: linear-gradient(to right, #8077ff, #4b9c54, #965555);
+
     --background-colour: #D9D9D9;
     --text-highlight: #3f3f3f;
     --feature-price-colour: #ba0000;
@@ -24,10 +26,12 @@
 
 header {
     width: 100lvw;
-    background-color: var(--background-colour);
     margin: 0;
     display: flex;
     align-items: center;
+    background-image: var(--theme-gradient);
+    color: white;
+    position: fixed;
 }
 
 body {
@@ -43,6 +47,10 @@ input {
 input:focus {
     border-color: var(--colour-primary);
     outline: none;
+}
+
+#header-buffer {
+    height: 75px;
 }
 
 #logo {
@@ -71,8 +79,9 @@ input:focus {
     left: 25%;
     margin: 10px;
     padding: 5px;
-    background-color: var(--colour-secondary-hover);
+    background-image: var(--theme-gradient);
     border-radius: 5px;
+    color: white;
     text-align: center;
     transition-property: bottom;
     transition-duration: 0.1s;
@@ -89,10 +98,6 @@ input:focus {
 
 .inline-block {
     display: inline-block;
-}
-
-.hidden {
-    display: none;
 }
 
 .left {
@@ -115,6 +120,7 @@ input:focus {
     font-size: 9pt;
     background-color: var(--background-colour);
     border-radius: 5px;
+    display: inline-block;
 }
 
 .platform-chip p {
@@ -140,6 +146,7 @@ input:focus {
     border: none;
     outline: none;
     font-size: 12pt;
+    color: white;
 }
 
 .account-button:hover {
@@ -149,6 +156,7 @@ input:focus {
 
 .wishlist-add, .wishlist-remove {
     background-color: var(--colour-secondary);
+    color: white;
     width: 25px;
     height: 25px;
     text-align: center;
@@ -194,4 +202,8 @@ input:focus {
 
 .secondary:active {
     background-color: var(--colour-secondary-select);
+}
+
+.hidden {
+    display: none;
 }

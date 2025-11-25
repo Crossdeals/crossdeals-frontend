@@ -1,11 +1,12 @@
 class GameDetailsData {
-    constructor(id, title, publisher, year, platforms, description) {
+    constructor(id, title, publisher, year, platforms, description, isWishlisted) {
         this.id = id;
         this.title = title;
         this.publisher = publisher;
         this.year = year;
         this.platforms = platforms;
         this.description = description;
+        this.isWishlisted = isWishlisted;
     }
 }
 

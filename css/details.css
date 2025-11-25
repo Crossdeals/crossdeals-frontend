@@ -54,8 +54,16 @@ a {
     padding: 0px 5px;
 }
 
-#game-pricing-container {
+#add-wishlist, #remove-wishlist {
+    width: 100%;
+    margin-top: 10px;
+}
+
+#game-pricing-side {
     width: 60%;
+}
+
+#game-pricing-container {
     display: flex;
     gap: 10px;
 }

@@ -3,6 +3,7 @@ const client = new APIHandler();
 const detailsUrl = "./details.html";
 let platformManager = null;
 let notificationManager = null;
+let loginManager = null;
 
 class NotificationManager {
     constructor() {
@@ -78,10 +79,10 @@ class PreferredPlatformManager {
         this.isPCPreferred = true;
 
         // TODO: Add the _ids here after hooking up with BE
-        this.playstationId = "6923f542173e60b736aa1769";
-        this.xboxId = "6923f542173e60b736aa1766";
-        this.switchId = "6923f542173e60b736aa176c";
-        this.pcId = "6923f542173e60b736aa175e"; // Steam only
+        this.playstationId = "storefront_sonyplaystationstore";
+        this.xboxId = "storefront_xboxstore";
+        this.switchId = "storefront_nintendostore";
+        this.pcId = "storefront_steam"; // Steam only
     }
 
     isPreferredPlatform(storefrontId) {
@@ -160,11 +161,29 @@ class PreferredPlatformManager {
             }
         });
     }
+
+    numberOfPreferredPlatforms() {
+        let number = 0;
+        if (this.isPlaystationPreferred) {
+            number++;
+        }
+        if (this.isXboxPreferred) {
+            number++;
+        }
+        if (this.isSwitchPreferred) {
+            number++;
+        }
+        if (this.isPCPreferred) {
+            number++;
+        }
+        return number;
+    }
 }
 
 class HeaderPresenter {
     constructor() {
         this.loginManager = new LoginManager();
+        loginManager = this.loginManager;
         this.platformManager = new PreferredPlatformManager();
         platformManager = this.platformManager;
 
@@ -189,7 +208,6 @@ class HeaderPresenter {
         this.xboxToggle = document.getElementById("xbox");
         this.switchToggle = document.getElementById("sw");
         this.pcToggle = document.getElementById("pc");
-        this.setupPlatformButtons();
         this.platformManager.getPlatformsFromServer(this.updatePlatformButtonState.bind(this));
     }
 
@@ -206,11 +224,16 @@ class HeaderPresenter {
             this.usernameText.innerHTML = username;
             this.loginButton.hidden = true;
             this.signupButton.hidden = true;
+            this.setupPlatformButtons();
         }
         else {
             console.log("Nobody signed in");
             this.usernameObject.classList.add("hidden");
             this.logoutButton.hidden = true;
+            this.playstationToggle.hidden = true;
+            this.xboxToggle.hidden = true;
+            this.switchToggle.hidden = true;
+            this.pcToggle.hidden = true;
         }
     }
 
@@ -250,21 +273,37 @@ class HeaderPresenter {
 
     setupPlatformButtons() {
         this.playstationToggle.addEventListener("click", () => {
+            if (this.platformManager.isPlaystationPreferred && this.platformManager.numberOfPreferredPlatforms() <= 1) {
+                notificationManager.showBannerTemporarily("You must have at least one preferred platform!");
+                return;
+            }
             this.platformManager.isPlaystationPreferred = !this.platformManager.isPlaystationPreferred;
             this.platformManager.updatePreferences();
             this.updatePlatformButtonState();
         });
         this.xboxToggle.addEventListener("click", () => {
+            if (this.platformManager.isXboxPreferred && this.platformManager.numberOfPreferredPlatforms() <= 1) {
+                notificationManager.showBannerTemporarily("You must have at least one preferred platform!");
+                return;
+            }
             this.platformManager.isXboxPreferred = !this.platformManager.isXboxPreferred;
             this.platformManager.updatePreferences();
             this.updatePlatformButtonState();
         });
         this.switchToggle.addEventListener("click", () => {
+            if (this.platformManager.isSwitchPreferred && this.platformManager.numberOfPreferredPlatforms() <= 1) {
+                notificationManager.showBannerTemporarily("You must have at least one preferred platform!");
+                return;
+            }
             this.platformManager.isSwitchPreferred = !this.platformManager.isSwitchPreferred;
             this.platformManager.updatePreferences();
             this.updatePlatformButtonState();
         });
         this.pcToggle.addEventListener("click", () => {
+            if (this.platformManager.isPCPreferred && this.platformManager.numberOfPreferredPlatforms() <= 1) {
+                notificationManager.showBannerTemporarily("You must have at least one preferred platform!");
+                return;
+            }
             this.platformManager.isPCPreferred = !this.platformManager.isPCPreferred;
             this.platformManager.updatePreferences();
             this.updatePlatformButtonState();

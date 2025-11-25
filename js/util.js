@@ -10,6 +10,10 @@ function floatToPercentageString(floatPercentage) {
     return `${rounded}%`;
 }
 
+function dollarAmountFormatted(dollarsFloat) {
+    return `$${dollarsFloat.toFixed(2)}`;
+}
+
 // Converts server's GET /index response to frontend data format.
 function gameListToHomeScreen(header, apiGameList, isAlreadyWishlisted) {
     let displayData = {};
@@ -38,20 +42,25 @@ function gameToHomeScreen(apiGameData) {
 
     // Get best price and platform
     let bestPrice = 9000;
-    let bestPricePlatforms = ["None"];
 
     apiGameData.deals.forEach(storePrice => {
         if (storePrice.currentPrice < bestPrice) {
             bestPrice = storePrice.currentPrice;
-            bestPricePlatforms = storePrice.storefront.platforms;
-        }
-        else if (storePrice.currentPrice == bestPrice) {
-            bestPricePlatforms.concat(storePrice.storefront.platforms);
         }
     })
 
     displayData["price"] = bestPrice;
-    displayData["platforms"] = bestPricePlatforms;
+
+    // Get a list of all platforms for this game.
+    const platforms = [];
+    for (let i = 0; i < apiGameData.deals.length; i++) {
+        const dealData = apiGameData.deals[i];
+        for (let j = 0; j < dealData.storefront.platforms.length; j++) {
+            const platform = dealData.storefront.platforms[j];
+            platforms.push(platform);
+        }
+    }
+    displayData["platforms"] = platforms;
 
     return displayData;
 }
@@ -73,7 +82,8 @@ function gameDetailsToDetailsScreen(apiGameData) {
         "Unknown Publisher",
         "Unknown Year",
         platforms,
-        "Unknown Description"
+        "Unknown Description",
+        apiGameData.isWishlisted
     );
 
     return gameDetailsData;

@@ -60,12 +60,20 @@ class GameCardSection {
         this.sectionHeader = this.section.querySelector(".section-header");
         this.cardContainer = this.section.querySelector(".card-container");
         this.cardTemplate = this.section.querySelector(".deal-card");
+        this.cardContainerPlaceholder = this.section.querySelector(".no-cards");
 
         this.cards = [];
 
         for (let i = 0; i < this.sectionData.data.length; i++) {
             let card = this.addCard(i, this.sectionData.data[i]);
             this.cards.push(card);
+        }
+
+        if (this.sectionData.data.length == 0) {
+            this.cardContainerPlaceholder.hidden = false;
+        }
+        else {
+            this.cardContainerPlaceholder.hidden = true;
         }
 
         this.sectionHeader.innerHTML = this.sectionData.header;
@@ -89,7 +97,7 @@ class GameCardSection {
 
         cardImage.src = gameCardData.image;
         cardTitle.innerHTML = gameCardData.title;
-        cardPrice.innerHTML = `$${gameCardData.price}`;
+        cardPrice.innerHTML = dollarAmountFormatted(gameCardData.price);
         cardTitle.addEventListener("click", () => window.location = `./details.html?title=${gameCardData.title}`)
         
         const callback = this.wishlistCallback;
@@ -149,8 +157,8 @@ class FeaturedGamePresenter {
 
         this.featuredTitle.innerHTML = featuredGameDetails.title;
         this.featuredPublisherDate.innerHTML = `${featuredGameDetails.publisher}, ${featuredGameDetails.year}`;
-        this.featuredPrice.innerHTML = `$${lowestPriceDetails.lowestPrice}`;
-        this.featuredPercentage.innerHTML = `${floatToPercentageString(lowestPriceDetails.salePercentage)} off - Originally $${lowestPriceDetails.originalPrice}`;
+        this.featuredPrice.innerHTML = dollarAmountFormatted(lowestPriceDetails.lowestPrice);
+        this.featuredPercentage.innerHTML = `${floatToPercentageString(lowestPriceDetails.salePercentage)} off - Originally ${dollarAmountFormatted(lowestPriceDetails.originalPrice)}`;
         this.featuredEndDate.innerHTML = `Deal ends ${lowestPriceDetails.endDate}`;
         this.featuredDescription.innerHTML = featuredGameDetails.description;
         this.featuredMoreButton.addEventListener("click", () => this.goToFeaturedGameDetails(featuredGameDetails.title))

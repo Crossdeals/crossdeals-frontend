@@ -30,6 +30,7 @@
         </div>
     </header>
     <main>
+        <div id="header-buffer"></div>
         <div>
             <div id="game-image-container">
                 <div id="game-details-container" style="background-image: url('../images/mw19-placeholder.png');">
@@ -48,15 +49,19 @@
                 <div class="left" id="game-description">
                     <p>Long description...</p>
                 </div>
-                <div class="right" id="game-pricing-container">
-                    <div class="game-details">
-                        <p class="game-platform">Xbox</p>
-                        <p class="game-price">$19.99</p>
-                        <p class="game-original-price">75% off - Original $79.99</p>
-                        <p class="game-lowest-price">Lowest ever: $15.99</p>
-                        <p class="game-deal-ending">Deal ends 07/17</p>
-                        <a class="game-deal-link button-link primary">Go to Microsoft Store</a>
+                <div class="right" id="game-pricing-side">
+                    <div id="game-pricing-container">
+                        <div class="game-details">
+                            <p class="game-platform">Xbox</p>
+                            <p class="game-price">$19.99</p>
+                            <p class="game-original-price">75% off - Original $79.99</p>
+                            <p class="game-lowest-price">Lowest ever: $15.99</p>
+                            <p class="game-deal-ending">Deal ends 07/17</p>
+                            <a class="game-deal-link button-link primary">Go to Microsoft Store</a>
+                        </div>
                     </div>
+                    <button id="add-wishlist" class="button primary">Add game to wishlist</button>
+                    <button id="remove-wishlist" class="button secondary">Remove game from wishlist</button>
                 </div>
             </div>
             <div class="clear" id="review-section">
