@@ -51,7 +51,8 @@ a {
 
 #game-description {
     width: 40%;
-    padding: 0px 5px;
+    padding: 0px 20px 5px 0px;
+    text-align: justify;
 }
 
 #add-wishlist, #remove-wishlist {
