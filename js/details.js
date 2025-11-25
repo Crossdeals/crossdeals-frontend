@@ -23,12 +23,16 @@ class GameDetailsScreen {
                 this.gameDetailsPresenter.updateWishlistButtons(gameDetailsData.isWishlisted);
 
                 this.gameDetailsPresenter.setGameDetails(gameDetailsData);
+                
+                let isAvailableOnPreferredPlatforms = false;
                 pricingList.forEach(data => {
                     if (platformManager.isPreferredPlatform(data.storefrontId)) {
                         this.gameDetailsPresenter.addPlatformCard(data);
+                        isAvailableOnPreferredPlatforms = true;
                     }
                 })
-
+                
+                this.gameDetailsPresenter.showNoPlatformsText(isAvailableOnPreferredPlatforms);
                 this.gameDetailsPresenter.removeTempObjects();
             }
             else {
@@ -66,6 +70,7 @@ class GameDetailsPresenter {
         this.descriptionText = document.getElementById("game-description");
         this.pricingContainer = document.getElementById("game-pricing-container");
         this.pricingCardTemplate = document.querySelector(".game-details");
+        this.noPlatformsText = document.getElementById("no-platforms");
         this.addToWishlistButton = document.getElementById("add-wishlist");
         this.removeFromWishlistButton = document.getElementById("remove-wishlist");
         this.averageRatingText = document.getElementById("review-average-rating");
@@ -92,6 +97,10 @@ class GameDetailsPresenter {
         this.removeFromWishlistButton.addEventListener("click", () => {
             removeCallback();
         })
+    }
+
+    showNoPlatformsText(isAvailable) {
+        this.noPlatformsText.hidden = isAvailable;
     }
 
     hideMainDetailsContainer(title) {

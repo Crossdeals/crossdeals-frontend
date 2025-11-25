@@ -96,6 +96,12 @@ a {
     margin: 15px 0px;
 }
 
+#no-platforms {
+    border: 1px solid var(--colour-secondary);
+    border-radius: 10px;
+    padding: 10px;
+}
+
 .review-card {
     background-color: var(--colour-secondary-hover);
     padding: 10px;
