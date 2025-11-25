@@ -27,6 +27,10 @@
     margin-bottom: 5px;
 }
 
+#feature-description {
+    text-align: justify;
+}
+
 #feature-more-button {
     margin-top: 30px;
 }
