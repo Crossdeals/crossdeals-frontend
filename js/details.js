@@ -98,7 +98,7 @@ class GameDetailsPresenter {
         this.mainDetailsContainer.hidden = true;
         this.titleText.innerHTML = "Game Not Found";
         this.publisherText.innerHTML = `${title} is not a game in our database. Please search for another game!`;
-        this.platformChipTemplate.hidden = true;
+        this.platformChipTemplate.classList.add("hidden");
     }
 
     setGameDetails(gameDetailsData) {
