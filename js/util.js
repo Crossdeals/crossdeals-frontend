@@ -44,7 +44,7 @@ function gameToHomeScreen(apiGameData) {
     let bestPrice = 9000;
 
     apiGameData.deals.forEach(storePrice => {
-        if (storePrice.currentPrice < bestPrice) {
+        if (platformManager.isPreferredPlatform(storePrice.storefront._id) && storePrice.currentPrice < bestPrice) {
             bestPrice = storePrice.currentPrice;
         }
     })
@@ -122,7 +122,7 @@ function getLowestPriceDetails(apiGameData) {
     for (let i = 0; i < apiGameData.deals.length; i++) {
         const dealData = apiGameData.deals[i];
 
-        if (dealData.currentPrice < lowestPrice) {
+        if (platformManager.isPreferredPlatform(dealData.storefront._id) && dealData.currentPrice < lowestPrice) {
             lowestPrice = dealData.currentPrice;
             originalPrice = dealData.originalPrice;
             salePercentage = 1.0 - (lowestPrice / originalPrice);
