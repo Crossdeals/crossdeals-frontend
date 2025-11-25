@@ -62,7 +62,10 @@ input:focus {
 #search {
     width: 80%;
     display: inline-block;
+    justify-content: center;
     text-align: center;
+    display: flex;
+    gap: 5px;
 }
 
 #searchbar {
@@ -134,6 +137,11 @@ input:focus {
     background-color: white;
     border: none;
     cursor: pointer;
+}
+
+.platform-img {
+    width: 25px;
+    height: 25px;
 }
 
 .platform-toggle-off {
