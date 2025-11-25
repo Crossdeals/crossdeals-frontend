@@ -106,8 +106,13 @@ class GameDetailsPresenter {
         this.publisherText.innerHTML = `${gameDetailsData.publisher}, ${gameDetailsData.year}`;
         this.descriptionText.innerHTML = gameDetailsData.description;
         
+        const platforms = [];
         for (let i = 0; i < gameDetailsData.platforms.length; i++) {
             let platform = gameDetailsData.platforms[i];
+            if (platforms.includes(platform)) {
+                continue;
+            }
+            platforms.push(platform);
             let platformChip = this.platformChipTemplate.cloneNode(true);
             platformChip.querySelector("p").innerHTML = platform;
             this.platformChipContainer.appendChild(platformChip);

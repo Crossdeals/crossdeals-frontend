@@ -113,11 +113,17 @@ class GameCardSection {
             wishlistRemoveButton.addEventListener("click", () => callback(section, index, gameCardData.gameId, gameCardData.title, false));
         }
         
+        const platforms = [];
         for (let i = 0; i < gameCardData.platforms.length; i++) {
+            const platform = gameCardData.platforms[i]
+            if (platforms.includes(platform)) {
+                continue;
+            }
+            platforms.push(platform);
             const newChip = platformChip.cloneNode(true);
             const newChipText = newChip.querySelector("p");
 
-            newChipText.innerHTML = gameCardData.platforms[i];
+            newChipText.innerHTML = platform;
             cardPlatformContainer.appendChild(newChip);
         }
         
