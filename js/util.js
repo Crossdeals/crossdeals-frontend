@@ -90,10 +90,10 @@ function gameDetailsToDetailsScreen(apiGameData) {
     const gameDetailsData = new GameDetailsData(
         apiGameData._id,
         apiGameData.title,
-        "Unknown Publisher",
-        "Unknown Year",
+        apiGameData.publisher,
+        apiGameData.year,
         platforms,
-        "Unknown Description",
+        apiGameData.description,
         apiGameData.isWishlisted
     );
 
