@@ -43,6 +43,10 @@ class GameDetailsScreen {
     }
     
     addToWishlist() {
+        if (!loginManager.isLoggedIn) {
+            notificationManager.showBannerTemporarily("Please log in to add this game to your wishlist!");
+            return;
+        }
         this.client.addToWishlist(loginManager.getUsername(), this.title, response => {
             if (response.status === 200) {
                 notificationManager.showBannerTemporarily("Added game to wishlist!")
