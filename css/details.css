@@ -130,6 +130,10 @@ a {
     margin: 2px;
 }
 
+.game-deal-link {
+    height: 65px;
+}
+
 .review-username, .review-date {
     font-size: 8pt;
 }
