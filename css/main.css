@@ -16,6 +16,11 @@
     padding: 25px;
 }
 
+#feature-platform-container {
+    display: flex;
+    gap: 5px;
+}
+
 #feature-price {
     color: var(--feature-price-colour);
     font-size: 36pt;
@@ -46,7 +51,7 @@
     width: 210px;
     height: 300px;
     outline: 1px solid gray;
-    background-image: url("../images/icon.png");
+    background-image: url("../images/icon-coloured.png");
     background-size: 100% 100%;
     padding: 15px;
     display: flex;

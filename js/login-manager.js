@@ -82,7 +82,8 @@ class PreferredPlatformManager {
         this.playstationId = "storefront_sonyplaystationstore";
         this.xboxId = "storefront_xboxstore";
         this.switchId = "storefront_nintendostore";
-        this.pcId = "storefront_steam"; // Steam only
+        this.steamId = "storefront_steam";
+        this.epicId = "storefront_epicgamesstore";
     }
 
     isPreferredPlatform(storefrontId) {
@@ -95,7 +96,7 @@ class PreferredPlatformManager {
         else if (this.isSwitchPreferred && storefrontId === this.switchId) {
             return true;
         }
-        else if (this.isPCPreferred && storefrontId === this.pcId) {
+        else if (this.isPCPreferred && (storefrontId === this.steamId || storefrontId === this.epicId)) {
             return true;
         }
         return false;
@@ -127,7 +128,7 @@ class PreferredPlatformManager {
             else if (store === this.switchId) {
                 this.isSwitchPreferred = true;
             }
-            else if (store === this.pcId) {
+            else if (store === this.steamId || store === this.epicId) {
                 this.isPCPreferred = true;
             }
             else {
@@ -150,7 +151,8 @@ class PreferredPlatformManager {
             stores.push(this.switchId);
         }
         if (this.isPCPreferred) {
-            stores.push(this.pcId);
+            stores.push(this.steamId);
+            stores.push(this.epicId);
         }
 
         this.client.setPreferredPlatforms(stores, response => {

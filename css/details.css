@@ -96,6 +96,12 @@ a {
     margin: 15px 0px;
 }
 
+#no-platforms {
+    border: 1px solid var(--colour-secondary);
+    border-radius: 10px;
+    padding: 10px;
+}
+
 .review-card {
     background-color: var(--colour-secondary-hover);
     padding: 10px;
@@ -110,7 +116,7 @@ a {
     border: 1px solid var(--colour-secondary);
     border-radius: 10px;
     padding: 10px;
-    flex-grow: 1;
+    flex: 1;
 }
 
 .game-price {
@@ -137,4 +143,8 @@ a {
     border-radius: 5px;
     font-size: 16pt;
     display: block;
+}
+
+.game-deal-link {
+    font-size: 12pt;
 }

@@ -42,14 +42,25 @@ function gameToHomeScreen(apiGameData) {
 
     // Get best price and platform
     let bestPrice = 9000;
+    let bestPriceAllPlatforms = 9000;
 
     apiGameData.deals.forEach(storePrice => {
         if (storePrice.currentPrice < bestPrice) {
-            bestPrice = storePrice.currentPrice;
+            if (platformManager.isPreferredPlatform(storePrice.storefront._id)) {
+                bestPrice = storePrice.currentPrice;
+            }
+            else {
+                bestPriceAllPlatforms = storePrice.currentPrice;
+            }
         }
     })
 
-    displayData["price"] = bestPrice;
+    if (bestPrice !== 9000) {
+        displayData["price"] = bestPrice;
+    }
+    else {
+        displayData["price"] = bestPriceAllPlatforms;
+    }
 
     // Get a list of all platforms for this game.
     const platforms = [];
@@ -122,7 +133,7 @@ function getLowestPriceDetails(apiGameData) {
     for (let i = 0; i < apiGameData.deals.length; i++) {
         const dealData = apiGameData.deals[i];
 
-        if (dealData.currentPrice < lowestPrice) {
+        if (platformManager.isPreferredPlatform(dealData.storefront._id) && dealData.currentPrice < lowestPrice) {
             lowestPrice = dealData.currentPrice;
             originalPrice = dealData.originalPrice;
             salePercentage = 1.0 - (lowestPrice / originalPrice);

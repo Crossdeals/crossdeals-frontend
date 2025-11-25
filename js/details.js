@@ -23,12 +23,16 @@ class GameDetailsScreen {
                 this.gameDetailsPresenter.updateWishlistButtons(gameDetailsData.isWishlisted);
 
                 this.gameDetailsPresenter.setGameDetails(gameDetailsData);
+                
+                let isAvailableOnPreferredPlatforms = false;
                 pricingList.forEach(data => {
                     if (platformManager.isPreferredPlatform(data.storefrontId)) {
                         this.gameDetailsPresenter.addPlatformCard(data);
+                        isAvailableOnPreferredPlatforms = true;
                     }
                 })
-
+                
+                this.gameDetailsPresenter.showNoPlatformsText(isAvailableOnPreferredPlatforms);
                 this.gameDetailsPresenter.removeTempObjects();
             }
             else {
@@ -66,6 +70,7 @@ class GameDetailsPresenter {
         this.descriptionText = document.getElementById("game-description");
         this.pricingContainer = document.getElementById("game-pricing-container");
         this.pricingCardTemplate = document.querySelector(".game-details");
+        this.noPlatformsText = document.getElementById("no-platforms");
         this.addToWishlistButton = document.getElementById("add-wishlist");
         this.removeFromWishlistButton = document.getElementById("remove-wishlist");
         this.averageRatingText = document.getElementById("review-average-rating");
@@ -94,11 +99,15 @@ class GameDetailsPresenter {
         })
     }
 
+    showNoPlatformsText(isAvailable) {
+        this.noPlatformsText.hidden = isAvailable;
+    }
+
     hideMainDetailsContainer(title) {
         this.mainDetailsContainer.hidden = true;
         this.titleText.innerHTML = "Game Not Found";
         this.publisherText.innerHTML = `${title} is not a game in our database. Please search for another game!`;
-        this.platformChipTemplate.hidden = true;
+        this.platformChipTemplate.classList.add("hidden");
     }
 
     setGameDetails(gameDetailsData) {
@@ -106,8 +115,13 @@ class GameDetailsPresenter {
         this.publisherText.innerHTML = `${gameDetailsData.publisher}, ${gameDetailsData.year}`;
         this.descriptionText.innerHTML = gameDetailsData.description;
         
+        const platforms = [];
         for (let i = 0; i < gameDetailsData.platforms.length; i++) {
             let platform = gameDetailsData.platforms[i];
+            if (platforms.includes(platform)) {
+                continue;
+            }
+            platforms.push(platform);
             let platformChip = this.platformChipTemplate.cloneNode(true);
             platformChip.querySelector("p").innerHTML = platform;
             this.platformChipContainer.appendChild(platformChip);

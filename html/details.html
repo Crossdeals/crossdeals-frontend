@@ -10,17 +10,26 @@
     <script src="../js/test-data.js"></script>
     <link rel="stylesheet" href="../css/common.css" />
     <link rel="stylesheet" href="../css/details.css" />
-    <title>CrossDeals</title>
+    <title>Game Details | CrossDeals</title>
+    <link rel="icon" href="../images/icon-coloured.png" />
 </head>
 <body>
     <header>
         <img src="../images/logo.png" id="logo" />
         <div id="search">
             <input placeholder="Search for games..." id="searchbar" />
-            <button id="ps" class="platform-toggle">PS</button>
-            <button id="xbox" class="platform-toggle">Xbox</button>
-            <button id="sw" class="platform-toggle">SW</button>
-            <button id="pc" class="platform-toggle">PC</button>            
+            <button id="ps" class="platform-toggle">
+                <img class="platform-img" src="../images/ps-logo.png" />
+            </button>
+            <button id="xbox" class="platform-toggle">
+                <img class="platform-img" src="../images/xbox-logo.png" />
+            </button>
+            <button id="sw" class="platform-toggle">
+                <img class="platform-img" src="../images/sw-logo.png" />
+            </button>
+            <button id="pc" class="platform-toggle">
+                <img class="platform-img" src="../images/pc-logo.png" />
+            </button>            
         </div>
         <div>
             <p class="inline-block" id="username-container">Signed in: <span id="username">User</span></p>
@@ -33,7 +42,7 @@
         <div id="header-buffer"></div>
         <div>
             <div id="game-image-container">
-                <div id="game-details-container" style="background-image: url('../images/mw19-placeholder.png');">
+                <div id="game-details-container" style="background-image: url('../images/cover-placeholder.png');">
                     <p id="game-title">Game Title</p>
                     <p id="game-publisher-year">Publisher, Year</p>
                     <div id="platform-container">
@@ -60,6 +69,7 @@
                             <a class="game-deal-link button-link primary">Go to Microsoft Store</a>
                         </div>
                     </div>
+                    <div id="no-platforms">This game is not available on your preferred platforms.</div>
                     <button id="add-wishlist" class="button primary">Add game to wishlist</button>
                     <button id="remove-wishlist" class="button secondary">Remove game from wishlist</button>
                 </div>
