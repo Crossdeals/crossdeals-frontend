@@ -71,6 +71,7 @@ a {
 
 #review-section {
     padding: 10px;
+    display: none;
 }
 
 #review-average-rating {
