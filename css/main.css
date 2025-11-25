@@ -16,6 +16,11 @@
     padding: 25px;
 }
 
+#feature-platform-container {
+    display: flex;
+    gap: 5px;
+}
+
 #feature-price {
     color: var(--feature-price-colour);
     font-size: 36pt;
