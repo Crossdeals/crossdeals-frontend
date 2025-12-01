@@ -192,4 +192,8 @@ class FeaturedGamePresenter {
     goToFeaturedGameDetails(gameTitle) {
         window.location = `details.html?title=${gameTitle}`;
     }
+
+    setupDetailsError() {
+        this.featuredMoreButton.addEventListener("click", () => notificationManager.showBannerTemporarily(errorMessages.featuredGameError));
+    }
 }

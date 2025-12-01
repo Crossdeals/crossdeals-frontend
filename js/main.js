@@ -16,6 +16,7 @@ class HomeScreen {
             }
             else {
                 notificationManager.showBannerTemporarily(errorMessages.featuredGameError);
+                this.featuredPresenter.setupDetailsError();
                 console.log("Failed to retrieve featured game details");
             }
         })
@@ -44,6 +45,8 @@ class HomeScreen {
                 let presenter = new GameSectionsPresenter(sectionListData, this.editWishlist.bind(this));
             }
             else {
+                let sectionListData = new GameCardSectionListData([]);
+                let presenter = new GameSectionsPresenter(sectionListData, this.editWishlist.bind(this));
                 notificationManager.showBannerTemporarily(errorMessages.featuredSalesError);
             }
         })
