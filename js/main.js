@@ -15,6 +15,7 @@ class HomeScreen {
                 this.featuredPresenter.populateFeaturedGame(response);
             }
             else {
+                notificationManager.showBannerTemporarily(errorMessages.featuredGameError);
                 console.log("Failed to retrieve featured game details");
             }
         })
@@ -28,6 +29,7 @@ class HomeScreen {
                 this.getHomeScreenGames();
             }
             else {
+                // This will happen if the user is not logged in.
                 console.log("Failed to retrieve wishlist");
                 this.getHomeScreenGames();
             }
@@ -40,6 +42,9 @@ class HomeScreen {
                 this.homeScreenData.push(gameListToHomeScreen(mainHeaders.featuredDeals, response, false));
                 let sectionListData = new GameCardSectionListData(this.homeScreenData);
                 let presenter = new GameSectionsPresenter(sectionListData, this.editWishlist.bind(this));
+            }
+            else {
+                notificationManager.showBannerTemporarily(errorMessages.featuredSalesError);
             }
         })
     }
@@ -54,6 +59,7 @@ class HomeScreen {
                     console.log("Wishlist add success");
                 }
                 else {
+                    notificationManager.showBannerTemporarily(errorMessages.wishlistError);
                     console.log("Failed to add to wishlist");
                 }
             })
@@ -66,6 +72,7 @@ class HomeScreen {
                     console.log("Wishlist remove success")
                 }
                 else {
+                    notificationManager.showBannerTemporarily(errorMessages.wishlistError);
                     console.log("Failed to remove from wishlist");
                 }
             })

@@ -108,6 +108,10 @@ class PreferredPlatformManager {
                 this.onGetPreferredPlatforms(response);
                 onSuccess();
             }
+            else {
+                // This can happen if the user is not logged in.
+                console.log("Failed to load preferred platforms");
+            }
         })
     }
 
@@ -159,6 +163,9 @@ class PreferredPlatformManager {
                 console.log("Updated platforms successfully");
                 // Refresh the page to repopulate the game lists.
                 window.location = window.location;
+            }
+            else {
+                notificationManager.showBannerTemporarily(errorMessages.platformError);
             }
         });
     }

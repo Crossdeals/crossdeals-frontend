@@ -49,8 +49,11 @@ class GameDetailsScreen {
         }
         this.client.addToWishlist(loginManager.getUsername(), this.title, response => {
             if (response.status === 200) {
-                notificationManager.showBannerTemporarily(detailsMessages.addSuccessful)
+                notificationManager.showBannerTemporarily(detailsMessages.addSuccessful);
                 this.gameDetailsPresenter.updateWishlistButtons(true);
+            }
+            else {
+                notificationManager.showBannerTemporarily(errorMessages.wishlistError);
             }
         })
     }
@@ -58,8 +61,11 @@ class GameDetailsScreen {
     removeFromWishlist() {
         this.client.removeFromWishlist(this.gameId, response => {
             if (response.status === 200) {
-                notificationManager.showBannerTemporarily(detailsMessages.removeSuccessful)
+                notificationManager.showBannerTemporarily(detailsMessages.removeSuccessful);
                 this.gameDetailsPresenter.updateWishlistButtons(false);
+            }
+            else {
+                notificationManager.showBannerTemporarily(errorMessages.wishlistError);
             }
         })
     }
