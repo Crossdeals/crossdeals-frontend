@@ -53,5 +53,5 @@ const errorMessages = {
     platformLoadError: "Failed to load your preferred platforms. Refresh the page and try again.",
     platformError: "Failed to edit your preferred platforms. Refresh the page and try again.",
     featuredGameError: "Failed to retrieve featured game details. Refresh the page and try again.",
-    featuredSalesError: "Failed to retrieve the featured deals. Refresh the page and try again.",
+    featuredSalesError: "Failed to retrieve the featured deals. Refresh the page and try again."
 }
