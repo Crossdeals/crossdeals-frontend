@@ -52,6 +52,9 @@ class GameDetailsScreen {
                 notificationManager.showBannerTemporarily(detailsMessages.addSuccessful);
                 this.gameDetailsPresenter.updateWishlistButtons(true);
             }
+            else if (response.status === 400) {
+                notificationManager.showBannerTemporarily(errorMessages.wishlistAlreadyError);
+            }
             else {
                 notificationManager.showBannerTemporarily(errorMessages.wishlistError);
             }
@@ -63,6 +66,10 @@ class GameDetailsScreen {
             if (response.status === 200) {
                 notificationManager.showBannerTemporarily(detailsMessages.removeSuccessful);
                 this.gameDetailsPresenter.updateWishlistButtons(false);
+            }
+            else if (response.status === 404) {
+                console.log("Game is already not in wishlist or does not exist.")
+                notificationManager.showBannerTemporarily(errorMessages.wishlistDeleteError);
             }
             else {
                 notificationManager.showBannerTemporarily(errorMessages.wishlistError);

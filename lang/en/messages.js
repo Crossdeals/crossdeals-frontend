@@ -48,6 +48,8 @@ const mainHeaders = {
 
 const errorMessages = {
     wishlistError: "Failed to edit wishlist. Refresh the page and try again.",
+    wishlistAlreadyError: "This game is already in your wishlist.",
+    wishlistDeleteError: "This game is not in your wishlist.",
     platformLoadError: "Failed to load your preferred platforms. Refresh the page and try again.",
     platformError: "Failed to edit your preferred platforms. Refresh the page and try again.",
     featuredGameError: "Failed to retrieve featured game details. Refresh the page and try again.",
