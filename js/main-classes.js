@@ -165,10 +165,10 @@ class FeaturedGamePresenter {
         this.featuredGameId = featuredGameDetails.id;
 
         this.featuredTitle.innerHTML = featuredGameDetails.title;
-        this.featuredPublisherDate.innerHTML = `${featuredGameDetails.publisher}, ${featuredGameDetails.year}`;
+        this.featuredPublisherDate.innerHTML = mainMessages.publisherDate.replace("{0}", featuredGameDetails.publisher).replace("{1}", featuredGameDetails.year);
         this.featuredPrice.innerHTML = dollarAmountFormatted(lowestPriceDetails.lowestPrice);
-        this.featuredPercentage.innerHTML = `${floatToPercentageString(lowestPriceDetails.salePercentage)} off - Originally ${dollarAmountFormatted(lowestPriceDetails.originalPrice)}`;
-        this.featuredEndDate.innerHTML = `Deal ends ${lowestPriceDetails.endDate}`;
+        this.featuredPercentage.innerHTML = mainMessages.percentageOff.replace("{0}", floatToPercentageString(lowestPriceDetails.salePercentage)).replace("{1}", dollarAmountFormatted(lowestPriceDetails.originalPrice));
+        this.featuredEndDate.innerHTML = mainMessages.dealEnding.replace("{0}", lowestPriceDetails.endDate);
         this.featuredDescription.innerHTML = featuredGameDetails.description;
         this.featuredMoreButton.addEventListener("click", () => this.goToFeaturedGameDetails(featuredGameDetails.title))
         

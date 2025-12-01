@@ -16,3 +16,32 @@ const signupMessages = {
     existingUsername: "An account with your username is already created.",
     unknownError: "Error, please try again."
 }
+
+const detailsMessages = {
+    notLoggedIn: "Please log in to add this game to your wishlist!",
+    addSuccessful: "Added game to wishlist!",
+    removeSuccessful: "Removed game from wishlist!",
+    gameNotFound: "Game Not Found",
+    gameNotFoundDescription: "{0} is not a game in our database. Please search for another game!",
+    originalPrice: "Original price: {0}",
+    lowestEver: "Lowest ever: {0}",
+    dealEnding: "Deal ends {0}",
+    goToStoreFront: "Go to {0}"
+}
+
+const headerMessages = {
+    onePlatform: "You must have at least one preferred platform!"
+}
+
+const mainMessages = {
+    publisherDate: "{0}, {1}",
+    percentageOff: "{0} off - Originally {1}",
+    dealEnding: "Deal ends {0}",
+    addSuccessful: "Added game to wishlist!",
+    removeSuccessful: "Removed game from wishlist!"
+}
+
+const mainHeaders = {
+    yourWishlist: "Your Wishlist",
+    featuredDeals: "Featured Deals"
+}

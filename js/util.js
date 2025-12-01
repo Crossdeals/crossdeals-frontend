@@ -36,7 +36,7 @@ function gameListToHomeScreen(header, apiGameList, isAlreadyWishlisted) {
 function gameToHomeScreen(apiGameData) {
     let displayData = {};
     displayData["gameId"] = apiGameData._id;
-    displayData["image"] = "../images/mw19-placeholder.png";
+    displayData["image"] = "../images/cover-placeholder.png";
     displayData["title"] = apiGameData.title;
     displayData["isWishlisted"] = apiGameData.isWishlisted;
 
