@@ -108,8 +108,12 @@ class PreferredPlatformManager {
                 this.onGetPreferredPlatforms(response);
                 onSuccess();
             }
-            else {
+            else if (response.status === 403) {
                 // This can happen if the user is not logged in.
+                console.log("Failed to load preferred platforms");
+            }
+            else {
+                notificationManager.showBannerTemporarily(errorMessages.platformLoadError)
                 console.log("Failed to load preferred platforms");
             }
         })

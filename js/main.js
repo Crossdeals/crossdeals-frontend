@@ -29,9 +29,13 @@ class HomeScreen {
                 this.homeScreenData.push(gameListToHomeScreen(mainHeaders.yourWishlist, response, true));
                 this.getHomeScreenGames();
             }
-            else {
+            else if (response.status === 403) {
                 // This will happen if the user is not logged in.
                 console.log("Failed to retrieve wishlist");
+                this.getHomeScreenGames();
+            }
+            else {
+                notificationManager.showBannerTemporarily(errorMessages.wishlistGetError);
                 this.getHomeScreenGames();
             }
         });
