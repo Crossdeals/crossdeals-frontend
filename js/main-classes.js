@@ -160,7 +160,7 @@ class FeaturedGamePresenter {
 
     populateFeaturedGame(apiGameData) {
         const featuredGameDetails = gameDetailsToDetailsScreen(apiGameData);
-        const lowestPriceDetails = getLowestPriceDetails(apiGameData);
+        const lowestPriceDetails = getLowestPriceDetails(apiGameData, platformManager);
 
         this.featuredGameId = featuredGameDetails.id;
 
