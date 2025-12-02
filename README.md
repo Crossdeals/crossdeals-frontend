@@ -12,8 +12,10 @@ Frontend for the CrossDeals project.
 
 Use any web browser and navigate to `./test/test.html`.
 
-## Continuous Deployment
+## CI/CD
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/fdb31c98-bc6d-471c-9767-c21b6ca30602/deploy-status)](https://app.netlify.com/projects/crossdeals/deploys)
 
-The frontend is hosted on Netlify (BE is not hosted as of this time so the website will only display errors) and any push to `main` will trigger a new deployment.
+The frontend is deployed on Netlify. Every push to a PR will make a preview build which is available in the PR's comments section. Every push to main will trigger a new deployment on the actual [website](https://crossdeals.netlify.app/html/index.html).
+
+Backend is not hosted at this time so most functions on the live website will pop up errors.
