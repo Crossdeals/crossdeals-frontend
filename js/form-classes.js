@@ -20,6 +20,10 @@ class FormField {
     validate() {
         return this.validator(this.getValue());
     }
+
+    setOnEnter(callback) {
+        this.textFieldObject.addEventListener("keydown", callback);
+    }
 }
 
 class Form {
