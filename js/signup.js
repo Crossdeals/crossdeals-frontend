@@ -51,6 +51,11 @@ function main() {
             return true;
         }
     })
+    confirmPasswordField.setOnEnter((keyboardEvent) => {
+        if (keyboardEvent.key === "Enter") {
+            form.submit();
+        }
+    });
 
     form.addField(usernameField);
     form.addField(passwordField);

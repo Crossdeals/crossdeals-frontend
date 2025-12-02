@@ -40,6 +40,11 @@ function main() {
             return true;
         }
     })
+    passwordField.setOnEnter((keyboardEvent) => {
+        if (keyboardEvent.key === "Enter") {
+            form.submit();
+        }
+    });
 
     form.addField(usernameField);
     form.addField(passwordField);

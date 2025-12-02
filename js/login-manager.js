@@ -108,8 +108,12 @@ class PreferredPlatformManager {
                 this.onGetPreferredPlatforms(response);
                 onSuccess();
             }
-            else {
+            else if (response.status === 403) {
                 // This can happen if the user is not logged in.
+                console.log("Failed to load preferred platforms");
+            }
+            else {
+                notificationManager.showBannerTemporarily(errorMessages.platformLoadError)
                 console.log("Failed to load preferred platforms");
             }
         })
@@ -265,18 +269,30 @@ class HeaderPresenter {
 
     logout() {
         client.logout(response => {
-            // TODO: check for errors here
-            sessionStorage.removeItem(usernameKey);
-            window.location = window.location;
+            if (response.status === 200) {
+                sessionStorage.removeItem(usernameKey);
+                window.location = window.location;
+            }
+            else {
+                notificationManager.showBannerTemporarily(errorMessages.logoutError);
+            }
         })
     }
 
     search(keyboardEvent) {
         if (keyboardEvent.key === "Enter") {
-            // TODO: Validating the input.
             const searchValue = this.searchBar.value;
-            window.location = detailsUrl.concat(`?title=${searchValue}`)
+            if (this.validateSearch(searchValue)) {
+                window.location = detailsUrl.concat(`?title=${searchValue}`)
+            }
+            else {
+                notificationManager.showBannerTemporarily(errorMessages.searchError);
+            }
         }
+    }
+
+    validateSearch(search) {
+        return !search.includes("&") && !search.includes("?") && !search.includes("=") && !search.includes(".") && !search.includes(";");
     }
 
     setupPlatformButtons() {
