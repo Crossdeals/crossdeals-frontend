@@ -30,15 +30,7 @@ class APIHandler {
         xhttp.send(JSON.stringify(loginDetails));
         xhttp.onreadystatechange = () => {
             if (xhttp.readyState === 4) {
-                try {
-                    let response = JSON.parse(xhttp.responseText);
-                    response["status"] = xhttp.status;
-                    responseCallback(response);
-                }
-                catch (e) {
-                    let response = {"error": e, "status": -1}
-                    responseCallback(response);
-                }
+                handleResponse(xhttp.responseText, xhttp.status, responseCallback);
             }
         }
     }
@@ -53,15 +45,7 @@ class APIHandler {
         xhttp.send(JSON.stringify(signupDetails));
         xhttp.onreadystatechange = () => {
             if (xhttp.readyState === 4) {
-                try {
-                    let response = JSON.parse(xhttp.responseText);
-                    response["status"] = xhttp.status;
-                    responseCallback(response);
-                }
-                catch (e) {
-                    let response = {"error": e, "status": -1}
-                    responseCallback(response);
-                }
+                handleResponse(xhttp.responseText, xhttp.status, responseCallback);
             }
         }
     }
@@ -74,15 +58,7 @@ class APIHandler {
         xhttp.send();
         xhttp.onreadystatechange = () => {
             if (xhttp.readyState === 4) {
-                try {
-                    let response = JSON.parse(xhttp.responseText);
-                    response["status"] = xhttp.status;
-                    responseCallback(response);
-                }
-                catch (e) {
-                    let response = {"error": e, "status": -1}
-                    responseCallback(response);
-                }
+                handleResponse(xhttp.responseText, xhttp.status, responseCallback);
             }
         }
     }
@@ -96,15 +72,7 @@ class APIHandler {
         xhttp.send(JSON.stringify(usernameRequest));
         xhttp.onreadystatechange = () => {
             if (xhttp.readyState === 4) {
-                try {
-                    let response = JSON.parse(xhttp.responseText);
-                    response["status"] = xhttp.status;
-                    responseCallback(response);
-                }
-                catch (e) {
-                    let response = {"error": e, "status": -1}
-                    responseCallback(response);
-                }
+                handleResponse(xhttp.responseText, xhttp.status, responseCallback);
             }
         }
     }
@@ -118,15 +86,7 @@ class APIHandler {
         xhttp.send(JSON.stringify(wishlistRequest));
         xhttp.onreadystatechange = () => {
             if (xhttp.readyState === 4) {
-                try {
-                    let response = JSON.parse(xhttp.responseText);
-                    response["status"] = xhttp.status;
-                    responseCallback(response);
-                }
-                catch (e) {
-                    let response = {"error": e, "status": -1}
-                    responseCallback(response);
-                }
+                handleResponse(xhttp.responseText, xhttp.status, responseCallback);
             }
         }
     }
@@ -178,15 +138,7 @@ class APIHandler {
         xhttp.send();
         xhttp.onreadystatechange = () => {
             if (xhttp.readyState === 4) {
-                try {
-                    let response = JSON.parse(xhttp.responseText);
-                    response["status"] = xhttp.status;
-                    responseCallback(response);
-                }
-                catch (e) {
-                    let response = {"error": e, "status": -1}
-                    responseCallback(response);
-                }
+                handleResponse(xhttp.responseText, xhttp.status, responseCallback);
             }
         }
     }
@@ -200,15 +152,7 @@ class APIHandler {
         xhttp.send();
         xhttp.onreadystatechange = () => {
             if (xhttp.readyState === 4) {
-                try {
-                    let response = JSON.parse(xhttp.responseText);
-                    response["status"] = xhttp.status;
-                    responseCallback(response);
-                }
-                catch (e) {
-                    let response = {"error": e, "status": -1}
-                    responseCallback(response);
-                }
+                handleResponse(xhttp.responseText, xhttp.status, responseCallback);
             }
         }
     }
@@ -221,15 +165,7 @@ class APIHandler {
         xhttp.send();
         xhttp.onreadystatechange = () => {
             if (xhttp.readyState === 4) {
-                try {
-                    let response = JSON.parse(xhttp.responseText);
-                    response["status"] = xhttp.status;
-                    responseCallback(response);
-                }
-                catch (e) {
-                    let response = {"error": e, "status": -1}
-                    responseCallback(response);
-                }
+                handleResponse(xhttp.responseText, xhttp.status, responseCallback);
             }
         }
     }
@@ -243,15 +179,7 @@ class APIHandler {
         xhttp.send();
         xhttp.onreadystatechange = () => {
             if (xhttp.readyState === 4) {
-                try {
-                    let response = JSON.parse(xhttp.responseText);
-                    response["status"] = xhttp.status;
-                    responseCallback(response);
-                }
-                catch (e) {
-                    let response = {"error": e, "status": -1}
-                    responseCallback(response);
-                }
+                handleResponse(xhttp.responseText, xhttp.status, responseCallback);
             }
         }
     }
@@ -264,15 +192,7 @@ class APIHandler {
         xhttp.send();
         xhttp.onreadystatechange = () => {
             if (xhttp.readyState === 4) {
-                try {
-                    let response = JSON.parse(xhttp.responseText);
-                    response["status"] = xhttp.status;
-                    responseCallback(response);
-                }
-                catch (e) {
-                    let response = {"error": e, "status": -1}
-                    responseCallback(response);
-                }
+                handleResponse(xhttp.responseText, xhttp.status, responseCallback);
             }
         }
     }

@@ -14,6 +14,19 @@ function dollarAmountFormatted(dollarsFloat) {
     return `$${dollarsFloat.toFixed(2)}`;
 }
 
+// Catches errors if response json cannot be parsed.
+function handleResponse(responseText, status, responseCallback) {
+    try {
+        let response = JSON.parse(responseText);
+        response["status"] = status;
+        responseCallback(response);
+    }
+    catch (e) {
+        let response = {"error": e, "status": -1}
+        responseCallback(response);
+    }
+}
+
 // Converts server's GET /index response to frontend data format.
 function gameListToHomeScreen(header, apiGameList, isAlreadyWishlisted) {
     let displayData = {};
