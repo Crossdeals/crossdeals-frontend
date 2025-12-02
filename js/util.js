@@ -14,6 +14,19 @@ function dollarAmountFormatted(dollarsFloat) {
     return `$${dollarsFloat.toFixed(2)}`;
 }
 
+// Catches errors if response json cannot be parsed.
+function handleResponse(responseText, status, responseCallback) {
+    try {
+        let response = JSON.parse(responseText);
+        response["status"] = status;
+        responseCallback(response);
+    }
+    catch (e) {
+        let response = {"error": e, "status": -1}
+        responseCallback(response);
+    }
+}
+
 // Converts server's GET /index response to frontend data format.
 function gameListToHomeScreen(header, apiGameList, isAlreadyWishlisted) {
     let displayData = {};
@@ -36,7 +49,7 @@ function gameListToHomeScreen(header, apiGameList, isAlreadyWishlisted) {
 function gameToHomeScreen(apiGameData) {
     let displayData = {};
     displayData["gameId"] = apiGameData._id;
-    displayData["image"] = "../images/mw19-placeholder.png";
+    displayData["image"] = "../images/cover-placeholder.png";
     displayData["title"] = apiGameData.title;
     displayData["isWishlisted"] = apiGameData.isWishlisted;
 

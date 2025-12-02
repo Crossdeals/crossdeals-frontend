@@ -78,7 +78,6 @@ class PreferredPlatformManager {
         this.isSwitchPreferred = true;
         this.isPCPreferred = true;
 
-        // TODO: Add the _ids here after hooking up with BE
         this.playstationId = "storefront_sonyplaystationstore";
         this.xboxId = "storefront_xboxstore";
         this.switchId = "storefront_nintendostore";
@@ -108,6 +107,10 @@ class PreferredPlatformManager {
             if (response.status === 200 || response.status === 304) {
                 this.onGetPreferredPlatforms(response);
                 onSuccess();
+            }
+            else {
+                // This can happen if the user is not logged in.
+                console.log("Failed to load preferred platforms");
             }
         })
     }
@@ -160,6 +163,9 @@ class PreferredPlatformManager {
                 console.log("Updated platforms successfully");
                 // Refresh the page to repopulate the game lists.
                 window.location = window.location;
+            }
+            else {
+                notificationManager.showBannerTemporarily(errorMessages.platformError);
             }
         });
     }
@@ -276,7 +282,7 @@ class HeaderPresenter {
     setupPlatformButtons() {
         this.playstationToggle.addEventListener("click", () => {
             if (this.platformManager.isPlaystationPreferred && this.platformManager.numberOfPreferredPlatforms() <= 1) {
-                notificationManager.showBannerTemporarily("You must have at least one preferred platform!");
+                notificationManager.showBannerTemporarily(headerMessages.onePlatform);
                 return;
             }
             this.platformManager.isPlaystationPreferred = !this.platformManager.isPlaystationPreferred;
@@ -285,7 +291,7 @@ class HeaderPresenter {
         });
         this.xboxToggle.addEventListener("click", () => {
             if (this.platformManager.isXboxPreferred && this.platformManager.numberOfPreferredPlatforms() <= 1) {
-                notificationManager.showBannerTemporarily("You must have at least one preferred platform!");
+                notificationManager.showBannerTemporarily(headerMessages.onePlatform);
                 return;
             }
             this.platformManager.isXboxPreferred = !this.platformManager.isXboxPreferred;
@@ -294,7 +300,7 @@ class HeaderPresenter {
         });
         this.switchToggle.addEventListener("click", () => {
             if (this.platformManager.isSwitchPreferred && this.platformManager.numberOfPreferredPlatforms() <= 1) {
-                notificationManager.showBannerTemporarily("You must have at least one preferred platform!");
+                notificationManager.showBannerTemporarily(headerMessages.onePlatform);
                 return;
             }
             this.platformManager.isSwitchPreferred = !this.platformManager.isSwitchPreferred;
@@ -303,7 +309,7 @@ class HeaderPresenter {
         });
         this.pcToggle.addEventListener("click", () => {
             if (this.platformManager.isPCPreferred && this.platformManager.numberOfPreferredPlatforms() <= 1) {
-                notificationManager.showBannerTemporarily("You must have at least one preferred platform!");
+                notificationManager.showBannerTemporarily(headerMessages.onePlatform);
                 return;
             }
             this.platformManager.isPCPreferred = !this.platformManager.isPCPreferred;

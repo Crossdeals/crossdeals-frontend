@@ -44,13 +44,19 @@ class GameDetailsScreen {
     
     addToWishlist() {
         if (!loginManager.isLoggedIn) {
-            notificationManager.showBannerTemporarily("Please log in to add this game to your wishlist!");
+            notificationManager.showBannerTemporarily(detailsMessages.notLoggedIn);
             return;
         }
         this.client.addToWishlist(loginManager.getUsername(), this.title, response => {
             if (response.status === 200) {
-                notificationManager.showBannerTemporarily("Added game to wishlist!")
+                notificationManager.showBannerTemporarily(detailsMessages.addSuccessful);
                 this.gameDetailsPresenter.updateWishlistButtons(true);
+            }
+            else if (response.status === 400) {
+                notificationManager.showBannerTemporarily(errorMessages.wishlistAlreadyError);
+            }
+            else {
+                notificationManager.showBannerTemporarily(errorMessages.wishlistError);
             }
         })
     }
@@ -58,8 +64,15 @@ class GameDetailsScreen {
     removeFromWishlist() {
         this.client.removeFromWishlist(this.gameId, response => {
             if (response.status === 200) {
-                notificationManager.showBannerTemporarily("Removed game from wishlist!")
+                notificationManager.showBannerTemporarily(detailsMessages.removeSuccessful);
                 this.gameDetailsPresenter.updateWishlistButtons(false);
+            }
+            else if (response.status === 404) {
+                console.log("Game is already not in wishlist or does not exist.")
+                notificationManager.showBannerTemporarily(errorMessages.wishlistDeleteError);
+            }
+            else {
+                notificationManager.showBannerTemporarily(errorMessages.wishlistError);
             }
         })
     }
@@ -109,8 +122,8 @@ class GameDetailsPresenter {
 
     hideMainDetailsContainer(title) {
         this.mainDetailsContainer.hidden = true;
-        this.titleText.innerHTML = "Game Not Found";
-        this.publisherText.innerHTML = `${title} is not a game in our database. Please search for another game!`;
+        this.titleText.innerHTML = detailsMessages.gameNotFound;
+        this.publisherText.innerHTML = detailsMessages.gameNotFoundDescription.replace("{0}", title);
         this.platformChipTemplate.classList.add("hidden");
     }
 
@@ -137,10 +150,10 @@ class GameDetailsPresenter {
 
         pricingCard.querySelector(".game-platform").innerHTML = gamePricingData.platform;
         pricingCard.querySelector(".game-price").innerHTML = dollarAmountFormatted(gamePricingData.price);
-        pricingCard.querySelector(".game-original-price").innerHTML = `Original price: ${dollarAmountFormatted(gamePricingData.originalPrice)}`;
-        pricingCard.querySelector(".game-lowest-price").innerHTML = `Lowest ever: ${dollarAmountFormatted(gamePricingData.lowestPrice)}`;
-        pricingCard.querySelector(".game-deal-ending").innerHTML = `Deal ends ${gamePricingData.dealEnding}`;
-        pricingCard.querySelector(".game-deal-link").innerHTML = `Go to ${gamePricingData.storefrontName}`;
+        pricingCard.querySelector(".game-original-price").innerHTML = detailsMessages.originalPrice.replace("{0}", dollarAmountFormatted(gamePricingData.originalPrice));
+        pricingCard.querySelector(".game-lowest-price").innerHTML = detailsMessages.lowestEver.replace("{0}", dollarAmountFormatted(gamePricingData.lowestPrice));
+        pricingCard.querySelector(".game-deal-ending").innerHTML = detailsMessages.dealEnding.replace("{0}", gamePricingData.dealEnding);
+        pricingCard.querySelector(".game-deal-link").innerHTML = detailsMessages.goToStoreFront.replace("{0}", gamePricingData.storefrontName);
         pricingCard.querySelector(".game-deal-link").href = gamePricingData.storefrontLink;
         this.pricingContainer.appendChild(pricingCard);
     }

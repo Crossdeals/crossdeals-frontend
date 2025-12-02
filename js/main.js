@@ -15,6 +15,8 @@ class HomeScreen {
                 this.featuredPresenter.populateFeaturedGame(response);
             }
             else {
+                notificationManager.showBannerTemporarily(errorMessages.featuredGameError);
+                this.featuredPresenter.setupDetailsError();
                 console.log("Failed to retrieve featured game details");
             }
         })
@@ -24,10 +26,11 @@ class HomeScreen {
         let username = this.headerPresenter.getUsername();
         this.client.getWishlist(username, response => {
             if (response.status === 200 || response.status === 304) {
-                this.homeScreenData.push(gameListToHomeScreen("Your Wishlist", response, true));
+                this.homeScreenData.push(gameListToHomeScreen(mainHeaders.yourWishlist, response, true));
                 this.getHomeScreenGames();
             }
             else {
+                // This will happen if the user is not logged in.
                 console.log("Failed to retrieve wishlist");
                 this.getHomeScreenGames();
             }
@@ -37,9 +40,14 @@ class HomeScreen {
     getHomeScreenGames() {
         this.client.getHomeScreenGames(response => {
             if (response.status === 200 || response.status === 304) {
-                this.homeScreenData.push(gameListToHomeScreen("Featured Deals", response, false));
+                this.homeScreenData.push(gameListToHomeScreen(mainHeaders.featuredDeals, response, false));
                 let sectionListData = new GameCardSectionListData(this.homeScreenData);
                 let presenter = new GameSectionsPresenter(sectionListData, this.editWishlist.bind(this));
+            }
+            else {
+                let sectionListData = new GameCardSectionListData([]);
+                let presenter = new GameSectionsPresenter(sectionListData, this.editWishlist.bind(this));
+                notificationManager.showBannerTemporarily(errorMessages.featuredSalesError);
             }
         })
     }
@@ -50,10 +58,11 @@ class HomeScreen {
             this.client.addToWishlist(username, title, response => {
                 if (response.status === 200) {
                     section.updateCardWishlistStatus(section, index, true);
-                    notificationManager.showBannerTemporarily("Added game to wishlist!");
+                    notificationManager.showBannerTemporarily(mainMessages.addSuccessful);
                     console.log("Wishlist add success");
                 }
                 else {
+                    notificationManager.showBannerTemporarily(errorMessages.wishlistError);
                     console.log("Failed to add to wishlist");
                 }
             })
@@ -62,10 +71,11 @@ class HomeScreen {
             this.client.removeFromWishlist(gameId, response => {
                 if (response.status === 200) {
                     section.updateCardWishlistStatus(section, index, false);
-                    notificationManager.showBannerTemporarily("Removed game from wishlist!");
+                    notificationManager.showBannerTemporarily(mainMessages.removeSuccessful);
                     console.log("Wishlist remove success")
                 }
                 else {
+                    notificationManager.showBannerTemporarily(errorMessages.wishlistError);
                     console.log("Failed to remove from wishlist");
                 }
             })
