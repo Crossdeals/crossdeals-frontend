@@ -47,6 +47,8 @@ const mainHeaders = {
 }
 
 const errorMessages = {
+    logoutError: "Failed to logout. Refresh the page and try again.",
+    searchError: "Your search term contains invalid characters.",
     wishlistError: "Failed to edit wishlist. Refresh the page and try again.",
     wishlistAlreadyError: "This game is already in your wishlist.",
     wishlistDeleteError: "This game is not in your wishlist.",
