@@ -28,14 +28,14 @@ function handleResponse(responseText, status, responseCallback) {
 }
 
 // Converts server's GET /index response to frontend data format.
-function gameListToHomeScreen(header, apiGameList, isAlreadyWishlisted) {
+function gameListToHomeScreen(header, apiGameList, isAlreadyWishlisted, platformManager) {
     let displayData = {};
     let headerGameList = [];
     apiGameList.forEach(gameData => {
         if (isAlreadyWishlisted) {
             gameData["isWishlisted"] = true;
         }
-        headerGameList.push(gameToHomeScreen(gameData));
+        headerGameList.push(gameToHomeScreen(gameData, platformManager));
     });
     displayData = {
         "header": header,
@@ -46,7 +46,7 @@ function gameListToHomeScreen(header, apiGameList, isAlreadyWishlisted) {
 }
 
 // Converts one game entry from the server's GET /index response to one game entry in frontend data format.
-function gameToHomeScreen(apiGameData) {
+function gameToHomeScreen(apiGameData, platformManager) {
     let displayData = {};
     displayData["gameId"] = apiGameData._id;
     displayData["image"] = "../images/cover-placeholder.png";
@@ -137,7 +137,7 @@ function gamePricingToDetailsScreen(apiGameData) {
     return gamePricingDataList;
 }
 
-function getLowestPriceDetails(apiGameData) {
+function getLowestPriceDetails(apiGameData, platformManager) {
     let lowestPrice = 99999;
     let originalPrice = 99999;
     let salePercentage = 1.0;
